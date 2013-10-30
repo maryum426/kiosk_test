@@ -2274,7 +2274,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
         $scope.searchPlaceKiosk = function () {
 
-            $location.path('/kiosk/createSweetPlace');
+            //$location.path('/kiosk/createSweetPlace');
             $scope.initializeGMapKiosk($scope);
             $scope.showClaim = false ;
         };
@@ -2283,7 +2283,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         //*************************************** Kiosk Google Map Initlization *********************************//
         $scope.initializeGMapKiosk = function ($scope) {
 
-             //$location.path('/kiosk/createSweetPlace');
+             $location.path('/kiosk/createSweetPlace');
 
             //console.log ("Load Map" + document.getElementById('map_canvas'));
 
