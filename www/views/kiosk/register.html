@@ -6,13 +6,13 @@
         <div class="profile-connect">
             <form name="kiosk_user">
                 <fieldset>
-                    <div class="inputfile-holder">
+                   <div class="inputfile-holder" ng-controller="CameraCtrl">
                         <!--<input type="file" name="#" class="fileholder-btn" size="0">-->
-                        <sweetfileselect align="center" showprogress="util.showProgress" swfile="user.avatarUrl" attr1="50" class="fileholder-btn">
-                        </sweetfileselect>
+                        <!--<sweetfileselect align="center" showprogress="util.showProgress" swfile="user.avatarUrl" attr1="50" class="fileholder-btn">
+                        </sweetfileselect>-->
                         <span class="profile-img-main heart-big-profile">
+                            <img src="images/capture-img.png" ng-click="capturePhoto()" alt="Profile Picture"  ng-show='!userAvatar'>
                             <img  ng-show='userAvatar' ng-src="{{userAvatar}}" class="imgavatar"/>
-                            <img src="images/capture-img.png" alt="Profile Picture" ng-show='!userAvatar'>
                         </span>
                     </div>
 
