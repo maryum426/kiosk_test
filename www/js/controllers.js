@@ -2283,7 +2283,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         //*************************************** Kiosk Google Map Initlization *********************************//
         $scope.initializeGMapKiosk = function ($scope) {
 
-             $location.path('/kiosk/createSweetPlace');
+             //$location.path('/kiosk/createSweetPlace');
 
             //console.log ("Load Map" + document.getElementById('map_canvas'));
 
@@ -2428,7 +2428,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //------------------------------ AutoComplete Box --------------------------------------------
             //--------------------------------------------------------------------------------------
             var input = (document.getElementById('target'));
-            var autocomplete = new google.maps.places.SearchBox(input);
+            var autocomplete = new google.maps.places.SearchBoz(input);
 
             autocomplete.bindTo('bounds', map);
 
@@ -2437,7 +2437,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 map:map
             });
 
-            google.maps.event.addListener(searchBox, 'place_changed', function () {
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
                 infowindow.close();
                 marker.setVisible(false);
                 //input.className = '';
