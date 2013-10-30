@@ -2428,7 +2428,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //------------------------------ AutoComplete Box --------------------------------------------
             //--------------------------------------------------------------------------------------
             var input = (document.getElementById('target'));
-            var autocomplete = new google.maps.places.SearchBoz(input);
+            var autocomplete = new google.maps.places.SearchBox(input);
 
             autocomplete.bindTo('bounds', map);
 
