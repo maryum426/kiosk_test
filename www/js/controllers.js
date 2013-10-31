@@ -2286,7 +2286,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
              $location.path('/kiosk/createSweetPlace');
 
             //console.log ("Load Map" + document.getElementById('map_canvas'));
-
+            var pos;
            $scope.placeListing = [] ;
             //var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
@@ -2304,7 +2304,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             
             function onSuccess(position) {
                 //alert("onSuccess() called!");
-                    var pos = new google.maps.LatLng(position.coords.latitude,
+                    pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
                 
             var mapOptions = {
@@ -2427,11 +2427,12 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //--------------------------------------------------------------------------------------
             //------------------------------ AutoComplete Box --------------------------------------------
             //--------------------------------------------------------------------------------------
-            var input = (document.getElementById('target'));
-            var autocomplete = new google.maps.places.SearchBox(input);
+            //var input = (document.getElementById('target'));
+            var autocomplete = new google.maps.places.AutoComplete(document.getElementById('target'),pos);
 
             autocomplete.bindTo('bounds', map);
-
+            
+            
             var infowindow = new google.maps.InfoWindow();
             var marker = new google.maps.Marker({
                 map:map
