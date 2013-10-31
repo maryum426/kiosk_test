@@ -9,12 +9,9 @@
                     <input name="placeaddress" id="target" type="text" class="text-field" placeholder="SEARCH"
                            ng-model="kiosk.address" required>
                 </div>
-
-                <span class="profile-status"><img src="images/profile-pic-3.jpg" alt="image"></span>
                 <span class="profile-status">
                     <img src="images/profile-pic-3.jpg" alt="image" ng-click="backRegister()" >
                 </span>
-
             </header>
 
             <!--<ul class="">

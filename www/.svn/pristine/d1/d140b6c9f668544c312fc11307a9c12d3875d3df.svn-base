@@ -1,20 +1,27 @@
 <div id="mybody" class="wrapper no-bg-color">
     <header class="header">
         <div class="heading-title-holder">
-            <div class="alignLEFT"><span class="heading-title">{{placeSearchResults.gname}}</span>
-                <em class="heading-sub-title">{{placeSearchResults.formatted_address}}</em> </div>
-            <a href="#" class="edit-holder"></a>
+            <div class="alignLEFT">
+                <div ng-hide="editorEnabled">
+                    <span class="heading-title">{{placeSearchResults.gname}}</span>
+                    <em class="heading-sub-title">{{placeSearchResults.formatted_address}}</em> </div>
+                    <a class="edit-holder" ng-click="enableEditor()"></a>
+                </div>
+                <div ng-show="editorEnabled">
+                    <input ng-model="editableTitle" ng-show="editorEnabled">
+                    <input ng-model="editableAddress" ng-show="editorEnabled">
+                    <a ng-click="saveEditKiosk()">Save</a>
+                    or
+                    <a ng-click="disableEditor()">cancel</a>.
+                </div>
+
+
         </div>
     </header>
     <div class="banner">
         <img src="images/banner-2.png" alt="banner">
         <a href="#" class="camera-icon camera-icon-right"></a>
     </div>
-
-	<span class="thankyou-title">Love your barista? say thank you!
-    		<a href="#" class="edit-holder"></a>
-    </span>
-
 
     <div ng-hide="editorEnabledTitle">
         <span class="thankyou-title">{{thankyoutitle}}
@@ -27,7 +34,6 @@
         or
         <a ng-click="disableEditorTitle()">cancel</a>.
     </div>
-
 
     <div class="container">
         <div class="claim-holder-box">
