@@ -36,6 +36,8 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
         $rootScope.userAvatar = null ;
 
+        $scope.editorEnabled = false;
+
         /** the initial center of the map */
         $scope.centerProperty = {
             latitude:45,
@@ -2274,7 +2276,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
         $scope.searchPlaceKiosk = function () {
 
-            //$location.path('/kiosk/createSweetPlace');
+            $location.path('/kiosk/createSweetPlace');
             $scope.initializeGMapKiosk($scope);
             $scope.showClaim = false ;
         };
@@ -2283,32 +2285,15 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         //*************************************** Kiosk Google Map Initlization *********************************//
         $scope.initializeGMapKiosk = function ($scope) {
 
-             $location.path('/kiosk/createSweetPlace');
+            $location.path('/kiosk/createSweetPlace');
 
-            //console.log ("Load Map" + document.getElementById('map_canvas'));
+            $scope.placeListing = [];
+            $rootScope.placeSearchResults = [];
 
-           $scope.placeListing = [] ;
-            //var latlng = new google.maps.LatLng(-34.397, 150.644);
+            var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
-            var map;
-
-            // Try HTML5 geolocation
-             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(onSuccess,onError);
-                
-               
-            } else {
-                // Browser doesn't support Geolocation
-                handleNoGeolocation(false);
-            }
-            
-            function onSuccess(position) {
-                //alert("onSuccess() called!");
-                    var pos = new google.maps.LatLng(position.coords.latitude,
-                        position.coords.longitude);
-                
-            var mapOptions = {
-                center:pos,
+            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+                center:latlng,
                 zoom:17,
                 panControl:false,
                 mapTypeControl:true,
@@ -2316,12 +2301,20 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                     style:google.maps.MapTypeControlStyle.DROPDOWN_MENU
                 },
                 zoomControl:true,
+                /*zoomControlOptions: {
+                 style: google.maps.ZoomControlStyle.SMALL
+                 },*/
                 scaleControl:false,
+
                 mapTypeId:google.maps.MapTypeId.ROADMAP
-                };
-                    
-                map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-            
+            });
+
+            // Try HTML5 geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = new google.maps.LatLng(position.coords.latitude,
+                        position.coords.longitude);
+
                     /*var infowindow = new google.maps.InfoWindow({
                      map: map,
                      position: pos,
@@ -2334,15 +2327,15 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                         title:'Location found.'
                     });
 
-                    //map.setCenter(pos);
-                };
-                
-                 function onError() {
-                     
+                    map.setCenter(pos);
+                }, function () {
                     $scope.handleNoGeolocation(true);
-                };
-                
-                
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+
             var defaultBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(-33.8902, 151.1759),
                 new google.maps.LatLng(-33.8474, 151.2631)
@@ -2428,7 +2421,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //------------------------------ AutoComplete Box --------------------------------------------
             //--------------------------------------------------------------------------------------
             var input = (document.getElementById('target'));
-            var autocomplete = new google.maps.places.SearchBox(input);
+            var autocomplete = new google.maps.places.Autocomplete(input);
 
             autocomplete.bindTo('bounds', map);
 
@@ -4142,28 +4135,6 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
         };
     };
 
-    $scope.$watch($rootScope.publicName, function () {
-        try {
-                                      //alert('Device is ready! Make sure you set your app_id below this alert.');
-                                      
-                                      //FB.init({ appId: '366407670138696', nativeInterface: CDV.FB, useCachedDialogs: false });
-                                      Parse.FacebookUtils.init({
-
-                                        appId      : "366407670138696", // app name : sweet_localhost
-                                        nativeInterface: CDV.FB,
-                                        useCachedDialogs: false,
-                                        status:true, // check login status
-                                        cookie:true, // enable cookies to allow Parse to access the session
-                                        xfbml:true, // parse XFBML
-                                        oauth:true
-                                    });
-                                    //alert("Parse Facebook Utility Initialized!");
-                                      } catch (e) {
-                                      alert("Hello: "+e);
-                                      }
-       
-    });
-    
     $scope.newAuth = function () {
 
         //console.log("\n--- AuthController ---");
@@ -4255,94 +4226,82 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
 
 
     //phonegap login
-    //var authData,id,access_token,expiration_date;
-
     $scope.phonegapFBLogin = function() {
         console.log('In home');
-        
-            if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')){ alert('Cordova variable does not exist. Check that you have included cordova.js correctly')};
-            if (typeof CDV == 'undefined') {alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly')};
-            if (typeof FB == 'undefined') {alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.')};
-          
-            //FB.login(function (response) {
-                //if (response.status === 'connected') {
-                    //alert("Connected");
-                    
-             Parse.FacebookUtils.logIn("email,publish_actions",{
-                 success: function (_user) {
-                        //alert("Logged In");
-                if (!_user.existed()) {
-                    alert("User signed up and logged in through Facebook!");
-                } else {
-                    alert("User logged in through Facebook!");
-                }
-                facebookService.getExtendedToken(function (success) {
-                    alert("---Extended Token--- " + success);
-                });
-//                    cb(user);
 
-                /*console.log("UserInfo -->" + _.pairs(user));
-                 console.log("UserInfo ID -->" + user.id);
-                 console.log("UserInfo FBID" + user.get("authData")["facebook"]["id"]);*/
-
-                facebookService.updateUserInfo(_user, function (rUser, rUserChannel) {
-                    $scope.safeApply(function () {
-                        $scope.section.loginInProgress = false;
-                        if (rUserChannel)
-                            $rootScope.loadUserChannel();
-                        //$location.path(CONSTANTS.ROUTES.SWEET_HOME);
-                    });
-                });
-
-                // Get user places
-                sweetService.getUserPlaces(_user.get("authData")["facebook"]["id"], function (placeUserSweets) {
-                    alert("Successfully retrieved placeUserSweets " + placeUserSweets.length + " scores.");
-                    $scope.safeApply(function () {
-                        $rootScope.listPlaces = placeUserSweets;
-                        alert("Successfully retrieved listPlaces " + $rootScope.listPlaces.length + " scores.");
-                        $location.path(CONSTANTS.ROUTES.SWEET_HOME_PLACE);
-                    });
-                });
-                   
-            },
-            error:function (_user, error) {
-                alert("User cancelled the Facebook login or did not fully authorize.");
-                alert(error.message);
-//                    cb(null);
-                }
+            FB.init({
+                appId:'366407670138696', // App ID
+                channelUrl:'http://localhost.local/sweet/bubble/channel.html', // Channel File
+                status:true, // check login status
+                cookie:true, // enable cookies to allow the server to access the session
+                xfbml:true  // parse XFBML
             });
-                    
-                //};
-              document.getElementById('data').innerHTML = JSON.stringify(response);  
-           //},{ scope: "email,publish_actions" });
-            
+
             // Additional init code here
-           /* FB.login(function (response) {
+            FB.login(function (response) {
                 if (response.status === 'connected') {
-                    alert("Connected");
-                    id = response.authResponse.userID;
-                    access_token = response.authResponse.accessToken;
-                    expiration_date = new Date();
+                    var id = response.authResponse.userID;
+                    var access_token = response.authResponse.accessToken;
+                    var expiration_date = new Date();
                     expiration_date.setSeconds(expiration_date.getSeconds() + response.authResponse.expiresIn);
                     expiration_date = expiration_date.toISOString();
-                    authData = {
+                    var authData = {
                             "id" : id,
                             "access_token" : access_token,
                             "expiration_date" : expiration_date
                     };
-                     
+
+                    Parse.FacebookUtils.logIn(authData, {
+                        success:function (user) {
+                            if (!user.existed()) {
+                                console.log("User signed up and logged in through Facebook!");
+                            } else {
+                                console.log("User logged in through Facebook!");
+                            }
+                            facebookService.getExtendedToken(function (success) {
+                                console.log("---Extended Token--- " + success);
+                            });
+//                    cb(user);
+
+                            /*console.log("UserInfo -->" + _.pairs(user));
+                             console.log("UserInfo ID -->" + user.id);
+                             console.log("UserInfo FBID" + user.get("authData")["facebook"]["id"]);*/
+
+                            facebookService.updateUserInfo(user, function (rUser, rUserChannel) {
+                                $scope.safeApply(function () {
+                                    $scope.section.loginInProgress = false;
+                                    if (rUserChannel)
+                                        $rootScope.loadUserChannel();
+                                    //$location.path(CONSTANTS.ROUTES.SWEET_HOME);
+                                });
+                            });
+
+                            // Get user places
+                            sweetService.getUserPlaces(user.get("authData")["facebook"]["id"], function (placeUserSweets) {
+                                console.log("Successfully retrieved placeUserSweets " + placeUserSweets.length + " scores.");
+                                $scope.safeApply(function () {
+                                    $rootScope.listPlaces = placeUserSweets;
+                                    console.log("Successfully retrieved listPlaces " + $rootScope.listPlaces.length + " scores.");
+                                    $location.path(CONSTANTS.ROUTES.SWEET_HOME_PLACE);
+                                });
+                            });
+
+                        },
+                        error:function (user, error) {
+                            console.log("User cancelled the Facebook login or did not fully authorize.");
+                            console.log(error.message);
+//                    cb(null);
+                        }
+                    });
                 } else if (response.status === 'not_authorized') {
                     // not_authorized
-                    alert('not_authorized');
+                    console.log('not_authorized');
                 } else {
                     // not_logged_in
-                    alert('not_logged_in');
+                    console.log('not_logged_in');
                 }
-                $scope.parseAuth();
-                document.getElementById('data').innerHTML = JSON.stringify(response);
-            },{ scope: "email,publish_actions" });*/
-            
-            
+            });
+
         };
 
 
@@ -4927,58 +4886,6 @@ function SweetCtrlPlace($window, UpdateService, $log, $scope, sweetService, inte
     $scope.newAuthLocationCancel = function () {
         $scope.showmobileActions = false;
         $location.path('/location/sweetplace');
-    };
-}
-
-function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interactionService, authService,
-                        userService, $location, utilService, $rootScope, CONSTANTS, socialNetworksService, facebookService, $route,
-                        $routeParams) {
-                            
-    //open camera 
-        
-    var imageData;
-    $scope.capturePhoto = function() {
-        
-        
-        
-        var options =   {
-            quality: 50,
-            cameraDirection:1,
-            sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
-            destinationType: navigator.camera.DestinationType.DATA_URL
-        };
-        // Take picture using device camera and retrieve image as base64-encoded string
-        navigator.camera.getPicture(onSuccess,onFail,options);
-    };
-    var onSuccess = function(data) {
-        //alert("On Success! ");
-       
-        //imageData=data.substr(data.lastIndexOf('/')+1);
-        //imageData=data;
-        var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
-        var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
-
-        //Initialize Parse
-        Parse.initialize(parseAPPID,parseJSID);
-        
-        var parseFile = new Parse.File("mypic.jpg", {base64:data});
-        
-        parseFile.save().then(function() {
-                alert("Got it!");
-                $rootScope.userAvatar = parseFile.url();
-                //alert (parseFile.url());
-                $rootScope.$broadcast("load_user_channel");
-                $rootScope.$broadcast("feedbackImg_uploaded");
-                console.log("Ok");
-                console.log(arguments.toString());
-            }, function(error) {
-                console.log("Error");
-                console.log(error);
-            });
-    };
-       
-    var onFail = function(e) {
-        alert("On fail " + e);
     };
 }
 
