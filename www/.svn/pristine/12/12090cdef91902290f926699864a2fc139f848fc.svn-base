@@ -1,0 +1,61 @@
+<div id="mybody" class="wrapper no-bg-color">
+    <header class="header">
+        <div class="heading-title-holder">
+            <div class="alignLEFT">
+                <div ng-hide="editorEnabled">
+                    <span class="heading-title">{{placeSearchResults.gname}}</span>
+                    <em class="heading-sub-title">{{placeSearchResults.formatted_address}}</em> </div>
+                    <a class="edit-holder" ng-click="enableEditor()"></a>
+                </div>
+                <div ng-show="editorEnabled">
+                    <input ng-model="editableTitle" ng-show="editorEnabled">
+                    <input ng-model="editableAddress" ng-show="editorEnabled">
+                    <a ng-click="saveEditKiosk()">Save</a>
+                    or
+                    <a ng-click="disableEditor()">cancel</a>.
+                </div>
+
+
+        </div>
+    </header>
+    <div class="banner">
+        <img src="images/banner-2.png" alt="banner">
+        <a href="#" class="camera-icon camera-icon-right"></a>
+    </div>
+
+    <div ng-hide="editorEnabledTitle">
+        <span class="thankyou-title">{{thankyoutitle}}
+    		<a class="edit-holder" ng-click="enableEditorTitle()"></a>
+        </span>
+    </div>
+    <div ng-show="editorEnabledTitle">
+        <input ng-model="editablethankyouTitle" ng-show="editorEnabledTitle">
+        <a ng-click="saveEditKioskThankyou()">Save</a>
+        or
+        <a ng-click="disableEditorTitle()">cancel</a>.
+    </div>
+
+    <div class="container">
+        <div class="claim-holder-box">
+            <span class="work-title">Great! You can edit your info above and then preview to launch your thank you display.</span>
+            <ul class="claim-holder clh-padding">
+                <li><a href="#">back</a></li>
+                <li><a href="#" class="active">Preview</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-GROUP" id="footer_GROUP">
+        <div id="footerSlideContainer">
+            <div class="detail" id="footerSlideButton" style="background-position: left top;"></div>
+            <div id="footerSlideContent" style="height: 0px;">
+                <div class="footer-Slider">
+                    <input type="text" name="#" placeholder="enter your mobile number" class="textfield-kiosk">
+                    <ul class="claim-holder claim-holder-kisok">
+                        <li><a href="#">Cancel</a></li>
+                        <li><a class="active" href="#">ok</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
