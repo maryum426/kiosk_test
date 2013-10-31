@@ -2428,8 +2428,12 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //------------------------------ AutoComplete Box --------------------------------------------
             //--------------------------------------------------------------------------------------
             //var input = (document.getElementById('target'));
-            var autocomplete = new google.maps.places.AutoComplete(document.getElementById('target'),pos);
-
+            var options = {
+            bounds: defaultBounds,
+            mapkey: "AIzaSyD-zFhVcr7DYt_9epog_r3kwxTftNbExoo"
+            };
+            var autocomplete = new google.maps.places.AutoComplete(document.getElementById('target'),options);
+            
             autocomplete.bindTo('bounds', map);
             
             
