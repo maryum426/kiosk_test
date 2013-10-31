@@ -2319,7 +2319,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 scaleControl:false,
                 mapTypeId:google.maps.MapTypeId.ROADMAP
                 };
-                    
+                 
                 map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
             
                     /*var infowindow = new google.maps.InfoWindow({
@@ -2432,17 +2432,29 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             bounds: defaultBounds,
             mapkey: "AIzaSyD-zFhVcr7DYt_9epog_r3kwxTftNbExoo"
             };
-            var autocomplete = new google.maps.places.AutoComplete(document.getElementById('target'),options);
+            input = /** @type {HTMLInputElement} */
+                    (document.getElementById('target')),
+                    searchBox = new google.maps.places.SearchBox(input);
+            //var autocomplete = new google.maps.places.AutoComplete(document.getElementById('target'),options);
             
-            autocomplete.bindTo('bounds', map);
-            
+            //autocomplete.bindTo('bounds', map);
+             google.maps.event.addListener(searchBox, 'places_changed', function () {
+                        var places = searchBox.getPlaces();
+                        pos = new google.maps.LatLng(places[0].geometry.location.jb, places[0].geometry.location.kb);
+                        map.setCenter(pos);
+                        marker.setMap(null);
+                        marker = new google.maps.Marker({
+                            position: pos,
+                            map: map
+                        });
+                    });
             
             var infowindow = new google.maps.InfoWindow();
             var marker = new google.maps.Marker({
                 map:map
             });
 
-            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            /*google.maps.event.addListener(autocomplete, 'place_changed', function () {
                 infowindow.close();
                 marker.setVisible(false);
                 //input.className = '';
@@ -2501,7 +2513,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
                 infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                 infowindow.open(map, marker);
-            });
+            });*/
 
             //--------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------
