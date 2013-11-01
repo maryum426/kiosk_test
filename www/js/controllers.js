@@ -2492,8 +2492,8 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 $scope.placeClaim($rootScope.placeSearchResults);
 
                 //}
-                marker.setIcon(/** @type {google.maps.Icon} **/ ({
-                    url:place.icon,
+                marker.setIcon(/** @type {google.maps.Icon} **/ //({
+                    /*url:place.icon,
                     size:new google.maps.Size(71, 71),
                     origin:new google.maps.Point(0, 0),
                     anchor:new google.maps.Point(17, 34),
