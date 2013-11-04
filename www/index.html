@@ -113,13 +113,17 @@
         mixpanel.init("e1c3f534a66f371ed1346002ab70136c");
     </script>
     <!-- end Mixpanel -->
-
+<style>
+html, body{
+	margin:0;
+}
+</style>
 </head>
 
 <body>
 <div id="fb-root"></div>
 <!--<div id="login"></div>-->
-<div id="mybody" class="wrapper no-bg-color">
+<div id="mybody" class="wrapper {{no_bg}}">
     <!--<section class="container">-->
     <!--<div class={{wrapper}}>-->
 
@@ -151,7 +155,7 @@
                     <span ng-switch-when="auth">
                         <span ng-include="'views/auth/new.html'" ng-show="renderPath[1] =='new'"></span>
                         <span ng-include="'views/auth/sent.html'" ng-show="renderPath[1] =='sent'"></span>
-                        <span ng-include="'views/auth/sms.html'" ng-show="renderPath[1] =='sms'"></span>
+                        <span ng-include="'views/auth/sent.html'" ng-show="renderPath[1] =='sms'"></span>
                     </span>
                 </span>
             </span>

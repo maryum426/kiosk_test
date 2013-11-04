@@ -1545,3 +1545,114 @@ sweetApp.directive('sweetplacefileselect', function($rootScope, userService) {
     };
 
 });
+
+//place pics
+sweetApp.directive('sweetplacepicselect', function($rootScope, userService) {
+    return {
+        restrict: 'E',
+        scope: {
+            swfile: '=',
+            userid: '=',
+            showprogress: '=',
+            setuseravatar: '&'
+        },
+        link: function (scope, element, attrs) {
+
+            /*element.bind("click", function() {
+                $rootScope.$broadcast("feedbackImg_upload");
+            });*/
+
+            element.bind("change", function(e) {
+
+                var files = e.target.files || e.dataTransfer.files;
+//                scope.$apply(function(){
+                console.log("File upload attrs --> " + attrs.attr1);
+                console.log("File upload userid --> " + scope.userid);
+                console.log("Uploaded file --> " + files);
+                var file = files[0];
+
+                var serverUrl = 'https://api.parse.com/1/files/' + file.name;
+                console.log("---sweetfileselect --- "+serverUrl);
+                scope.$apply(function(){
+                    scope.showprogress = 'true';
+                });
+                $.ajax({
+                    type: "POST",
+                    beforeSend: function(request) {
+                        request.setRequestHeader("X-Parse-Application-Id", 'h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu');
+                        request.setRequestHeader("X-Parse-REST-API-Key", 'EexsGuVhcxUeMaJc41jOoTe620y8GS1m5KUj2ANG');
+                        request.setRequestHeader("Content-Type", file.type);
+                    },
+                    url: serverUrl,
+                    data: file,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        scope.$apply(function(){
+
+                            scope.swfile = data.url;
+                            console.log("File available at: " + scope.swfile);
+                            var query = new Parse.Query("SweetPlace");
+                            //query.equalTo("userId", scope.userid);
+                            console.log("---Creater of place id ---- "+ scope.userid);
+                            console.log("---Place id ---- "+ $rootScope.newplaceid);
+                            query.equalTo("objectId", $rootScope.newplaceid );
+                            query.first({
+                                success:function(rUserChannel) {
+                                    console.log("---sweetfileselect--- "+rUserChannel.id);
+                                    rUserChannel.set("placePhoto",data.url);
+                                    rUserChannel.save(null,{
+                                        success:function(sUserChannel) {
+                                            console.log("Saved "+sUserChannel);
+                                            scope.$apply(function() {
+                                                console.log("--About to setUserAvatar--- "+sUserChannel.get("avatarURL"));
+                                                $rootScope.placeAvatar = sUserChannel.get("placePhoto");
+                                                userService.setUserChannel(sUserChannel);
+                                                $rootScope.$broadcast("load_user_channel");
+                                                //$rootScope.$broadcast("feedbackImg_uploaded");
+
+                                                // scope.setuseravatar(data.url);
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+//                                element.visibility = false;
+//                                scope.showFileSelect = false;
+//                                scope.setSweetExpression('picture');
+                        });
+
+                    },
+                    error: function(data) {
+                        var obj = jQuery.parseJSON(data);
+                        console.log(obj.error);
+                    }
+                });
+            });
+
+//            });
+        },
+//        template:"<input type='file' name='gesturePictureSelect' id='gesturePictureSelect'/>"
+
+        template: '<div class="upload-title"><input type="file" accept="image/*" id="capture" capture="camera" class="text-field" size="0" ></div>'
+            + "<span ng-show='showprogress' class='showupload'>"
+            + "<span class='progress_animation'>Uploading...</span>"
+            + "</span>",
+
+        //+"</div>",
+
+        controller:function($scope, $rootScope, userService) {
+            $scope.$on("load_user_channel", function(rUserChannel) {
+                //console.log("---loadUserAvatar called--- " +userService.getUserChannel().get("avatarURL"));
+                //$rootScope.userChannel.set("avatarURL",userService.getUserChannel().get("avatarURL"));
+                //$rootScope.userAvatar = $rootScope.userChannel.get("avatarURL");
+                //$rootScope.loadUserChannel();
+
+                $scope.showprogress = 'false';
+
+            });
+
+        }
+    };
+
+});

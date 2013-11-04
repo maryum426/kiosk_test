@@ -60,7 +60,7 @@ jQuery(function($) {
                     <!--<i class="icon-heart"></i>-->
                     <img src="images/heart-icon.png" alt="image" class="heart-img-mini" />
                 </span>
-            <a href="#" class="person-name">{{uplace.get('userName').split(" ")[0]}}</a>
+            <a class="person-name">{{uplace.get('userName').split(" ")[0]}}</a>
         </li>
     </ul>
 </div>
@@ -159,22 +159,23 @@ jQuery(function($) {
         <input name="" class="create-place-btn-search" type="button" value="Join This Place"
                ng-click=addPlace(currentPlace)>
     </div>
-    <div id="footer_GROUP" class="footer-GROUP">
+    <div id="footer_GROUP1" class="footer-GROUP">
     <div id="footerSlideContainer">
       <div id="footerSlideButton" class="detail closeClass"></div>
       <div id="footerSlideContent">
         <div class="footer-Slider">
-        		<!--<input type="text" class="texfield" placeholder="enter your mobile number">-->
-                <!--<ul class="submit-holder register_BUTTON_HOLDER">
+        		<input type="text" class="texfield" placeholder="enter your mobile number" ng-model="user.phone">
+                <ul class="submit-holder register_BUTTON_HOLDER">
                   <li><a ng-click="">Cancel</a></li>
-                  <li><a ng-click="" class="send-button register-button">Login</a></li>
-                  <li><a class="facebook" alt="facebook" ng-click="facebookPlaceLogin()" ng-controller="AuthController">facebook</a></li>
-                </ul>-->
+                  <li><a ng-controller="AuthController" ng-click="newAuthAddUser()" class="send-button" title="{{placeKiosk}}" id="adduser">Login</a></li>
+                  <!--<li><a class="facebook" alt="facebook" ng-click="facebookPlaceLogin()" ng-controller="AuthController">facebook</a></li>-->
+                </ul>
                 <ul class="social-icons">
-                    <li>
+                    <!--<li>
                         <span class="fbring">
-                            <a class="facebook" alt="facebook" ng-click="facebookPlaceLogin()" ng-controller="AuthController">facebook</a></li>
+                            <a class="facebook" alt="facebook" ng-click="facebookPlaceLogin()" ng-controller="AuthController">facebook</a>
                         </span>
+                    </li>-->
                     <!--<li><a class="google">google</a></li>
                    <li><a class="linkden">linkden</a></li>
                    <li><a class="twitter">twitter</a></li>-->
@@ -434,6 +435,7 @@ jQuery(function($) {
                                    type="text" ng-model="user.name" min="7" max="110" required>
                             <input class="texfield-grey" name="mnumber" id="mnumber" placeholder="Mobile Number (optional)"
                                     type="text" ng-model="user.mobile" min="7" max="110" >
+                            <input type="checkbox" name="" value="copy" ng-model="user.chkbox"><span class="chkText" style="color:#fff;margin-left: 5px;">Send a copy to Katie</span>
                         </fieldset>
 
                     <ul class="submit-holder">

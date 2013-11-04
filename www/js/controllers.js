@@ -35,6 +35,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         $scope.clickedLongitudeProperty = null;
 
         $rootScope.userAvatar = null ;
+        $rootScope.placeAvatar = null ;
 
         /** the initial center of the map */
         $scope.centerProperty = {
@@ -2240,6 +2241,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
         $scope.kioskRegister = function(){
             console.log("----kioskRegister----");
+            console.log("--> " + $rootScope.kioskRegister);
 
             console.log("full name --> " + $scope.kiosk.fullname);
             console.log("vocation --> " + $scope.kiosk.vocation);
@@ -2249,19 +2251,19 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             $scope.kioskSetUser = [];
             $scope.kioskSetUser.fullName = $scope.kiosk.fullname ;
             $scope.kioskSetUser.vocation = $scope.kiosk.vocation ;
-            $scope.kioskSetUser.userPhone = '7076344193';//$rootScope.userPName ;
+            $scope.kioskSetUser.userPhone = $rootScope.userPName ;
             if ($rootScope.userAvatar == false || $rootScope.userAvatar == ' ' || $rootScope.userAvatar == null){
                 $scope.kioskSetUser.userAvatar = 'images/main-circle-img.png';
             } else {
                 $scope.kioskSetUser.userAvatar = $rootScope.userAvatar ;
             }
 
-            sweetService.setKioskUser($scope.kioskSetUser, function () {
+            //sweetService.setKioskUser($scope.kioskSetUser, function () {
                 //console.log("");
                 //$scope.showSearchKiosk();
-                $scope.createPlaceKiosk();
+                //$scope.createPlaceKiosk();
                 //$location.path('/kiosk/createSweetPlace');
-            });
+            //});
         }
 
         $scope.showSearchKiosk = function () {
@@ -2645,10 +2647,10 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //$scope.newPlace.placeAddress2 = document.getElementById("target").value;
             //$scope.newPlace.placeAddress2 = kiosk.address2;
 
-            if ($rootScope.userAvatar == false){
-                $scope.newPlace.placePhoto = 'http://files.parse.com/7ddeea41-9b34-46f5-b20f-1e58e72ef6ee/d0296c4c-a48e-4742-a8b9-664c7ad5ee96-DSC_0144.JPG';
+            if ($rootScope.placeAvatar == false){
+                $scope.newPlace.placePhoto = 'images/banner-2.png';
             } else {
-                $scope.newPlace.placePhoto = $rootScope.userAvatar ;
+                $scope.newPlace.placePhoto = $rootScope.placeAvatar ;
             }
 
             $scope.newPlace.placeDesc = '';
@@ -2656,7 +2658,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             $scope.newPlace.placeLatitude = '';
             $scope.newPlace.placeLongitude = '';
 
-            $scope.newPlace.placeName = $rootScope.placeSearchResults.gname;
+            $scope.newPlace.placeName = ($rootScope.placeSearchResults.gname).replace(/\s/g, "");
             $scope.newPlace.LatLong = $rootScope.placeSearchResults.LatLong;
             //$scope.newPlace.photo = $rootScope.placeSearchResults.photo ;
             $scope.newPlace.gname = $rootScope.placeSearchResults.gname;
@@ -2665,28 +2667,33 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             sweetService.saveSweetPlaceParse($scope.newPlace, function (results) {
                 console.log("save claim Place in Parse");
-                console.log("results --> " + results.length);
+                console.log("results --> " + results.id);
+                $rootScope.newplaceid = results.id ;
+                console.log("$rootScope.newplaceid --> " + $rootScope.newplaceid);
                 if(results.length == 0){
-                    $location.path('/kiosk/claimPlaceCreated');
-                    window.location('#/kiosk/claimPlaceCreated');
+                    $scope.safeApply(function () {
+                        $location.path('/kiosk/claimPlaceCreated');
+                    });
                 }
 
                 if (results.length > 0) {
                     $scope.placeMsg = true ;
                     $scope.$apply();
                 }
-             });
+            });
             //$location.path('/kiosk/claimPlaceCreated');
         }
 
         // Inline editing
-        $scope.thankyoutitle = "Love your barista? say thank you!";
+        $rootScope.placeSearchResults = [];
+        $rootScope.placeSearchResults.kioskthankyoutitle = "Love your barista? say thank you!";
         $scope.editorEnabledTitle = false;
+        $scope.launch = false ;
 
         $scope.enableEditor = function() {
             $scope.editorEnabled = true;
-            $scope.editableTitle = $scope.placeSearchResults.gname ;
-            $scope.editableAddress = $scope.placeSearchResults.formatted_address ;
+            $scope.kiosk.editableTitle = $scope.placeSearchResults.gname ;
+            $scope.kiosk.editableAddress = $scope.placeSearchResults.formatted_address ;
         };
 
         $scope.disableEditor = function() {
@@ -2694,28 +2701,39 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         };
 
         $scope.saveEditKiosk = function() {
-            $scope.gname = $scope.editableTitle;
-            $scope.address = $scope.editableAddress;
+            $rootScope.placeSearchResults.gname = $scope.kiosk.editableTitle;
+            $rootScope.placeSearchResults.formatted_address = $scope.kiosk.editableAddress;
             console.log("--> " + $scope.gname );
             console.log("--> " + $scope.address);
 
-            console.log("Edit--> " + $scope.editableTitle);
-            console.log("Edit--> " + $scope.editableAddress);
+            console.log("Edit--> " + $scope.kiosk.editableTitle);
+            console.log("Edit--> " + $scope.kiosk.editableAddress);
+            sweetService.saveKioskPlaceEdit($rootScope.placeSearchResults,$rootScope.newplaceid, function (results) {
+
+            });
             $scope.disableEditor();
         };
 
 
         $scope.enableEditorTitle = function() {
             $scope.editorEnabledTitle = true;
-            $scope.editablethankyouTitle = $scope.thankyoutitle ;
+            $scope.kiosk.editablethankyouTitle = $rootScope.placeSearchResults.kioskthankyoutitle ;
         };
         $scope.disableEditorTitle = function() {
             $scope.editorEnabledTitle = false;
         };
         $scope.saveEditKioskThankyou = function() {
-            console.log("Edit --> " + $scope.editablethankyouTitle );
-            $scope.thankyouTitle = $scope.editablethankyouTitle;
-            console.log("--> " + $scope.thankyouTitle );
+            console.log("Edit --> " + $scope.kiosk.editablethankyouTitle );
+
+            $scope.safeApply(function () {
+                $rootScope.placeSearchResults.kioskthankyoutitle = $scope.kiosk.editablethankyouTitle;
+                console.log("--> " + $rootScope.placeSearchResults.kioskthankyoutitle );
+            });
+
+            sweetService.saveKioskPlaceEdit2($rootScope.placeSearchResults.kioskthankyoutitle,$rootScope.newplaceid, function (results) {
+
+            });
+
             $scope.disableEditorTitle();
         };
 
@@ -2723,6 +2741,30 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         $scope.backRegister = function(){
             $location.path('/kiosk/register');
         }
+
+        $scope.launchKiosk = function(){
+            $scope.logoutKiosk();
+        }
+
+        $scope.previewKiosk = function(){
+            console.log("-- Preview Kiosk -- ");
+            console.log("--> " + $rootScope.placeSearchResults);
+
+            $scope.launch = true ;
+        }
+
+        $scope.logoutKiosk = function () {
+            console.log("-- Logout kiosk --");
+            console.log("--> " + $rootScope.placeSearchResults.gname);
+           // var address = ($rootScope.placeSearchResults.gname).replace(" ", "");
+            //console.log('----> ' + address);
+            userService.logout();
+            $scope.safeApply(function () {
+                $location.path($rootScope.placeSearchResults.gname);
+            });
+
+        };
+
         $scope.$on('$viewContentLoaded', function(event) {
             $window._gaq.push(['_trackPageview', $location.path()]);
         });
@@ -3066,6 +3108,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
 
         console.log("User phone: " + $scope.user.mobile);
         console.log("User comment: " + $scope.user.comment);
+        console.log("User check box: " + $scope.user.chkbox);
         console.log("User name: " + userFname);
         console.log($scope.newSweet.receiverPhone);
         console.log($scope.newSweet.receiverName);
@@ -3078,6 +3121,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         $scope.newSweet.senderName = "SweetCustomer";
         $scope.newSweet.comment = $scope.user.comment;
         $scope.newSweet.rating = $scope.ratestar;
+        $scope.newSweet.check = $scope.user.chkbox ;
 
         if ($scope.user.name == '' || $scope.user.name == null){
             $scope.newSweet.username = '';
@@ -3527,6 +3571,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
     // Update the rendering of the page logout state.
     var renderNotLogoIn = function () {
         console.log("---Rendering Logout---");
+        $scope.no_bg = "no-bg-color";
 
         if($scope.loggedInUser){
             $scope.cssResponsive = 'css/responsive.css' ;
@@ -3625,6 +3670,9 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         $scope.publicPlace = publicPlace;
 
         switch (renderAction) {
+            case "auth.new":
+                $scope.no_bg = "";
+                break;
             case "sweet.friend":
             case "sweet.timeline":
             case "sweet.feed":
@@ -3688,6 +3736,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
             $scope.guestPlace.placeName = username;
 
             console.log("sweetname custom--> " + username);
+            $rootScope.placeKiosk = username ;
 
             /*sweetService.getPlacesSweets(username, function (placeSweets) {
                 console.log("Successfully retrieved place sweets custom" + placeSweets.length + " scores.");
@@ -3737,6 +3786,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
     // Update the rendering of the page.
     var render = function () {
         console.log("---Rendering---");
+        $scope.no_bg = "no-bg-color";
 
         $scope.safeApply(function () {
             $rootScope.latestSweet = {};
@@ -4233,6 +4283,44 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                  $location.path(redirectPage);
              });
          });
+
+        $scope.clearData();
+
+    };
+
+    //user login add to place authentication
+    $scope.newAuthAddUser = function () {
+
+        $rootScope.userPName = '';
+        $rootScope.userPName = $scope.user.phone ; //userPName -> userPhoneName
+        $rootScope.userAddedPlace = document.getElementById("adduser").title ;
+
+        console.log("--- AuthController Add User ---");
+        console.log("User phone: " + $scope.user.phone);
+        console.log("Place Name : " + document.getElementById("adduser").title);
+
+        $log.info("--SMS Login---");
+
+        authService.loginPhoneNumber($scope.user.phone, function (flag) {
+
+            var redirectPage;
+
+            if (flag == true){
+                console.log("Is user loged IN --> " + userService.currentUser());
+
+                redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER;
+            } else {
+                console.log("Is user New --> " );
+                authService.createAuthSms($scope.user.phone);
+                redirectPage = CONSTANTS.ROUTES.AUTH_SMS;
+            }
+
+            console.log("loginPhoneNumber-->$rootScope.userPName: " + $rootScope.userPName + '---' +$scope.user.phone);
+
+            $scope.safeApply(function () {
+                $location.path(redirectPage);
+            });
+        });
 
         $scope.clearData();
 

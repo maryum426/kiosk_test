@@ -92,6 +92,7 @@ input, select, textare {
 }
 .container_ROW {
 	width: 100%;/*display: table-row;*/
+	position:relative;
 }
 .footer_GROUP {
 	width: 100%;
@@ -400,8 +401,10 @@ input, select, textare {
 	position: relative;
 }
 .banner img {
-	display: block;
-	width: 100%;
+    display: block;
+    height: 304px;
+    width: 100%;
+	overflow:hidden;
 }
 .thankyou-title {
 	display: block;
@@ -498,13 +501,15 @@ input, select, textare {
     margin: 25px 25px 20px;
 }
 .search-field input {
-	background: none;
+	background: #67cadb;
 	border: none;
 	color: #FFFFFF;
 	float: left;
 	font-size: 36px;
 	padding: 0 2px;
 	width: 528px;
+	border-radius:0;
+	-webkit-border-radius:0;
 }
 .profile-status {
 	float: right;
@@ -1255,7 +1260,7 @@ ul.rating {
 	width: 72px;
 	height: 71px;
 	position: absolute;
-	left: 25px;
+	right: 25px;
 	top: 25px;
 }
 .registry-icon {
@@ -1409,11 +1414,13 @@ This is sample of the dropdown div. It will make it easy to set scc of div
 }*/
 /*Asim-CSS-START-HERE*/
 .pac-container {
-    background-color: #14B9D6;
+    background-color: #67cadb;
     border-radius:0;
 	-webkit-border-radius:0;
     color: #FFFFFF;
     font-family:"Helvetica Light", Arial, sans-serif;
+	width:510px !important;
+ 	border-left: 22px solid #14b9d6;
 }
 .pac-item-query{
 	color:inherit;
@@ -1579,4 +1586,116 @@ This is sample of the dropdown div. It will make it easy to set scc of div
 /*29-Oct-css-start*/
 .kiosk-login-holder{
 	padding:0 76px;
+}
+/*01-Nov-2013-CSs*/
+.profile-img-main .imgavatar {
+    height: 300px;
+    width: 300px;
+}
+.fileholder-btn #capture {
+    cursor: pointer;
+    display: block;
+    height: 75px;
+    margin: 5px 0 0;
+}
+.overflow-holder{
+	overflow:hidden;
+}
+.alignLEFT .heading-title{
+	padding:0;
+}
+.btn-holders{
+	float:right;
+}
+.save-kiosk{
+	background: url(../images/save-btn.png) no-repeat;
+	float: left;
+    height: 30px;
+    text-indent: -9999px;
+    width: 30px;	
+	margin: 0 5px;
+}
+.cancel-kiosk{
+	background: url(../images/cancel-btn.png) no-repeat;
+	float: left;
+    height: 30px;
+    text-indent: -9999px;
+    width: 30px;
+	margin: 0 5px;
+}
+.or-text{
+	float: left;
+    font-size: 20px;
+    margin: 5px 8px 0 0;
+}
+.editable-input {
+    float: left;
+}
+.editable-input input {
+    border: none;
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    margin: 5px 0;
+    padding: 2px;
+    width: 340px;
+	border-radius:0;
+	-webkit-border-radius:0;
+	font-size:20px;
+	color:#535353;
+	width: 620px;
+}
+.margin-stack{
+	margin: 20px 0 0;
+}
+.col02-placeMsg {
+    background: #14B9D6;
+    color: #fff;
+    font-size: 24px;
+    left: 220px;
+    padding: 35px 80px;
+    position: absolute;
+    right: auto;
+    text-align: center;
+    top: 156px;
+    z-index: 999;
+}
+.place-msg{
+	display:block;
+	margin:0 0 10px;
+}
+.send-ok-btn {
+    background: #F24E22;
+    color: #FFFFFF;
+    display: block;
+    font-size: 38px;
+    margin: 0 auto;
+    padding: 12px 70px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 60px;
+}
+.send-ok-btn:hover{
+	text-decoration:none;
+}
+.heading-fixed {
+    height: 44px;
+    overflow: hidden;
+	max-width: 676px;
+}
+.sub-heading-fixed {
+    height: 25px;
+    overflow: hidden;
+	max-width: 676px;
+}
+.upload-title {
+    display: block;
+}
+.upload-title .text-field {
+    cursor: pointer;
+    height: 71px;
+    opacity: 0;
+	filter: alpha(opacity=0);
+    width: 100%;
 }

@@ -245,7 +245,8 @@ angular.module('DataServices', ['ngResource'])
         };
 
         var sendAuthSms = function () {
-//            TODO:update authlink
+            //TODO:update authlink
+            console.log("authlink --> " + m_guid + m_phone);
             var msg = constantService.getAuthSMSMsg() + "\n" + m_guid;
             utilService.sendSMS(m_phone, msg, function (success) {
             });
@@ -402,7 +403,7 @@ angular.module('DataServices', ['ngResource'])
                 checkPhoneInDB(phone, function (foundAuth) {
 
                     if(foundAuth == null){
-                        console.log("Found Auth: "+ foundAuth);
+                        console.log("Found Auth Null: "+ foundAuth);
                         cb(false);
                     }else {
 
@@ -1592,6 +1593,56 @@ angular.module('DataServices', ['ngResource'])
                 });
             },
 
+            saveKioskPlaceEdit:function (kiosk,placeId, cb) {
+
+                console.log("saveKiosk: " + kiosk.gname);
+                console.log("saveKiosk: " + kiosk.formatted_address);
+                console.log("saveKiosk: " + placeId);
+
+                var SweetPlace = Parse.Object.extend("SweetPlace");
+                var pSweet = new SweetPlace();
+                var query = new Parse.Query("SweetPlace");
+
+                query.equalTo("objectId", placeId);
+                query.first({
+                    success:function(rKiosk) {
+                        rKiosk.set("gname",kiosk.gname);
+                        rKiosk.set("placeName",kiosk.gname);
+                        rKiosk.set("address",kiosk.formatted_address);
+                        rKiosk.save(null,{
+                            success:function(result) {
+                                console.log("Saved "+ result);
+                            }
+                        });
+                    }
+                });
+
+            },
+
+            saveKioskPlaceEdit2:function (kiosk,placeId, cb) {
+
+                console.log("saveKiosk: " + kiosk);
+                console.log("saveKiosk: " + placeId);
+
+                var SweetPlace = Parse.Object.extend("SweetPlace");
+                var pSweet = new SweetPlace();
+
+                var query = new Parse.Query("SweetPlace");
+
+                query.equalTo("objectId", placeId);
+                query.first({
+                    success:function(rKiosk) {
+                        rKiosk.set("placeTitle",kiosk);
+                        rKiosk.save(null,{
+                            success:function(result) {
+                                console.log("Saved "+ result);
+                            }
+                        });
+                    }
+                });
+
+            },
+
             getPlaces:function (cb) {
                 var placeSweetsArray = [];
                 var SweetPlace = Parse.Object.extend("SweetPlace");
@@ -2150,7 +2201,12 @@ angular.module('DataServices', ['ngResource'])
             },
 
             sendCommentEmail:function (emailData, cb) {
-
+                console.log("Checkbox value " + emailData.check);
+                if (emailData.check == true){
+                    var copy = 'Copy Katie: Yes';
+                }else{
+                    var copy = '';
+                }
                 var newLine = "<br>";
 
                 var fromEmail = emailData.fromEmail;
@@ -2167,6 +2223,7 @@ angular.module('DataServices', ['ngResource'])
                             + newLine
                             + emailData.mobile
                             + newLine
+                            + copy
                             + newLine
                             + "- Team Sweetness ";
 
