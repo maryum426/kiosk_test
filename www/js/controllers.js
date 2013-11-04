@@ -4210,11 +4210,11 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
     };
 
     $scope.$watch($rootScope.publicName, function () {
-        try {
+        //try {
                                       //alert('Device is ready! Make sure you set your app_id below this alert.');
                                       
                                       //FB.init({ appId: '366407670138696', nativeInterface: CDV.FB, useCachedDialogs: false });
-                                      Parse.FacebookUtils.init({
+                                      /*Parse.FacebookUtils.init({
 
                                         appId      : "366407670138696", // app name : sweet_localhost
                                         nativeInterface: CDV.FB,
@@ -4227,7 +4227,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                                     //alert("Parse Facebook Utility Initialized!");
                                       } catch (e) {
                                       alert("Hello: "+e);
-                                      }
+                                      }*/
        
     });
     
