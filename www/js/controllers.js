@@ -4365,7 +4365,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
     $scope.phonegapFBLogin = function() {
         console.log('In home');
         
-            if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')){ alert('Cordova variable does not exist. Check that you have included cordova.js correctly')};
+            /*if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')){ alert('Cordova variable does not exist. Check that you have included cordova.js correctly')};
             if (typeof CDV == 'undefined') {alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly')};
             if (typeof FB == 'undefined') {alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.')};
           
@@ -4390,7 +4390,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                  console.log("UserInfo ID -->" + user.id);
                  console.log("UserInfo FBID" + user.get("authData")["facebook"]["id"]);*/
 
-                facebookService.updateUserInfo(_user, function (rUser, rUserChannel) {
+                /*facebookService.updateUserInfo(_user, function (rUser, rUserChannel) {
                     $scope.safeApply(function () {
                         $scope.section.loginInProgress = false;
                         if (rUserChannel)
