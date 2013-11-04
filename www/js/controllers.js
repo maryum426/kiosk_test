@@ -2285,32 +2285,15 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         //*************************************** Kiosk Google Map Initlization *********************************//
         $scope.initializeGMapKiosk = function ($scope) {
 
-             $location.path('/kiosk/createSweetPlace');
+            $location.path('/kiosk/createSweetPlace');
 
-            //console.log ("Load Map" + document.getElementById('map_canvas'));
-            var pos;
-           $scope.placeListing = [] ;
-            //var latlng = new google.maps.LatLng(-34.397, 150.644);
+            $scope.placeListing = [];
+            $rootScope.placeSearchResults = [];
+
+            var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
-            var map;
-
-            // Try HTML5 geolocation
-             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(onSuccess,onError);
-                
-               
-            } else {
-                // Browser doesn't support Geolocation
-                handleNoGeolocation(false);
-            }
-            
-            function onSuccess(position) {
-                //alert("onSuccess() called!");
-                    pos = new google.maps.LatLng(position.coords.latitude,
-                        position.coords.longitude);
-                
-            var mapOptions = {
-                center:pos,
+            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+                center:latlng,
                 zoom:17,
                 panControl:false,
                 mapTypeControl:true,
@@ -2318,12 +2301,20 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                     style:google.maps.MapTypeControlStyle.DROPDOWN_MENU
                 },
                 zoomControl:true,
+                /*zoomControlOptions: {
+                 style: google.maps.ZoomControlStyle.SMALL
+                 },*/
                 scaleControl:false,
+
                 mapTypeId:google.maps.MapTypeId.ROADMAP
-                };
-                 
-                map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-            
+            });
+
+            // Try HTML5 geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = new google.maps.LatLng(position.coords.latitude,
+                        position.coords.longitude);
+
                     /*var infowindow = new google.maps.InfoWindow({
                      map: map,
                      position: pos,
@@ -2336,15 +2327,15 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                         title:'Location found.'
                     });
 
-                    //map.setCenter(pos);
-                };
-                
-                 function onError() {
-                     
+                    map.setCenter(pos);
+                }, function () {
                     $scope.handleNoGeolocation(true);
-                };
-                
-                
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+
             var defaultBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(-33.8902, 151.1759),
                 new google.maps.LatLng(-33.8474, 151.2631)
@@ -2429,34 +2420,17 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //--------------------------------------------------------------------------------------
             //------------------------------ AutoComplete Box --------------------------------------------
             //--------------------------------------------------------------------------------------
-            //var input = (document.getElementById('target'));
-            var options = {
-            bounds: defaultBounds,
-            mapkey: "AIzaSyD-zFhVcr7DYt_9epog_r3kwxTftNbExoo"
-            };
-            input = /** @type {HTMLInputElement} */
-                    (document.getElementById('target')),
-                    searchBox = new google.maps.places.SearchBox(input);
-            //var autocomplete = new google.maps.places.AutoComplete(document.getElementById('target'),options);
-            
-            //autocomplete.bindTo('bounds', map);
-             google.maps.event.addListener(searchBox, 'places_changed', function () {
-                        var places = searchBox.getPlaces();
-                        pos = new google.maps.LatLng(places[0].geometry.location.jb, places[0].geometry.location.kb);
-                        map.setCenter(pos);
-                        marker.setMap(null);
-                        marker = new google.maps.Marker({
-                            position: pos,
-                            map: map
-                        });
-                    });
-            
+            var input = (document.getElementById('target'));
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.bindTo('bounds', map);
+
             var infowindow = new google.maps.InfoWindow();
             var marker = new google.maps.Marker({
                 map:map
             });
 
-            /*google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
                 infowindow.close();
                 marker.setVisible(false);
                 //input.className = '';
@@ -2494,8 +2468,8 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 $scope.placeClaim($rootScope.placeSearchResults);
 
                 //}
-                marker.setIcon(/** @type {google.maps.Icon} **/ //({
-                    /*url:place.icon,
+                marker.setIcon(/** @type {google.maps.Icon} **/ ({
+                    url:place.icon,
                     size:new google.maps.Size(71, 71),
                     origin:new google.maps.Point(0, 0),
                     anchor:new google.maps.Point(17, 34),
@@ -2515,7 +2489,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
                 infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                 infowindow.open(map, marker);
-            });*/
+            });
 
             //--------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------
