@@ -59,12 +59,7 @@
     <feature name="http://api.phonegap.com/1.0/media"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/notification"/>
-    
-    
-    <gap:plugin name="com.phonegap.plugins.facebookconnect">
-    <param name="APP_ID" value="366407670138696"/>
-    <param name="APP_NAME" value="sweetness_localhost"/>
-    </gap:plugin>
+  
     
     <plugin name="Camera" value="CDVCamera" />
 
