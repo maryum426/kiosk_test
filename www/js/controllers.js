@@ -2275,10 +2275,11 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         }
 
         $scope.searchPlaceKiosk = function () {
-            alert("Search Place");
-            $location.path('/kiosk/createSweetPlace');
+            
+            //$location.path('/kiosk/createSweetPlace');
             $scope.initializeGMapKiosk($scope);
             $scope.showClaim = false ;
+            alert("Search Place");
         };
 
         //-------------------------------------------------------------------------------------------------------//
@@ -2308,7 +2309,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
                 mapTypeId:google.maps.MapTypeId.ROADMAP
             });
-
+            alert("Map Set");
             // Try HTML5 geolocation
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
