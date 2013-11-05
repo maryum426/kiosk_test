@@ -5054,11 +5054,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 console.log("Error");
                 console.log(error);
             });
+            $scope.showClaim = false ;
     };
        
     var onFail = function(e) {
         alert("On fail " + e);
     };
+    $scope.showClaim = false ;
 }
 
 //alpha
