@@ -2275,7 +2275,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         }
 
         $scope.searchPlaceKiosk = function () {
-
+            alert("Search Place");
             $location.path('/kiosk/createSweetPlace');
             $scope.initializeGMapKiosk($scope);
             $scope.showClaim = false ;
@@ -5054,13 +5054,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 console.log("Error");
                 console.log(error);
             });
-            $scope.showClaim = false ;
+            //$scope.showClaim = false ;
     };
        
     var onFail = function(e) {
         alert("On fail " + e);
     };
-    $scope.showClaim = false ;
+    //$scope.showClaim = false ;
 }
 
 //alpha
