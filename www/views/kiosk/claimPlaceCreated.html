@@ -1,9 +1,7 @@
 <div id="mybody" class="wrapper no-bg-color">
     <header class="header">
         <div class="heading-title-holder">
-            <div class="alignLEFT"><span class="heading-title">{{placeSearchResults.gname}}</span>
-                <em class="heading-sub-title">{{placeSearchResults.formatted_address}}</em> </div>
-            <a href="#" class="edit-holder"></a>
+           
             <div class="overflow-holder" ng-hide="editorEnabled">
                 <div>
                     <div class="alignLEFT"><span class="heading-title heading-fixed">{{placeSearchResults.gname}}</span>
@@ -36,7 +34,7 @@
     
     <div ng-hide="editorEnabledTitle">
         <span class="thankyou-title">{{placeSearchResults.kioskthankyoutitle}}
-    		<a class="edit-holder" ng-click="enableEditorTitle()"></a>
+    		Love your barista? say thank you!<a class="edit-holder" ng-click="enableEditorTitle()"></a>
         </span>
     </div>
     <div ng-show="editorEnabledTitle" class="overflow-holder thankyou-title">
