@@ -2290,18 +2290,12 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             $scope.placeListing = [];
             $rootScope.placeSearchResults = [];
+
+            var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
             var map,mapOptions,pos;
-            //var latlng = new google.maps.LatLng(-34.397, 150.644);
-            navigator.geolocation.getCurrentPosition(function (position) {
-                    pos = new google.maps.LatLng(position.coords.latitude,
-                        position.coords.longitude);
-                    });
-                    
-            
-            
-            map = new google.maps.Map(document.getElementById('map_canvas'), {
-                center:pos,
+            /*var map = new google.maps.Map(document.getElementById('map_canvas'), {
+                center:latlng,
                 zoom:17,
                 panControl:false,
                 mapTypeControl:true,
@@ -2312,10 +2306,10 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 /*zoomControlOptions: {
                  style: google.maps.ZoomControlStyle.SMALL
                  },*/
-                scaleControl:false,
+                /*scaleControl:false,
 
                 mapTypeId:google.maps.MapTypeId.ROADMAP
-            });
+            });*/
             
            
             //alert("Map Set");
@@ -2324,7 +2318,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 navigator.geolocation.getCurrentPosition(function (position) {
                     pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
-                    /*mapOptions = {
+                    mapOptions = {
                         center:pos,
                         zoom:17,
                         panControl:false,
@@ -2337,7 +2331,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                         mapTypeId:google.maps.MapTypeId.ROADMAP
                         };
                     
-                    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);*/
+                    
                     
                     /*var infowindow = new google.maps.InfoWindow({
                      map: map,
@@ -2364,7 +2358,9 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 // Browser doesn't support Geolocation
                 handleNoGeolocation(false);
             }
-
+            
+            map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+            
             var defaultBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(-33.8902, 151.1759),
                 new google.maps.LatLng(-33.8474, 151.2631)
@@ -2762,7 +2758,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
            // var address = ($rootScope.placeSearchResults.gname).replace(" ", "");
             //console.log('----> ' + address);
             userService.logout();
-            window.open('http://www.facebook.com');
+            window.open('http://m.facebook.com');
             /*$scope.safeApply(function () {
                 $location.path($rootScope.placeSearchResults.gname);
             });*/
