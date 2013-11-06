@@ -2330,8 +2330,9 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                         scaleControl:false,
                         mapTypeId:google.maps.MapTypeId.ROADMAP
                         };
-                    google.maps.event.trigger(map, 'resize');
+                    
                     map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+                    google.maps.event.trigger(map, 'resize');
                     /*var infowindow = new google.maps.InfoWindow({
                      map: map,
                      position: pos,
