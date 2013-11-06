@@ -2293,6 +2293,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
+            var map,mapOptions;
             /*var map = new google.maps.Map(document.getElementById('map_canvas'), {
                 center:latlng,
                 zoom:17,
@@ -2317,7 +2318,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 navigator.geolocation.getCurrentPosition(function (position) {
                     var pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
-                    var mapOptions = {
+                    mapOptions = {
                         center:pos,
                         zoom:17,
                         panControl:false,
