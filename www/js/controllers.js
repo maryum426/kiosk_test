@@ -2762,7 +2762,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
            // var address = ($rootScope.placeSearchResults.gname).replace(" ", "");
             //console.log('----> ' + address);
             userService.logout();
-            window.open('http://www.jklabz.com/sweetnesskiosk');
+            window.open('http://www.facebook.com');
             /*$scope.safeApply(function () {
                 $location.path($rootScope.placeSearchResults.gname);
             });*/
