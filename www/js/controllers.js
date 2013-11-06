@@ -2276,7 +2276,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
         $scope.searchPlaceKiosk = function () {
             
-            $location.path('/kiosk/createSweetPlace');
+            //$location.path('/kiosk/createSweetPlace');
             $scope.initializeGMapKiosk($scope);
             $scope.showClaim = false ;
             //alert("Search Place");
@@ -2339,10 +2339,10 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                      content: 'Location found.'
                      });*/
                     
-                    google.maps.event.addListener(map, 'idle', function(){
+                    /*google.maps.event.addListener(map, 'idle', function(){
                         //alert("Resize Called!");
                         google.maps.event.trigger(map, 'resize');
-                    });
+                    });*/
                     
                     var marker = new google.maps.Marker({
                         position:pos,
