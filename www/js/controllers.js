@@ -2286,7 +2286,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         //*************************************** Kiosk Google Map Initlization *********************************//
         $scope.initializeGMapKiosk = function ($scope) {
 
-            $window.location('/kiosk/createSweetPlace');
+            $location.path('/kiosk/createSweetPlace');
 
             $scope.placeListing = [];
             $rootScope.placeSearchResults = [];
