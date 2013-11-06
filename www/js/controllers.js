@@ -2293,7 +2293,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
-            var map,mapOptions;
+            var map,mapOptions,pos;
             /*var map = new google.maps.Map(document.getElementById('map_canvas'), {
                 center:latlng,
                 zoom:17,
@@ -2316,7 +2316,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             // Try HTML5 geolocation
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = new google.maps.LatLng(position.coords.latitude,
+                    pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
                     mapOptions = {
                         center:pos,
@@ -2332,7 +2332,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                         };
                     
                     map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-                    google.maps.event.trigger(map, 'resize');
+                    
                     /*var infowindow = new google.maps.InfoWindow({
                      map: map,
                      position: pos,
@@ -2358,7 +2358,10 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 new google.maps.LatLng(-33.8902, 151.1759),
                 new google.maps.LatLng(-33.8474, 151.2631)
             );
-
+                $('#map-modal').on('shown', function () {
+                    google.maps.event.trigger(map, 'resize');
+                    map.setCenter(pos);
+                  });
             map.fitBounds(defaultBounds);
 
             //--------------------------------------------------------------------------------------
