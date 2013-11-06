@@ -2279,7 +2279,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //$location.path('/kiosk/createSweetPlace');
             $scope.initializeGMapKiosk($scope);
             $scope.showClaim = false ;
-            alert("Search Place");
+            //alert("Search Place");
         };
 
         //-------------------------------------------------------------------------------------------------------//
@@ -2309,7 +2309,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
                 mapTypeId:google.maps.MapTypeId.ROADMAP
             });
-            alert("Map Set");
+            //alert("Map Set");
             // Try HTML5 geolocation
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
