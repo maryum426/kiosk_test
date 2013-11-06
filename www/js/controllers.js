@@ -2312,7 +2312,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             });*/
             
             $('#map_canvas').on('shown', function () {
-                    alert("Resize Called!");
+                    //alert("Resize Called!");
                     google.maps.event.trigger(map, 'resize');
                     map.setCenter(pos);
                   });
