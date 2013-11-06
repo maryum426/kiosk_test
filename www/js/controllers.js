@@ -2293,7 +2293,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
-            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+            /*var map = new google.maps.Map(document.getElementById('map_canvas'), {
                 center:latlng,
                 zoom:17,
                 panControl:false,
@@ -2305,17 +2305,32 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 /*zoomControlOptions: {
                  style: google.maps.ZoomControlStyle.SMALL
                  },*/
-                scaleControl:false,
+                /*scaleControl:false,
 
                 mapTypeId:google.maps.MapTypeId.ROADMAP
-            });
+            });*/
+            
+            
             //alert("Map Set");
             // Try HTML5 geolocation
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     var pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
-
+                    var mapOptions = {
+                        center:pos,
+                        zoom:17,
+                        panControl:false,
+                        mapTypeControl:true,
+                        mapTypeControlOptions:{
+                            style:google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                        },
+                        zoomControl:true,
+                        scaleControl:false,
+                        mapTypeId:google.maps.MapTypeId.ROADMAP
+                        };
+                    
+                    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
                     /*var infowindow = new google.maps.InfoWindow({
                      map: map,
                      position: pos,
@@ -2328,7 +2343,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                         title:'Location found.'
                     });
 
-                    map.setCenter(pos);
+                    //map.setCenter(pos);
                 }, function () {
                     $scope.handleNoGeolocation(true);
                 });
