@@ -2290,12 +2290,18 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             $scope.placeListing = [];
             $rootScope.placeSearchResults = [];
-
-            var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
             var map,mapOptions,pos;
-            var map = new google.maps.Map(document.getElementById('map_canvas'), {
-                center:latlng,
+            //var latlng = new google.maps.LatLng(-34.397, 150.644);
+            navigator.geolocation.getCurrentPosition(function (position) {
+                    pos = new google.maps.LatLng(position.coords.latitude,
+                        position.coords.longitude);
+                    });
+                    
+            
+            
+            map = new google.maps.Map(document.getElementById('map_canvas'), {
+                center:pos,
                 zoom:17,
                 panControl:false,
                 mapTypeControl:true,
