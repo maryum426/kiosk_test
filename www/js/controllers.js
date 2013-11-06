@@ -2294,7 +2294,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             var latlng = new google.maps.LatLng(-34.397, 150.644);
             var geocoder = new google.maps.Geocoder();
             var map,mapOptions,pos;
-            /*var map = new google.maps.Map(document.getElementById('map_canvas'), {
+            var map = new google.maps.Map(document.getElementById('map_canvas'), {
                 center:latlng,
                 zoom:17,
                 panControl:false,
@@ -2306,10 +2306,10 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 /*zoomControlOptions: {
                  style: google.maps.ZoomControlStyle.SMALL
                  },*/
-                /*scaleControl:false,
+                scaleControl:false,
 
                 mapTypeId:google.maps.MapTypeId.ROADMAP
-            });*/
+            });
             
            
             //alert("Map Set");
@@ -2318,7 +2318,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 navigator.geolocation.getCurrentPosition(function (position) {
                     pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
-                    mapOptions = {
+                    /*mapOptions = {
                         center:pos,
                         zoom:17,
                         panControl:false,
@@ -2331,7 +2331,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                         mapTypeId:google.maps.MapTypeId.ROADMAP
                         };
                     
-                    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+                    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);*/
                     
                     /*var infowindow = new google.maps.InfoWindow({
                      map: map,
