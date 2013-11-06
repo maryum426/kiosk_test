@@ -2276,7 +2276,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
         $scope.searchPlaceKiosk = function () {
             
-            //$location.path('/kiosk/createSweetPlace');
+            $location.path('/kiosk/createSweetPlace');
             $scope.initializeGMapKiosk($scope);
             $scope.showClaim = false ;
             //alert("Search Place");
