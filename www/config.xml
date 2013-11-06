@@ -63,7 +63,7 @@
     
     <plugin name="Camera" value="CDVCamera" />
 
-    <access origin="*" />
+    <access origin="*" browserOnly="true"/>
     <access origin="*.googleapis.com"/>
     <access origin="*.google.com"/>
     <access origin="*.gstatic.com"/>

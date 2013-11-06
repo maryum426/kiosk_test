@@ -2311,11 +2311,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 mapTypeId:google.maps.MapTypeId.ROADMAP
             });*/
             
-            $('#map_canvas').on('shown', function () {
-                    //alert("Resize Called!");
-                    google.maps.event.trigger(map, 'resize');
-                    map.setCenter(pos);
-                  });
+           
             //alert("Map Set");
             // Try HTML5 geolocation
             if (navigator.geolocation) {
@@ -2344,7 +2340,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                      });*/
                     
                     google.maps.event.addListener(map, 'idle', function(){
-                        alert("Resize Called!");
+                        //alert("Resize Called!");
                         google.maps.event.trigger(map, 'resize');
                     });
                     
@@ -2760,9 +2756,10 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
            // var address = ($rootScope.placeSearchResults.gname).replace(" ", "");
             //console.log('----> ' + address);
             userService.logout();
-            $scope.safeApply(function () {
+            window.open('http://www.jklabz.com/sweetnesskiosk');
+            /*$scope.safeApply(function () {
                 $location.path($rootScope.placeSearchResults.gname);
-            });
+            });*/
 
         };
 
