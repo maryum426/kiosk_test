@@ -2311,7 +2311,11 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 mapTypeId:google.maps.MapTypeId.ROADMAP
             });*/
             
-            
+            $('#map_canvas').on('shown', function () {
+                    alert("Resize Called!");
+                    google.maps.event.trigger(map, 'resize');
+                    map.setCenter(pos);
+                  });
             //alert("Map Set");
             // Try HTML5 geolocation
             if (navigator.geolocation) {
@@ -2338,7 +2342,12 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                      position: pos,
                      content: 'Location found.'
                      });*/
-
+                    
+                    google.maps.event.addListener(map, 'idle', function(){
+                        alert("Resize Called!");
+                        google.maps.event.trigger(map, 'resize');
+                    });
+                    
                     var marker = new google.maps.Marker({
                         position:pos,
                         map:map,
@@ -2358,10 +2367,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 new google.maps.LatLng(-33.8902, 151.1759),
                 new google.maps.LatLng(-33.8474, 151.2631)
             );
-                $('#map-modal').on('shown', function () {
-                    google.maps.event.trigger(map, 'resize');
-                    map.setCenter(pos);
-                  });
+                
             map.fitBounds(defaultBounds);
 
             //--------------------------------------------------------------------------------------
@@ -2450,7 +2456,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             var marker = new google.maps.Marker({
                 map:map
             });
-
+            
             google.maps.event.addListener(autocomplete, 'place_changed', function () {
                 infowindow.close();
                 marker.setVisible(false);
