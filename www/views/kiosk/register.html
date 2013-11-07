@@ -15,11 +15,19 @@
                             <img  ng-show='userAvatar' ng-src="{{userAvatar}}" class="imgavatar"/>
                         </span>
                     </div>
+                    <div ng-hide="editInfo">
+                        <input type="text" class="textfield-holder" name="#" placeholder="Full name" ng-model="kiosk.fullname" >
+                        <!--<input type="text" name="#" placeholder="Email Address" class="textfield-holder" ng-model="kiosk.vocation">-->
+                        <input type="text" name="#" placeholder="Email Address" class="textfield-holder" ng-model="kiosk.email">
+                    </div>
+                    <div ng-show="editInfo">
+                        <span class="editlabal" >{{infoUserChannal.fullNmae}}</span>
+                        <span class="editlabal">{{infoUserChannal.email}}</span>
+                    </div>
 
-                    <input type="text" class="textfield-holder" name="#" placeholder="Full name" ng-model="kiosk.fullname">
-                    <input type="text" name="#" placeholder="Vocation e.g. Barista" class="textfield-holder" ng-model="kiosk.vocation">
 
-                    <a class="visibility-btn" ng-click="setVisibility()">Set visibility</a>
+
+                    <!--<a class="visibility-btn" ng-click="setVisibility()">Set visibility</a>-->
                     <a class="visibility-btn" ng-click="searchPlaceKiosk()">Set Place</a>
 
                 </fieldset>
@@ -27,7 +35,7 @@
         </div>
     </div>
 </div>
-        {{userAddedPlace}}
+
 <div class="footer_GROUP">
     <div class="footer_HOLDER">
         <div class="profile-connect-bottom no_PADDING_TOP">

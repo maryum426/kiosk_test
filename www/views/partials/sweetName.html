@@ -52,6 +52,7 @@ jQuery(function($) {
     <ul class="social-connection">
         <li ng-repeat="uplace in usersInPlaces">
                 <span class="person-info">
+                    <!--ng-src="{{uplace.get('userPic')}}" -->
                   <img  ng-src="http://graph.facebook.com/{{uplace.get('userID')}}/picture?width=200&height=200"
                         title="{{uplace.get('userName')}}" ng-click="sendPlaceGesture(uplace)"
                         friend="{{uplace}}">
@@ -433,11 +434,11 @@ jQuery(function($) {
                             </textarea>
                             <input class="texfield-grey" name="username" id="username" placeholder="Full Name (optional)"
                                    type="text" ng-model="user.name" min="7" max="110" required>
-                            <input class="texfield-grey" name="mnumber" id="mnumber" placeholder="Mobile Number (optional)"
+                            <input class="texfield-grey" name="mnumber" id="mnumber" placeholder="Email Address (optional)"
                                     type="text" ng-model="user.mobile" min="7" max="110" >
-                            <input type="checkbox" name="" value="copy" ng-model="user.chkbox"><span class="chkText" style="color:#fff;margin-left: 5px;">Send a copy to Katie</span>
+                            <input type="checkbox" name="" value="copy" ng-model="user.chkbox" style="margin: 0px !important;position: relative;top: -3px;">
+                                <span class="chkText" style="color: #fff;margin-left: 10px;font-size: 25px;">Send a copy to store manager Katie</span>
                         </fieldset>
-
                     <ul class="submit-holder">
                         <li><a ng-click="newAuthPlaceCancel()">Cancel</a></li>
                         <li>

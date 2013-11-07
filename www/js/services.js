@@ -128,7 +128,7 @@ angular.module('DataServices', ['ngResource'])
                     });
             },
             //TODO SMS to email forwarding
-            sendEmailPP:function (fromEmail,receiverEmail, subject, m_phone, cb) {
+            sendEmailPP:function (fromEmail,receiverEmail, ccEmail,subject, m_phone, cb) {
 
                 console.log("fromEmail" + fromEmail);
                 console.log("receiverEmail" + receiverEmail);
@@ -143,6 +143,7 @@ angular.module('DataServices', ['ngResource'])
                         key:"1a015cea-ea9f-4bce-b2b8-ac3fe322d34b",
                         fromEmail:fromEmail,
                         toEmail:receiverEmail,
+                        ccEmail:ccEmail,
                         subject:subject,
                         html:m_phone
                         //fromName:'sweetness',
@@ -246,7 +247,7 @@ angular.module('DataServices', ['ngResource'])
 
         var sendAuthSms = function () {
             //TODO:update authlink
-            console.log("authlink --> " + m_guid + m_phone);
+            console.log("authlink --> " + m_guid + ' -- ' + m_phone);
             var msg = constantService.getAuthSMSMsg() + "\n" + m_guid;
             utilService.sendSMS(m_phone, msg, function (success) {
             });
@@ -323,7 +324,7 @@ angular.module('DataServices', ['ngResource'])
                 m_guid = utilService.generateGuidSms();
                 m_phone = ph;
 //                //console.log(m_guid);
-//                console.log(m_phone);
+                console.log("phone --> " + m_phone);
                 saveAuth();
                 sendAuthSms();
             }, // createAuth
@@ -399,6 +400,7 @@ angular.module('DataServices', ['ngResource'])
 
             loginPhoneNumber:function (phone, cb) {
                 console.log("authenticationThroughSMS");
+                console.log("phone : " + phone);
 
                 checkPhoneInDB(phone, function (foundAuth) {
 
@@ -833,6 +835,46 @@ angular.module('DataServices', ['ngResource'])
 
             currentUser:function () {
                 return Parse.User.current();
+            },
+
+            getUserChannelInfo:function (userphone, cb) {
+                console.log("--- Get User Info from Channal ---");
+
+                var queryUserChannel = new Parse.Query("UserChannel");
+                var getphone = [];
+                getphone.push(userphone);
+                queryUserChannel.containedIn("channels", getphone);
+                //console.log("---userChannels---"+userChannels);
+                queryUserChannel.find({
+                    success:function (rUserChannels) {
+                        console.log("Result " + rUserChannels.length);
+                        cb(rUserChannels);
+                    },
+                    error:function (error) {
+                        console.log("service: getUserChannelsByIds() -> " + error.code + " " + error.message);
+                    }
+
+                });
+
+            },
+
+            getUserlInfo:function (userphone, cb) {
+                console.log("--- Get User Info ---");
+
+                var queryUser = new Parse.Query("User");
+                queryUser.equalTo("username", userphone);
+
+                queryUser.find({
+                    success:function (rUser) {
+                        console.log("Result " + rUser.length);
+                        cb(rUser);
+                    },
+                    error:function (error) {
+                        console.log("service: getUserByName() -> " + error.code + " " + error.message);
+                    }
+
+                });
+
             }
         }
     })
@@ -2203,16 +2245,19 @@ angular.module('DataServices', ['ngResource'])
             sendCommentEmail:function (emailData, cb) {
                 console.log("Checkbox value " + emailData.check);
                 if (emailData.check == true){
-                    var copy = 'Copy Katie: Yes';
+                    //var adminEmail = 'ktlady917@gmail.com' ;
+                    //var adminEmail = 'fahdbangash@gmail.com' ;
+                    var adminEmail = 'maryum.babar@virtual-force.com' ;
                 }else{
-                    var copy = '';
+                    var adminEmail = '' ;
                 }
                 var newLine = "<br>";
 
                 var fromEmail = emailData.fromEmail;
-                var receiverEmail = emailData.receiverEmail;
+                var receiverEmail = emailData.receiverEmail ;
+                var ccEmail = adminEmail ;
                 var subject = emailData.subject;
-                var m_phone = "Hi " + emailData.emailFname
+                var m_phone = "Hi " + emailData.emailFname +  "!"
                             + newLine
                             + "A customer just wrote to you: "
                             + newLine
@@ -2223,11 +2268,41 @@ angular.module('DataServices', ['ngResource'])
                             + newLine
                             + emailData.mobile
                             + newLine
-                            + copy
                             + newLine
                             + "- Team Sweetness ";
 
-                utilService.sendEmailPP(fromEmail,receiverEmail, subject, m_phone, function (success) {
+                console.log('resiver email ' + receiverEmail);
+                utilService.sendEmailPP(fromEmail,receiverEmail, ccEmail,subject, m_phone, function (success) {
+                    if (success) {
+                        console.log("Email send successfuly");
+                        cb(true);
+                    }
+                    else {
+                        console.log("Email having some problem");
+                        cb(false);
+                    }
+                });
+            },
+
+            sendEmailToUser:function (emailData, cb) {
+
+                var newLine = "<br>";
+
+                var fromEmail = emailData.fromEmail;
+                var receiverEmail = emailData.mobile ;
+                var subject = emailData.subject;
+                var m_phone = "Hello there!"
+                    + newLine
+                    + "Your message has been delivered to "+ emailData.emailFname +"."
+                    + newLine
+                    + newLine
+                    + "Have a wonderful day :-)"
+                    + newLine
+                    + newLine
+                    + "- Team Sweetness ";
+
+                console.log('resiver email ' + receiverEmail);
+                utilService.sendEmailPP(fromEmail,receiverEmail,'', subject, m_phone, function (success) {
                     if (success) {
                         console.log("Email send successfuly");
                         cb(true);
@@ -2369,27 +2444,36 @@ angular.module('DataServices', ['ngResource'])
             setKioskUser:function (kioskUserInfo, cb) {
 
                 var Kiosk = Parse.Object.extend("kioskUser");
-                var uKiosk = new Kiosk();
+                var uKiosk = new Parse.Query(Kiosk);
 
-                uKiosk.set("fullName", kioskUserInfo.fullName);
-                uKiosk.set("vocation", kioskUserInfo.vocation);
-                uKiosk.set("userAvatar", kioskUserInfo.userAvatar);
-                uKiosk.set("userPhone", kioskUserInfo.userPhone);
+                console.log("userPhone ::" + kioskUserInfo.userPhone);
 
-                uKiosk.save(null, {
-                    success:function (rKiosk) {
-                        //console.log(rKiosk + " saved successfully");
+                uKiosk.equalTo("userPhone", kioskUserInfo.userPhone);
+                //uKiosk.equalTo("userPhone", '7076344193');
+                uKiosk.first({
+                    success:function (objectUserInfo) {
+                        //console.log("Successfully get user info " +  objectUserInfo.length);
+                        //if user update its information
+                        objectUserInfo.set("fullName", kioskUserInfo.fullName);
+                        objectUserInfo.set("vocation", kioskUserInfo.vocation);
+                        objectUserInfo.set("email", kioskUserInfo.email);
+                        objectUserInfo.set("userAvatar", kioskUserInfo.userAvatar);
+                        objectUserInfo.set("userPhone", kioskUserInfo.userPhone);
+                        objectUserInfo.save();
 
                         //TODO: update User table with fullName
                         var kioskUsers = Parse.Object.extend("User");
                         var query = new Parse.Query(kioskUsers);
 
-                        //query.equalTo("username", kioskUserInfo.userPhone);
-                        query.equalTo("username", '7076344193');
+                        //query.equalTo("username", '7076344193');
+                        query.equalTo("username", kioskUserInfo.userPhone);
                         query.first({
                             success:function (object) {
-                                //console.log("Successfully retrieved place join request user " +  object.length);
+                                console.log("Successfully update user info " +  object.length);
                                 object.set("fullName", kioskUserInfo.fullName);
+                                object.set("email", kioskUserInfo.email);
+                                //object.set("phones", kioskUserInfo.userPhone);
+                                object.set("avatarUrl", kioskUserInfo.userAvatar);
                                 object.save();
                                 cb(object);
                             },
@@ -2398,18 +2482,120 @@ angular.module('DataServices', ['ngResource'])
                             }
                         });
 
+                        console.log("User channel");
+                        var getphone = [];
+                        getphone.push(kioskUserInfo.userPhone);
+                        var queryUserChannel = new Parse.Query("UserChannel");
+                        queryUserChannel.containedIn("channels", getphone );
+
+                        queryUserChannel.first({
+                            success:function (object) {
+                                console.log("Successfully update user channel " +  object.length);
+                                object.set("fullName", kioskUserInfo.fullName);
+                                object.set("avatarURL", kioskUserInfo.userAvatar);
+                                object.set("avatarUrl", kioskUserInfo.userAvatar);
+                                object.set("channel", kioskUserInfo.userPhone);
+                                object.set("email", kioskUserInfo.email);
+                                object.save();
+                                cb(object);
+                            },
+                            error:function (error) {
+                                console.log("Error: " + error.code + " " + error.message);
+                            }
+                        });
+
+                        cb(objectUserInfo);
                     },
-                    error:function (rSweet, error) {
-                        console.log("service: saveSweet() -> " + error.code + " " + error.message);
+                    error:function (error) {
+                        //incase of first time we need to add user in table
+                        //console.log("Error: " + error.code + " " + error.message);
+                        uKiosk.set("fullName", kioskUserInfo.fullName);
+                        uKiosk.set("vocation", kioskUserInfo.vocation);
+                        uKiosk.set("userAvatar", kioskUserInfo.userAvatar);
+                        uKiosk.set("userPhone", kioskUserInfo.userPhone);
+
+                        uKiosk.save(null, {
+                            success:function (rKiosk) {
+                                console.log(rKiosk + " Kiosk saved successfully");
+
+                                //TODO: update User table with fullName
+                                var kioskUsers = Parse.Object.extend("User");
+                                var query = new Parse.Query(kioskUsers);
+
+                                //query.equalTo("username", kioskUserInfo.userPhone);
+                                //query.equalTo("username", '7076344193');
+                                query.equalTo("username", kioskUserInfo.userPhone);
+                                query.first({
+                                    success:function (object) {
+                                        console.log("Successfully update user info " +  object.length);
+                                        object.set("fullName", kioskUserInfo.fullName);
+                                        object.save();
+                                        cb(object);
+                                    },
+                                    error:function (error) {
+                                        console.log("Error: " + error.code + " " + error.message);
+                                    }
+                                });
+
+                            },
+                            error:function (rSweet, error) {
+                                console.log("service: saveSweet() -> " + error.code + " " + error.message);
+                            }
+                        });
                     }
                 });
-                /*
-                userService.getUserByChannel(sweet.receiverPhone, function (user) {
-                    if (user) pSweet.set("receiverId", user.id);
-                    //userService.createUserChannel(sweet.receiverPhone,sweet.receiverName,function(rUserChannel){});
-                    //console.log("---saveSweet--- "+pSweet);
+            },
 
-                });*/
+            //blue
+            addKioskUserToPlace:function (kioskUserInfo,placeInfo, cb) {
+
+                console.log("---- Add user to place table ----");
+
+                var Kiosk = Parse.Object.extend("SweetPlaceUsers");
+                //var uKiosk = new Parse.Query(Kiosk);
+                var uKiosk = new Kiosk();
+
+                console.log(">> " + kioskUserInfo[0].get('userId'));
+                console.log(">> " + placeInfo[0].get('placeName'));
+                //console.log(">>- " + placeInfo['placeName']);
+                //console.log(">>-- " + placeInfo.placeCreatorId);
+
+                uKiosk.set("placeCreatorId", placeInfo[0].get('placeCreatorId'));
+                uKiosk.set("placeName", placeInfo[0].get('placeName'));
+                uKiosk.set("placeSweetName", placeInfo[0].get('placeSweetName'));
+                uKiosk.set("placeDesc", placeInfo[0].get('placeDesc'));
+                uKiosk.set("placeURL", placeInfo[0].get('placeURL'));
+                uKiosk.set("placeLatitude", placeInfo[0].get('placeLatitude'));
+                uKiosk.set("placeLongitude", placeInfo[0].get('placeLongitude'));
+                uKiosk.set("userID", kioskUserInfo[0].get('userId'));
+                uKiosk.set("userName", kioskUserInfo[0].get('fullName'));
+                uKiosk.set("email", kioskUserInfo[0].get('email'));
+                uKiosk.set("userNetwork", 'phone');
+                uKiosk.set("userPic", kioskUserInfo[0].get('avatarURL'));
+                uKiosk.set("joinReq", '1');
+                /*if (addsweetplace.joinReq == "1") {
+                    uKiosk.set("joinReq", '1');
+                } else {
+                    uKiosk.set("joinReq", '0');
+                }*/
+
+                uKiosk.set("LatLong", placeInfo[0].get('LatLong'));
+                //pSweet.set("photo" , placeInfo[0].get('photo'));
+                //pSweet.set("address" , placeInfo[0].get('formatted_address'));
+                uKiosk.set("gname", placeInfo[0].get('gname'));
+                uKiosk.set("icon", placeInfo[0].get('icon'));
+
+                //-------------------------------------------------------------------
+                uKiosk.save(null, {
+                    success:function (pSweet) {
+                        console.log(pSweet + " saved successfully");
+                        cb(pSweet);
+                    },
+                    error:function (pSweet, error) {
+                        console.log("service: saveSweet() -> " + error.code + " " + error.message);
+                    }
+
+                });
             }
         }
     })
@@ -2618,9 +2804,7 @@ angular.module('DataServices', ['ngResource'])
                     }
                 });
 
-            },
-
-            //blue
+            }
 
         }
     })

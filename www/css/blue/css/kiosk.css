@@ -1040,8 +1040,9 @@ ul.rating {
 	text-align: center;
 }
 .login-btn {
-	background: #F24E22;
+	background: #F24E22 !important;
 	border: none;
+	border-radius:0;
 	color: #fff;
 	cursor: pointer;
 	display: block;
@@ -1050,6 +1051,13 @@ ul.rating {
 	margin: 34px auto 0;
 	padding: 11px 40px 15px;
 	width: auto;
+
+    -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0px;
+    -webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 */
+    -moz-box-sizing: border-box; /* Firefox 1+ */
+    box-sizing: border-box;
 }
 .new-page-style {
 	padding-bottom: 20px;
@@ -1420,7 +1428,7 @@ This is sample of the dropdown div. It will make it easy to set scc of div
     color: #FFFFFF;
     font-family:"Helvetica Light", Arial, sans-serif;
 	width:510px !important;
- 	border-left: 22px solid #14b9d6;
+ 	border-left: 22px solid #f34e21;
 }
 .pac-item-query{
 	color:inherit;
@@ -1698,4 +1706,11 @@ This is sample of the dropdown div. It will make it easy to set scc of div
     opacity: 0;
 	filter: alpha(opacity=0);
     width: 100%;
+}
+.progress_animation {
+    height: 100%;
+    left: -3px;
+    position: absolute;
+    top: -2px;
+    width: 188px;
 }

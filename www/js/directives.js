@@ -1130,7 +1130,7 @@ sweetApp.directive('sweetfileselect', function($rootScope, userService) {
                 var file = files[0];
 
                 var serverUrl = 'https://api.parse.com/1/files/' + file.name;
-                console.log("---sweetfileselect --- "+serverUrl);
+                console.log("---sweetfileselect user Pic --- "+serverUrl);
                 scope.$apply(function(){
                     scope.showprogress = 'true';
                 });
@@ -1197,7 +1197,7 @@ sweetApp.directive('sweetfileselect', function($rootScope, userService) {
                     + "<span class='progress_animation'><img src='images/animation.gif'/> </span>"
                     //+ "<timer-loading duration='5' autostart='true'></timer-loading>"
                     //+"<br/><br/>"
-                    //+"Uploading..."
+                    +"Uploading..."
                     // +"<div class='progress progress-striped active'>"
                     // +"    <div class='bar' style='width: 40%;'></div>"
                     // +"  </div>"
@@ -1492,7 +1492,6 @@ sweetApp.directive('sweetplacefileselect', function($rootScope, userService) {
                                                 userService.setUserChannel(sUserChannel);
                                                 $rootScope.$broadcast("load_user_channel");
                                                 $rootScope.$broadcast("feedbackImg_uploaded");
-
                                                 // scope.setuseravatar(data.url);
                                             });
                                         }
@@ -1637,6 +1636,7 @@ sweetApp.directive('sweetplacepicselect', function($rootScope, userService) {
         template: '<div class="upload-title"><input type="file" accept="image/*" id="capture" capture="camera" class="text-field" size="0" ></div>'
             + "<span ng-show='showprogress' class='showupload'>"
             + "<span class='progress_animation'>Uploading...</span>"
+            + "Uploading..."
             + "</span>",
 
         //+"</div>",
