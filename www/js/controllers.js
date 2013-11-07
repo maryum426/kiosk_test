@@ -5052,7 +5052,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
         
         var options =   {
-            quality: 50,
+            quality: 20,
             cameraDirection:1,
             sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
             destinationType: navigator.camera.DestinationType.DATA_URL,
