@@ -2243,7 +2243,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             console.log("----kioskRegisterCancel----");
             userService.logout();
             $scope.safeApply(function () {
-                $window.location(CONSTANTS.ROUTES.AUTH);
+                $location.path('/');
             });
         }
 
