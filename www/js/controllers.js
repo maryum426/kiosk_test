@@ -5055,15 +5055,15 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             quality: 20,
             cameraDirection:1,
             sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
-            destinationType: navigator.camera.DestinationType.DATA_URL,
-            saveToPhotoAlbum: true
+            destinationType: navigator.camera.DestinationType.DATA_URL
+            //saveToPhotoAlbum: true
         };
         // Take picture using device camera and retrieve image as base64-encoded string
         navigator.camera.getPicture(onSuccess,onFail,options);
     };
     var onSuccess = function(data) {
        
-       /* var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
+        var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
         var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
 
         //Initialize Parse
@@ -5082,7 +5082,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             }, function(error) {
                 console.log("Error");
                 console.log(error);
-            });*/
+            });
            
     };
        
