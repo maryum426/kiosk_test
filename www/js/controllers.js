@@ -5198,11 +5198,12 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
         parseFile.save().then(function() {
                 alert("Got it!");
+                $rootScope.userAvatar = parseFile.url();
                 pic_url = parseFile.url();
-                //uploadParse(pic_url);
-                alert (parseFile.url());
-                //$rootScope.$broadcast("load_user_channel");
-                //$rootScope.$broadcast("feedbackImg_uploaded");
+                uploadParse(pic_url);
+                //alert (parseFile.url());
+                $rootScope.$broadcast("load_user_channel");
+                $rootScope.$broadcast("feedbackImg_uploaded");
                 console.log("Ok");
                 
             }, function(error) {
@@ -5220,7 +5221,8 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         var query = new Parse.Query("PlaceSweetness");
                             //query.equalTo("userId", scope.userid);
                             query.equalTo("objectId", $rootScope.sweetofplaceid );
-                            alert("---sweetfleseelect---- userId"+scope.userid);
+                            alert("SweetofPlaceID: " + $rootScope.sweetofplaceid);
+                            alert("---sweetfleseelect---- userId"+$scope.userid);
                             query.first({
                                 success:function(rUserChannel) {
                                     console.log("---sweetfileselect--- "+rUserChannel.id);
@@ -5228,12 +5230,12 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                                     rUserChannel.save(null,{
                                         success:function(sUserChannel) {
                                             alert("Saved "+sUserChannel);
-                                            scope.$apply(function() {
+                                            $scope.$apply(function() {
                                                 console.log("--About to setUserAvatar--- "+sUserChannel.get("avatarURL"));
                                                 $rootScope.userAvatar = sUserChannel.get("avatarURL");
                                                 userService.setUserChannel(sUserChannel);
-                                                $rootScope.$broadcast("load_user_channel");
-                                                $rootScope.$broadcast("feedbackImg_uploaded");
+                                                //$rootScope.$broadcast("load_user_channel");
+                                                //$rootScope.$broadcast("feedbackImg_uploaded");
 
                                                 // scope.setuseravatar(data.url);
                                             });
