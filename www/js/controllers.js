@@ -5220,6 +5220,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     var uploadParse = function(url){
         var query = new Parse.Query("PlaceSweetness");
                             //query.equalTo("userId", scope.userid);
+                            alert('Upload Parse Called');
                             query.equalTo("objectId", $rootScope.sweetofplaceid );
                             alert("SweetofPlaceID: " + $rootScope.sweetofplaceid);
                             alert("---sweetfleseelect---- userId"+$scope.userid);
