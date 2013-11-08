@@ -2243,40 +2243,9 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             console.log("----kioskRegisterCancel----");
             userService.logout();
             $scope.safeApply(function () {
-                console.log("call of cancel");
-
-                //$scope.wrapper = "wrapper-feeds-place";
-
-                /*$scope.showmobileActions = false;
-                $scope.showPlaceFeed = true ;
-                $scope.section.sendingPlace = true;
-                $scope.section.sending = false ;
-                $scope.publicPlaceHeader = false;
-                $scope.feedbackform = false;
-                $scope.thanksheading = false ;
-                $scope.thanksfooter = false ;*/
-
-                $scope.clearData();
-
-                $scope.roundProgressData = {
-                    label: 0,
-                    percentage: 0
-                }
-                increment = 0 ;
-                interval = 0 ;
-                $scope.counter = 0;
-                $timeout($scope.onTimeout,1000); //show the timer
-
-                $scope.feedbackform = false;
-                //$scope.showmobileActions = false;
-                //$scope.showPlaceFeed = true ;
-                //$scope.section.sendingPlace = true;
-                $scope.section.sending = false ;
-                //$scope.publicPlaceHeader = false;
-                $scope.thanksheading = false ;
-                $scope.thanksfooter = true ;
-                $scope.playBell = false;
-
+                //$location.path('#/u/auth');
+                $location.path(CONSTANTS.ROUTES.AUTH);
+                console.log(CONSTANTS.ROUTES.AUTH);
             });
         }
 
@@ -2848,10 +2817,10 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
            // var address = ($rootScope.placeSearchResults.gname).replace(" ", "");
             //console.log('----> ' + address);
             userService.logout();
-            //window.open('http://www.jklabz.com/sweetnessblue/#/lahore2');
-            $scope.safeApply(function () {
+            window.open('http://www.jklabz.com/sweetnessblue/#/lahore2');
+            /*$scope.safeApply(function () {
                 $location.path($rootScope.placeSearchResults.gname);
-            });
+            });*/
 
         };
 
