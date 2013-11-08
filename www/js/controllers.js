@@ -5177,7 +5177,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
         
         var options =   {
-            quality: 20,
+            quality: 50,
             cameraDirection:1,
             sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
             destinationType: navigator.camera.DestinationType.DATA_URL
@@ -5187,14 +5187,45 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         navigator.camera.getPicture(onSuccess,onFail,options);
     };
     var onSuccess = function(data) {
-       
+        
+            var thumbnail = 400;
+            var canvas = document.createElement('canvas');
+            
+            canvas.width = thumbnail;
+            canvas.height = thumbnail;
+            
+            var context = canvas.getContext('2d');
+            context.clearRect(0, 0, thumbnail, thumbnail);
+            var imageWidth;
+            var imageHeight;
+            var offsetX = 0;
+            var offsetY = 0;
+
+            if (this.width > this.height) {
+                imageWidth = Math.round(thumbnail * this.width / this.height);
+                imageHeight = thumbnail;
+                offsetX = - Math.round((imageWidth - thumbnail) / 2);
+            } else {
+                imageHeight = Math.round(thumbnail * this.height / this.width);
+                imageWidth = thumbnail;    
+                offsetY = - Math.round((imageHeight - thumbnail) / 2);            
+            }
+            
+            context.drawImage(data, offsetX, offsetY, imageWidth, imageHeight);
+            var data2 = canvas.toDataURL('image/jpeg');
+            //alert (data2);
+            /*var thumb = $('<img/>');
+            thumb.attr('src', data2);
+            $('body').append(thumb);*/
+        
+        
         var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
         var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
 
         //Initialize Parse
         Parse.initialize(parseAPPID,parseJSID);
         
-        var parseFile = new Parse.File("mypic.jpg", {base64:data});
+        var parseFile = new Parse.File("mypic.jpg", {base64:data2});
         
         parseFile.save().then(function() {
                 alert("Got it!");
