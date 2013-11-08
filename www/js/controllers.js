@@ -3674,7 +3674,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         } else {
             $scope.cssResponsive = '' ;
             $scope.cssSweet = '' ;
-            $scope.cssStyle = 'css/blue/css/purple.css' ;
+            $scope.cssStyle = 'css/blue/css/kiosk.css' ;
             console.log("cssResponsive " + $scope.cssResponsive);
             console.log("cssSweet " + $scope.cssSweet);
             console.log("cssStyle " + $scope.cssStyle);
@@ -3688,8 +3688,10 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
 
         //alpha
         if(renderGuestPath[1] == 'custom' && username != "" ){
-            $rootScope.publicName = username;
+            //$rootScope.publicName = username;
+            $location.path(CONSTANTS.ROUTES.AUTH);
             //console.log("render username Guest-->" + $scope.publicName);
+            //console.log("First call to c");
         }
         if (username == "[object Object]"){
             $rootScope.publicName = '';
@@ -3805,7 +3807,9 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         console.log("Render Action: " + renderAction);
         console.log("Render Path0: " + renderPath[0]);
         console.log("Render Path1: " + renderPath[1]);
-
+        
+        console.log("Value of isAuth: " );
+        
         if (isAuth && renderPath[1] == 'sms') {
             console.log("isAuth and sms get");
             $location.path(CONSTANTS.ROUTES.AUTH_SMS);
@@ -5167,7 +5171,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                             
     //open camera 
         
-    var imageData;
+    var imageData,pic_url;
     $scope.capturePhoto = function() {
         
         
@@ -5194,12 +5198,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
         parseFile.save().then(function() {
                 alert("Got it!");
-                $rootScope.userAvatar = parseFile.url();
+                pic_url = parseFile.url();
+                uploadParse(pic_url);
                 //alert (parseFile.url());
-                $rootScope.$broadcast("load_user_channel");
-                $rootScope.$broadcast("feedbackImg_uploaded");
+                //$rootScope.$broadcast("load_user_channel");
+                //$rootScope.$broadcast("feedbackImg_uploaded");
                 console.log("Ok");
-                console.log(arguments.toString());
+                
             }, function(error) {
                 console.log("Error");
                 console.log(error);
@@ -5211,6 +5216,32 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         alert("On fail " + e);
     };
     
+    var uploadParse = function(url){
+        var query = new Parse.Query("PlaceSweetness");
+                            //query.equalTo("userId", scope.userid);
+                            query.equalTo("objectId", $rootScope.sweetofplaceid );
+                            console.log("---sweetfleseelect---- userId"+scope.userid);
+                            query.first({
+                                success:function(rUserChannel) {
+                                    console.log("---sweetfileselect--- "+rUserChannel.id);
+                                    rUserChannel.set("avatarURL",url);
+                                    rUserChannel.save(null,{
+                                        success:function(sUserChannel) {
+                                            alert("Saved "+sUserChannel);
+                                            scope.$apply(function() {
+                                                console.log("--About to setUserAvatar--- "+sUserChannel.get("avatarURL"));
+                                                $rootScope.userAvatar = sUserChannel.get("avatarURL");
+                                                userService.setUserChannel(sUserChannel);
+                                                $rootScope.$broadcast("load_user_channel");
+                                                $rootScope.$broadcast("feedbackImg_uploaded");
+
+                                                // scope.setuseravatar(data.url);
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+    }
 }
 
 //alpha
