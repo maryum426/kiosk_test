@@ -722,13 +722,13 @@ sweetApp.config(
         }
     });
 
-//SweetTest
+//Sweetness Test Eneviorment : sweetTest
 //Parse.initialize("jKROXk4rTh4qm0vO2QxqoHhkcSsjklqN8V7bZPTz", "vARBe1nGSGtDfQPkdlS2Ond0dxcAr6tAJZgkIm9K");
 
-//SweetBee
+//Sweetness Development Eneviorment :SweetBee
 Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
 
-//SweetApp
+//Sweetness Production Eneviorment : SweetApp
 //Parse.initialize("WRdpguLGfYdPVMq2LwHiB0s5k9ESVTwdde7kXwDm", "MzJ2jpG740oPfRdsKRY6jbXHCeEDXwTlnVFUYiTi");
 
 /*(function (d) {
@@ -744,16 +744,6 @@ Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l
 }(document));*/
 
 setTimeout(function () {
-    /*
-     Parse.FacebookUtils.init({
-     //              TODO: What if user revoke Sweet app permissions
-     appId      : "465464716837107",
-     channelUrl : "http://localhost.local/sweet/bubble/channel.html", // Channel File
-     status     : true,  // check login status
-     cookie     : true,  // enable cookies to allow Parse to access the session
-     xfbml      : true,  // parse XFBML,
-     oauth      : true
-     });*/
     /*Parse.FacebookUtils.init({
         //              TODO: What if user revoke Sweet app permissions
         //appId      : "548541351864725", // thankyou.sweetness.io
@@ -761,7 +751,7 @@ setTimeout(function () {
         appId      : "366407670138696", // app name : sweet_localhost
         //appId		: "446791675403047", //app nmae : sweetjklabz
         //appId   : "234099260080497", //jklabz sweetnessblue
-        //appId   : "580501651986153", //jklabz sweetnessblue -thankyouweetness
+        //appId   : "580501651986153", //jklabz sweetnessblue -thankyouweetness //Production Eneviorment
         channelUrl:"http://localhost.local/sweet/alpha/channel.html", // Channel File
         //channelUrl:"http://thankyou.sweetness.io/channel.html",
         status:true, // check login status
@@ -771,38 +761,4 @@ setTimeout(function () {
         bundleId: "com.sweetness.thankyou"
     });*/
 }, 1000);
-
-/*window.fbAsyncInit = function() {
-    console.log('Test fb login');
-    FB.init({
-        appId      : '366407670138696', // App ID
-        channelUrl : 'http://localhost.local/sweet/bubble/channel.html', // Channel File
-        status     : true, // check login status
-        cookie     : true, // enable cookies to allow the server to access the session
-        xfbml      : true  // parse XFBML
-    });
-};*/
-//
-//// Load the SDK Asynchronously
-/*(function(d){
-    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement('script'); js.id = id; js.async = true;
-    js.src = "//connect.facebook.net/en_US/all.js";
-    ref.parentNode.insertBefore(js, ref);
-}(document));*/
-//
-//function login() {
-//    FB.login(function(response) {
-//        if (response.authResponse) {
-//            // connected
-//            testAPI();
-//        } else {
-//            // cancelled
-//        }
-//    });
-//}
-
-
-//            };
 

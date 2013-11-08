@@ -2576,7 +2576,83 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //--------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------
 
-            
+            //--------------------------------------------------------------------------------------
+            //------------------------------ AutoComplete Box --------------------------------------------
+            //--------------------------------------------------------------------------------------
+            var input = (document.getElementById('target'));
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.bindTo('bounds', map);
+
+            var infowindow = new google.maps.InfoWindow();
+            var marker = new google.maps.Marker({
+                map:map
+            });
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                infowindow.close();
+                marker.setVisible(false);
+                //input.className = '';
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    // Inform the user that the place was not found and return.
+                    //input.className = 'notfound';
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                //if (place.geometry.viewport) {
+                //console.log("place.geometry.viewport");
+                //map.fitBounds(place.geometry.viewport);
+                //} else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);
+
+                console.log("LatLong" + place.geometry.location);
+                //console.log(" -->" + _.pairs(place.photos[0]));
+                console.log(" -->" + place.reference);
+                console.log(" -->" + place.rating);
+                console.log(" -->" + place.name);
+                console.log(" -->" + place.icon);
+                console.log(" -->" + place.formatted_address);
+                console.log(" -->");
+
+                $rootScope.placeSearchResults.LatLong = place.geometry.location;
+                //$rootScope.placeSearchResults.photo = place.photos;
+                $rootScope.placeSearchResults.gname = place.name;
+                $rootScope.placeSearchResults.icon = place.icon;
+                $rootScope.placeSearchResults.formatted_address = place.formatted_address;
+                $rootScope.placeSearchResults.kioskthankyoutitle = "Love your barista?sat thank you!" ;
+                console.log("placeSearchResults -->" + $rootScope.placeSearchResults.gname);
+
+                $scope.placeClaim($rootScope.placeSearchResults);
+
+                //}
+                marker.setIcon(/** @type {google.maps.Icon} **/ ({
+                    url:place.icon,
+                    size:new google.maps.Size(71, 71),
+                    origin:new google.maps.Point(0, 0),
+                    anchor:new google.maps.Point(17, 34),
+                    scaledSize:new google.maps.Size(35, 35)
+                }));
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                infowindow.open(map, marker);
+            });
+
+            //--------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------
             //add marker on double click
             ////////////////////////////////////////////////////////////////
             var markersArray = [];
@@ -2684,11 +2760,12 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         }
 
         $scope.placeClaimBack = function () {
+            $scope.placeMsg = false ;
             $scope.searchPlaceKiosk();
         }
 
         $scope.creatPlaceKiosk = function(kiosk) {
-
+            $scope.previewdisable = true;
             $scope.newPlace = [];
             $rootScope.currentPlace = [];
 
@@ -2797,6 +2874,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
 
         $scope.backRegister = function(){
+            $scope.previewdisable = true;
             $location.path('/kiosk/register');
         }
 
@@ -2808,6 +2886,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             console.log("-- Preview Kiosk -- ");
             console.log("--> " + $rootScope.placeSearchResults);
 
+            $scope.previewdisable = false;
             $scope.launch = true ;
         }
 
@@ -2819,7 +2898,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             userService.logout();
             window.open('http://www.jklabz.com/sweetnessblue/#/lahore2');
             /*$scope.safeApply(function () {
-                $location.path($rootScope.placeSearchResults.gname);
+                $location.path(($rootScope.placeSearchResults.gname).replace(/\s/g, ""));
             });*/
 
         };
@@ -3241,7 +3320,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         $scope.newSweet.emailFname = userFname.split(" ")[0];
         $scope.newSweet.fromEmail = 'thankyou@sweetness.io';
         $scope.newSweet.receiverEmail = rEmail ;//'kashif.abdullah@virtual-force.com'; //'sweetest@sweetness.io';
-        $scope.newSweet.subject = "You got feedback from a customer";
+        $scope.newSweet.subject = "You got a message";
 
         // if user not giving any comment. No email send
         if ($scope.user.comment == '' || $scope.user.comment == null){
@@ -3501,7 +3580,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
 
 //  Green button navigation
 
-    $scope.showTopCircle = function () {
+    /*$scope.showTopCircle = function () {
         return $scope.isInteractionPage();
     };
 
@@ -3509,7 +3588,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         return ($scope.renderAction == "sweet.friend" || $scope.renderAction == "sweet.feed" || $scope.renderAction == "sweet.timeline"
             || $scope.renderAction == "place.feed" || $scope.renderAction == "place.timeline" || $scope.renderAction == "place.friend"
             || $scope.renderAction == "place.myplaces" || $scope.renderAction == "place.setting" || $scope.renderAction == "place.interactionp");
-    };
+    };*/
 
     $scope.hideSearch = function () {
         //return ($scope.renderAction == "place.createsweetplace" || $scope.renderAction == "place.showplace");
@@ -3519,22 +3598,20 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         //return ($scope.renderAction == "place.createsweetplace" || $scope.renderAction == "place.showplace");
     };
 
-    $scope.setLastVisitedPage = function () {
+    /*$scope.setLastVisitedPage = function () {
         if (!$scope.isInteractionPage()) {
             $scope.lastVisitedPage = $location.path();
         }
     };
 
     $scope.navigateToInteraction = function () {
-//        $scope.fNavigationToInteraction = true;
         $scope.setLastVisitedPage();
         $scope.$broadcast('navigate_to_interaction');
     };
 
     $scope.navigateToLastVisitedPage = function () {
-//        $scope.fNavigationToInteraction = false;
         $location.path($scope.lastVisitedPage);
-    };
+    };*/
 
     $scope.showSearch = function () {
         /*console.log("-->>search");

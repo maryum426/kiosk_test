@@ -128,7 +128,7 @@ angular.module('DataServices', ['ngResource'])
                     });
             },
             //TODO SMS to email forwarding
-            sendEmailPP:function (fromEmail,receiverEmail, ccEmail,subject, m_phone, cb) {
+            sendEmailPP:function (fromEmail,receiverEmail, subject, m_phone, cb) {
 
                 console.log("fromEmail" + fromEmail);
                 console.log("receiverEmail" + receiverEmail);
@@ -143,7 +143,94 @@ angular.module('DataServices', ['ngResource'])
                         key:"1a015cea-ea9f-4bce-b2b8-ac3fe322d34b",
                         fromEmail:fromEmail,
                         toEmail:receiverEmail,
+                        subject:subject,
+                        html:m_phone
+                        //fromName:'sweetness',
+                        //toName:'m.kashif.abdullah@gmail.com'
+                    },
+                    {
+                        success:function (msg) {
+                            cb(true);
+                        },
+                        error:function () {
+                            cb(false);
+                        }
+                    }
+                );
+            },
+
+            sendEmailCc:function (fromEmail,receiverEmail, ccEmail, subject, m_phone, cb) {
+
+                console.log("fromEmail" + fromEmail);
+                console.log("receiverEmail" + receiverEmail);
+                console.log("subject" + subject);
+                console.log("body" + m_phone);
+
+                Parse.Cloud.run("sendEmailCc",
+                    {
+                        key:"1a015cea-ea9f-4bce-b2b8-ac3fe322d34b",
+                        fromEmail:fromEmail,
+                        toEmail:receiverEmail,
                         ccEmail:ccEmail,
+                        subject:subject,
+                        html:m_phone
+                        //fromName:'sweetness',
+                        //toName:'m.kashif.abdullah@gmail.com'
+                    },
+                    {
+                        success:function (msg) {
+                            cb(true);
+                        },
+                        error:function () {
+                            cb(false);
+                        }
+                    }
+                );
+            },
+
+            sendEmailBcc:function (fromEmail,receiverEmail, bccEmail, subject, m_phone, cb) {
+
+                console.log("fromEmail" + fromEmail);
+                console.log("receiverEmail" + receiverEmail);
+                console.log("subject" + subject);
+                console.log("body" + m_phone);
+
+                Parse.Cloud.run("sendEmailBcc",
+                    {
+                        key:"1a015cea-ea9f-4bce-b2b8-ac3fe322d34b",
+                        fromEmail:fromEmail,
+                        toEmail:receiverEmail,
+                        bccEmail:bccEmail,
+                        subject:subject,
+                        html:m_phone
+                        //fromName:'sweetness',
+                        //toName:'m.kashif.abdullah@gmail.com'
+                    },
+                    {
+                        success:function (msg) {
+                            cb(true);
+                        },
+                        error:function () {
+                            cb(false);
+                        }
+                    }
+                );
+            },
+
+            sendEmailAll:function (fromEmail,receiverEmail, bccEmail, ccEmail, subject, m_phone, cb) {
+
+                console.log("fromEmail" + fromEmail);
+                console.log("receiverEmail" + receiverEmail);
+                console.log("subject" + subject);
+                console.log("body" + m_phone);
+
+                Parse.Cloud.run("sendEmailBcc",
+                    {
+                        key:"1a015cea-ea9f-4bce-b2b8-ac3fe322d34b",
+                        fromEmail:fromEmail,
+                        toEmail:receiverEmail,
+                        ccEmail:ccEmail,
+                        bccEmail:bccEmail,
                         subject:subject,
                         html:m_phone
                         //fromName:'sweetness',
@@ -2245,13 +2332,25 @@ angular.module('DataServices', ['ngResource'])
             sendCommentEmail:function (emailData, cb) {
                 console.log("Checkbox value " + emailData.check);
                 if (emailData.check == true){
-                    //var adminEmail = 'ktlady917@gmail.com' ;
+                    var adminEmail = 'frothykatie@gmail.com' ;
                     //var adminEmail = 'fahdbangash@gmail.com' ;
-                    var adminEmail = 'maryum.babar@virtual-force.com' ;
                 }else{
                     var adminEmail = '' ;
                 }
+
                 var newLine = "<br>";
+                var msg = '';
+
+                if(emailData.username != ''){
+                    msg += newLine ;
+                    msg += newLine ;
+                    msg += emailData.username;
+                }
+
+                if(emailData.mobile != ''){
+                    msg += newLine ;
+                    msg += emailData.mobile ;
+                }
 
                 var fromEmail = emailData.fromEmail;
                 var receiverEmail = emailData.receiverEmail ;
@@ -2259,29 +2358,41 @@ angular.module('DataServices', ['ngResource'])
                 var subject = emailData.subject;
                 var m_phone = "Hi " + emailData.emailFname +  "!"
                             + newLine
+                            + newLine
                             + "A customer just wrote to you: "
                             + newLine
                             + newLine
                             + emailData.comment
-                            + newLine
-                            + emailData.username
-                            + newLine
-                            + emailData.mobile
+                            + msg
                             + newLine
                             + newLine
                             + "- Team Sweetness ";
 
                 console.log('resiver email ' + receiverEmail);
-                utilService.sendEmailPP(fromEmail,receiverEmail, ccEmail,subject, m_phone, function (success) {
-                    if (success) {
-                        console.log("Email send successfuly");
-                        cb(true);
-                    }
-                    else {
-                        console.log("Email having some problem");
-                        cb(false);
-                    }
-                });
+                if(adminEmail != ''){
+                    utilService.sendEmailCc(fromEmail,receiverEmail,ccEmail,subject, m_phone, function (success) {
+                        if (success) {
+                            console.log("Email send successfuly");
+                            cb(true);
+                        }
+                        else {
+                            console.log("Email having some problem");
+                            cb(false);
+                        }
+                    });
+                } else{
+                    utilService.sendEmailPP(fromEmail,receiverEmail,subject, m_phone, function (success) {
+                        if (success) {
+                            console.log("Email send successfuly");
+                            cb(true);
+                        }
+                        else {
+                            console.log("Email having some problem");
+                            cb(false);
+                        }
+                    });
+                }
+
             },
 
             sendEmailToUser:function (emailData, cb) {
@@ -2293,6 +2404,7 @@ angular.module('DataServices', ['ngResource'])
                 var subject = emailData.subject;
                 var m_phone = "Hello there!"
                     + newLine
+                    + newLine
                     + "Your message has been delivered to "+ emailData.emailFname +"."
                     + newLine
                     + newLine
@@ -2302,7 +2414,7 @@ angular.module('DataServices', ['ngResource'])
                     + "- Team Sweetness ";
 
                 console.log('resiver email ' + receiverEmail);
-                utilService.sendEmailPP(fromEmail,receiverEmail,'', subject, m_phone, function (success) {
+                utilService.sendEmailPP(fromEmail,receiverEmail, subject, m_phone, function (success) {
                     if (success) {
                         console.log("Email send successfuly");
                         cb(true);

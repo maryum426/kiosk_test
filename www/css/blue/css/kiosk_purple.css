@@ -220,19 +220,16 @@ input, select, textare {
 	overflow: hidden;
 }
 .heading-title {
-    display: block;
     font-size: 30px;
-    text-transform: uppercase;
 	display: block;
 	font-size: 38px;
-	text-transform: uppercase;
     padding: 5px 0;
+	letter-spacing: -1px;
 }
 .heading-sub-title {
 	font-size: 20px;
 	display: block;
 	font-style: normal;
-	text-transform: uppercase;
 }
 .social-features {
 	float: right;
@@ -299,9 +296,9 @@ input, select, textare {
 	position: relative;
 }
 .heart-big-profile {
-	height: 300px;
+	height: 290px;
 	padding: 23px;
-	width: 300px;
+	width: 290px;
 }
 .profile-img-main > img {
 	width: 100%;
@@ -380,7 +377,7 @@ input, select, textare {
 }
 .submit-holder li a {
 	display: block;
-	font-size: 37px;
+	font-size: 44px;
 	color: #fff;
 	text-decoration: none;
 	background-color: #b7b7b7;
@@ -1068,7 +1065,7 @@ ul.rating {
 	color: #949494;
 	background-color: #ebebeb;
 	padding: 30px 10px;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -1086,9 +1083,10 @@ ul.rating {
 	font-size: 30px;
 	margin-bottom: 20px;
 	min-width: 158px;
-	padding: 9px 18px;
+	padding: 9px 22px;
 	text-decoration: none;
 	 margin-left: 10px;
+	 text-align:center;
 }
 .visibility-btn:hover {
 	text-decoration: none;
@@ -1097,7 +1095,7 @@ ul.rating {
 	background-color: #ed145b;
 }
 .register_BUTTON_HOLDER li a {
-	padding: 30px 0;
+	padding: 26px 0;
 }
 .inputfile-holder {
 	max-width: 346px;
@@ -1106,19 +1104,20 @@ ul.rating {
 	overflow: hidden;
 }
 .fileholder-btn {
-	height: 42%;
-	left: 0;
-	position: absolute;
-	top: 273px;
-	width: 110%;
+	width: 290px;
 	z-index: 999;
-	-moz-transform: scale(4) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
-	-webkit-transform: scale(4) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
-	-o-transform: scale(4) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
-	-ms-transform: scale(4) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
-	transform: scale(4) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+	-moz-transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+	-webkit-transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+	-o-transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+	-ms-transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+	transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
 	cursor: pointer;
 	opacity: 0;
+	height: 75%;
+    left: 29px;
+    opacity: 0;
+    position: absolute;
+    top: 43px;
 }
 /*NEW-SCREEN-CSS-END*/
 
@@ -1595,13 +1594,14 @@ This is sample of the dropdown div. It will make it easy to set scc of div
 }
 /*01-Nov-2013-CSs*/
 .profile-img-main .imgavatar {
-    height: 300px;
-    width: 300px;
+    height: 290px;
+    width: 290px;
 }
 .fileholder-btn #capture {
     cursor: pointer;
     display: block;
-    height: 75px;
+    height:100%;
+	width:100%;
     margin: 5px 0 0;
 }
 .overflow-holder{
@@ -1703,5 +1703,16 @@ This is sample of the dropdown div. It will make it easy to set scc of div
     height: 71px;
     opacity: 0;
 	filter: alpha(opacity=0);
+    width: 100%;
+}
+
+.editlabal {
+    background-color: #EBEBEB;
+    color: #949494;
+    font-size: 38px;
+    margin-bottom: 10px;
+    padding: 30px 10px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #FAFAFA;
     width: 100%;
 }
