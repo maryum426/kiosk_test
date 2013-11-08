@@ -5199,8 +5199,8 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         parseFile.save().then(function() {
                 alert("Got it!");
                 pic_url = parseFile.url();
-                uploadParse(pic_url);
-                //alert (parseFile.url());
+                //uploadParse(pic_url);
+                alert (parseFile.url());
                 //$rootScope.$broadcast("load_user_channel");
                 //$rootScope.$broadcast("feedbackImg_uploaded");
                 console.log("Ok");
@@ -5220,7 +5220,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         var query = new Parse.Query("PlaceSweetness");
                             //query.equalTo("userId", scope.userid);
                             query.equalTo("objectId", $rootScope.sweetofplaceid );
-                            console.log("---sweetfleseelect---- userId"+scope.userid);
+                            alert("---sweetfleseelect---- userId"+scope.userid);
                             query.first({
                                 success:function(rUserChannel) {
                                     console.log("---sweetfileselect--- "+rUserChannel.id);
