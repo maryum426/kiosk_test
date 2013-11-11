@@ -2775,9 +2775,10 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //console.log("-->> " + kiosk.address2);
             //console.log("-->> " + document.getElementById("target").value + ' __ ' + kiosk.address);
             //console.log("-->> " + document.getElementById("address2").value + ' __ ' + kiosk.address2);
+            console.log("$rootScope.placeSearchResults.kioskthankyoutitle-->> " + $rootScope.placeSearchResults.kioskthankyoutitle);
 
             //$scope.newPlace.placeName = kiosk.name;
-            //$scope.newPlace.placeTitle = kiosk.title;
+            $scope.newPlace.placeTitle = $rootScope.placeSearchResults.kioskthankyoutitle;
             $scope.newPlace.placeSweetName = '';
             //$scope.newPlace.placeAddress2 = document.getElementById("target").value;
             //$scope.newPlace.placeAddress2 = kiosk.address2;
@@ -2793,7 +2794,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             $scope.newPlace.placeLatitude = '';
             $scope.newPlace.placeLongitude = '';
 
-            $scope.newPlace.placeName = ($rootScope.placeSearchResults.gname).replace(/\s/g, "");
+            $scope.newPlace.placeName = (($rootScope.placeSearchResults.gname).replace(/[\. ,:-]+/g, "")).toLowerCase();
             $scope.newPlace.LatLong = $rootScope.placeSearchResults.LatLong;
             //$scope.newPlace.photo = $rootScope.placeSearchResults.photo ;
             $scope.newPlace.gname = $rootScope.placeSearchResults.gname;
