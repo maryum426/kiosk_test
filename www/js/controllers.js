@@ -5310,7 +5310,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             
             context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
             alert("Image Drawn");
-            }
+            //}
             var data2 = canvas.toDataURL('image/jpeg');
             //alert ("Data2: " + data2);
        
@@ -5323,7 +5323,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         //Initialize Parse
         Parse.initialize(parseAPPID,parseJSID);
         
-        var parseFile = new Parse.File("mypic.jpg", data2);
+        var parseFile = new Parse.File("mypic.jpg", {base64:data2});
         
         parseFile.save().then(function() {
                 alert("Got it!");
@@ -5339,7 +5339,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 console.log("Error");
                 console.log(error);
             });
-           
+            }
     };
        
     var onFail = function(e) {
