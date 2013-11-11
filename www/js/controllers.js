@@ -5272,7 +5272,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             
             //alert("Image: " + data);
             var image = new Image();
-            image.src = data3;
+            image.src = data;
             
             var canvas = document.createElement('canvas');
             
