@@ -5267,15 +5267,12 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
             var thumbnail = 400;
             var image = $('<img/>');
+            image.src = "data:image/jpeg;base64," + data;
             //image.on('load', function () {
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
             canvas.height = thumbnail;
-            
-            
-            //$rootScope.$broadcast("load_user_channel");
-            //$rootScope.$broadcast("feedbackImg_uploaded");
             
             var ppWidth, ppHeight;
             
@@ -5309,7 +5306,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             var data2 = canvas.toDataURL('image/jpeg');
             alert (data2);
             //});
-            image.src = "data:image/jpeg;base64," + data;
+            
             alert("Source Set!");
             /*var thumb = $('<img/>');
             thumb.attr('src', data2);
