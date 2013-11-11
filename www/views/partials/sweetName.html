@@ -25,15 +25,15 @@ jQuery(function($) {
     <div ng-show="gustPageInfo">
         <div ng-repeat="gplace in currentPlace">
             <header class="header">
-                <div class="heading-title-holder"><span class="heading-title">{{gplace.get("placeTitle")}}</span>
-                    <!--<em class="heading-sub-title">{{gplace.get("address")}}</em>-->
+                <div class="heading-title-holder"><span class="heading-title">{{gplace.get("gname")}}</span>
+                    <em class="heading-sub-title">{{gplace.get("address")}}</em>
                 </div>
             </header>
             <div class="banner">
                 <!--<img src="images_blue/banner-1.png" alt="banner">-->
                 <img src="images/main-circle-img-banner.png" alt="img" ng-src='{{ imagePlaceBanner || images/main-circle-img-banner.png}}'>
             </div>
-            <span class="thankyou-title"> Love your barista? <strong>say thank you!</strong> </span>
+            <span class="thankyou-title">{{gplace.get("placeTitle")}}</span>
             <!--<span class="top-heading"> ${{gplace.get("placeName")}} </span>-->
             <!--<span class="top-heading">{{gplace.get("placeSweetName")}}</span>-->
             <!--<span class="top-subheading"> Enjoyed exceptional service? </span>-->
