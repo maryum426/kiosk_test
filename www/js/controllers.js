@@ -2243,9 +2243,8 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             console.log("----kioskRegisterCancel----");
             userService.logout();
             $scope.safeApply(function () {
-                //$location.path('#/u/auth');
                 $location.path(CONSTANTS.ROUTES.AUTH);
-                console.log(CONSTANTS.ROUTES.AUTH);
+                
             });
         }
 
@@ -2259,7 +2258,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 console.log("vocation --> " + $scope.kiosk.vocation);
                 console.log("userAvatar --> " + $rootScope.userAvatar);
                 console.log("userPName --> " + $rootScope.userPName);
-
+kashif
                 $scope.kioskSetUser = [];
                 $scope.kioskSetUser.fullName = $scope.kiosk.fullname ;
                 $scope.kioskSetUser.vocation = $scope.kiosk.vocation ;
@@ -3743,23 +3742,6 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
 
         $scope.no_bg = "no-bg-color";
 
-
-        if($scope.loggedInUser){
-            $scope.cssResponsive = 'css/responsive.css' ;
-            $scope.cssSweet = 'css/sweet.css' ;
-            $scope.cssStyle = '' ;
-            console.log("cssResponsive " + $scope.cssResponsive);
-            console.log("cssSweet " + $scope.cssSweet);
-            console.log("cssStyle" + $scope.cssStyle);
-        } else {
-            $scope.cssResponsive = '' ;
-            $scope.cssSweet = '' ;
-            $scope.cssStyle = 'css/blue/css/kiosk.css' ;
-            console.log("cssResponsive " + $scope.cssResponsive);
-            console.log("cssSweet " + $scope.cssSweet);
-            console.log("cssStyle " + $scope.cssStyle);
-        }
-
         $scope.cssResponsive = '' ;
         $scope.cssSweet = '' ;
         $scope.cssStyle = 'css/blue/css/purple.css' ;
@@ -3767,60 +3749,6 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         console.log("cssSweet " + $scope.cssSweet);
         console.log("cssStyle " + $scope.cssStyle);
         console.log('Path :: ' + $route.current.action);
-
-        //alpha
-        //Non user + logout state + this device + public pages for place and users >
-        var renderGuestAction = $route.current.action; //$location.path();
-        var renderGuestPath = renderGuestAction.split( "." );
-        var username = ($routeParams.name || "");
-
-        //alpha
-        if(renderGuestPath[1] == 'custom' && username != "" ){
-            //$rootScope.publicName = username;
-            $location.path(CONSTANTS.ROUTES.AUTH);
-            //console.log("render username Guest-->" + $scope.publicName);
-            //console.log("First call to c");
-        }
-        if (username == "[object Object]"){
-            $rootScope.publicName = '';
-        }
-
-        //alpha
-        if($rootScope.publicName != '' && !$scope.isUserLoggedIn ) {
-
-            //console.log("Rendering Step1 --->");
-            $scope.isPublicPage = true;
-            $scope.showLogin = false;
-
-            //console.log("sweetname Guest--> " + $rootScope.publicName);
-            //$scope.$apply( $location.path( '/'+ $rootScope.publicName ) );
-
-            $scope.showPlaceFeed = true ;
-            $location.path('/'+ $rootScope.publicName);
-            //$window.location('/'+ $rootScope.publicName);
-        }
-
-        // Non user + logout state + this device >
-        //alpha
-        if ($location.path() == '/' || $location.path() == '/u/auth' && !$scope.isUserLoggedIn) {
-            //console.log("Rendering Step2 --->");
-            //console.log("constant auth: " + CONSTANTS.ROUTES.AUTH);
-            $location.path(CONSTANTS.ROUTES.AUTH);
-            $scope.showLogin = true;
-        }
-
-        if ($location.path() == '/u/auth/sms' && !$scope.isUserLoggedIn) {
-            //console.log("Rendering Step2 --->");
-            //console.log("constant auth: " + CONSTANTS.ROUTES.AUTH);
-            $location.path(CONSTANTS.ROUTES.AUTH_SMS);
-        }
-
-        // Non user + logout state + this device >
-        if ($location.path() == '/' && !$scope.isUserLoggedIn) {
-            //console.log("constant auth: " + CONSTANTS.ROUTES.AUTH);
-            $location.path(CONSTANTS.ROUTES.AUTH);
-            $scope.showLogin = true;
-        }
 
         // Pull the "action" value out of the currently selected route.
         var renderAction = $route.current.action;
@@ -3907,9 +3835,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         }
         //var username = ($routeParams.name || "");
         console.log("username custom--> " + username);
-        
-        console.log("Value of isAuth: " );
-        
+
         //alpha
         if(renderPath[1] == 'custom' && username != "" ){
             $rootScope.publicName = username;
@@ -5409,16 +5335,17 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     };
     
     var uploadParse = function(url){
-        var query = new Parse.Query("PlaceSweetness");
+        var query = new Parse.Query("User");
+        
                             //query.equalTo("userId", scope.userid);
                             alert('Upload Parse Called');
-                            query.equalTo("objectId", $rootScope.sweetofplaceid );
-                            alert("SweetofPlaceID: " + $rootScope.sweetofplaceid);
-                            alert("---sweetfleseelect---- userId"+$scope.userid);
+                            query.equalTo("username", $rootScope.userPName );
+                            //alert("SweetofPlaceID: " + $rootScope.sweetofplaceid);
+                            //alert("---sweetfleseelect---- userId"+$scope.userid);
                             query.first({
                                 success:function(rUserChannel) {
                                     console.log("---sweetfileselect--- "+rUserChannel.id);
-                                    rUserChannel.set("avatarURL",url);
+                                    rUserChannel.set("avatarUrl",url);
                                     rUserChannel.save(null,{
                                         success:function(sUserChannel) {
                                             alert("Saved "+sUserChannel);
@@ -5435,6 +5362,25 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                                     });
                                 }
                             });
+        var query2 = new Parse.Query("UserChannel");
+        query2.equalTo("channel", $rootScope.userPName); 
+        query2.first({
+            success:function(rUserChannel) {
+                                    console.log("---sweetfileselect--- "+rUserChannel.id);
+                                    rUserChannel.set("avatarUrl",url);
+                                    rUserChannel.set("avatarURL",url);
+                                    rUserChannel.save(null,{
+                                        success:function(sUserChannel) {
+                                            alert("Saved "+sUserChannel);
+                                            $scope.$apply(function() {
+                                                console.log("--About to setUserAvatar--- "+sUserChannel.get("avatarURL"));
+                                                
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+        
     }
 }
 
