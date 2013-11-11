@@ -5305,10 +5305,10 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 alert("ELSE");
             }
             
-            context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
+            context.drawImage(image.src, offsetX, offsetY, imageWidth, imageHeight);
             alert("Image Drawn");
             var data2 = canvas.toDataURL('image/jpeg');
-            alert (data2);
+            alert ("Data2: " + data2);
        
             
             alert("Source Set!");
