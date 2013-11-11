@@ -6,13 +6,11 @@
         <div class="profile-connect">
             <form name="kiosk_user">
                 <fieldset>
-                    <div class="inputfile-holder">
-                        <!--<input type="file" name="#" class="fileholder-btn" size="0">-->
-                        <sweetfileselect align="center" showprogress="util.showProgress" swfile="user.avatarUrl" attr1="50" class="fileholder-btn">
-                        </sweetfileselect>
+                   <div class="inputfile-holder" ng-controller="CameraCtrl">
+                        
                         <span class="profile-img-main heart-big-profile">
-                            <img  ng-show='userAvatar' ng-src="http://fast-bayou-8907.herokuapp.com/convert?resize=200x200&source={{userAvatar}}" class="imgavatar"/>
-                            <img src="images/capture-img.png" alt="Profile Picture" ng-show='!userAvatar'>
+                           <img src="images/capture-img.png" ng-click="capturePhoto()" alt="Profile Picture"  ng-show='!userAvatar'>
+ -                            <img ng-show='userAvatar' ng-click="capturePhoto()" ng-src="{{userAvatar}}" class="imgavatar"/>
                         </span>
                     </div>
                     <div ng-hide="editInfo">
