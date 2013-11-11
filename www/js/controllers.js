@@ -5277,20 +5277,23 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             var imageHeight;
             var offsetX = 0;
             var offsetY = 0;
-
-            if (this.width > this.height) {
-                imageWidth = Math.round(thumbnail * this.width / this.height);
+            
+            alert('Width: ' + data.width);
+            alert('Height: ' + data.height);
+            
+            if (data.width > data.height) {
+                imageWidth = Math.round(thumbnail * data.width / data.height);
                 imageHeight = thumbnail;
                 offsetX = - Math.round((imageWidth - thumbnail) / 2);
             } else {
-                imageHeight = Math.round(thumbnail * this.height / this.width);
+                imageHeight = Math.round(thumbnail * data.height / data.width);
                 imageWidth = thumbnail;    
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
             }
             
             context.drawImage(data, offsetX, offsetY, imageWidth, imageHeight);
             var data2 = canvas.toDataURL('image/jpeg');
-            //alert (data2);
+            alert (data2);
             /*var thumb = $('<img/>');
             thumb.attr('src', data2);
             $('body').append(thumb);*/
