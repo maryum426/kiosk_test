@@ -5266,18 +5266,23 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     var onSuccess = function(data) {
         
             var thumbnail = 400;
+            var ppWidth, ppHeight;
             var image = $('<img/>');
             image.src = "data:image/jpeg;base64," + data;
+            
             alert("Image: " + image.src);
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
             canvas.height = thumbnail;
             
-            var ppWidth, ppHeight;
+            
             
             ppWidth = image.width;
             ppHeight = image.height;
+            
+            alert('Width: ' + ppWidth);
+            alert('Height: ' + ppHeight);
             
             var context = canvas.getContext('2d');
             context.clearRect(0, 0, thumbnail, thumbnail);
@@ -5286,8 +5291,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             var offsetX = 0;
             var offsetY = 0;
             
-            //alert('Width: ' + ppWidth);
-            //alert('Height: ' + ppHeight);
+            
             
             if (ppWidth > ppHeight) {
                 imageWidth = Math.round(thumbnail * ppWidth / ppHeight);
