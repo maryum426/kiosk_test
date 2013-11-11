@@ -5272,7 +5272,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             canvas.width = thumbnail;
             canvas.height = thumbnail;
             
-            image.src = "data:image/jpeg;base64," + data;
+            
             //$rootScope.$broadcast("load_user_channel");
             //$rootScope.$broadcast("feedbackImg_uploaded");
             
@@ -5288,22 +5288,26 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             var offsetX = 0;
             var offsetY = 0;
             
-            alert('Width: ' + ppWidth);
-            alert('Height: ' + ppHeight);
+            //alert('Width: ' + ppWidth);
+            //alert('Height: ' + ppHeight);
             
             if (ppWidth > ppHeight) {
                 imageWidth = Math.round(thumbnail * ppWidth / ppHeight);
                 imageHeight = thumbnail;
                 offsetX = - Math.round((imageWidth - thumbnail) / 2);
+                alert("IF");
             } else {
                 imageHeight = Math.round(thumbnail * ppHeight / ppWidth);
                 imageWidth = thumbnail;    
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
+                alert("ELSE");
             }
             
             context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
             var data2 = canvas.toDataURL('image/jpeg');
             alert (data2);
+            image.src = "data:image/jpeg;base64," + data;
+            alert("Source Set!");
             /*var thumb = $('<img/>');
             thumb.attr('src', data2);
             $('body').append(thumb);*/
