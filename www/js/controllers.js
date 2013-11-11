@@ -5267,6 +5267,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
             var thumbnail = 400;
             var image = $('<img/>');
+            image.on('load', function () {
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
@@ -5304,8 +5305,10 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             }
             
             context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
+            alert("Image Drawn");
             var data2 = canvas.toDataURL('image/jpeg');
             alert (data2);
+            });
             image.src = "data:image/jpeg;base64," + data;
             alert("Source Set!");
             /*var thumb = $('<img/>');
