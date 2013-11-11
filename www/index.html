@@ -31,9 +31,11 @@
     <!--<link rel="stylesheet" href="{{cssKiosk}}" type="text/css" media="all">-->
     <!--<link rel="stylesheet" href="{{cssStyle}}" type="text/css" media="all">-->
     <link rel="stylesheet" href="css/blue/css/font-awesome.css" type="text/css" media="all">
-    <link rel="stylesheet" href="css/blue/css/kiosk.css" type="text/css" media="all">
+    <!--<link rel="stylesheet" href="css/blue/css/kiosk.css" type="text/css" media="all">-->
+    <link rel="stylesheet" href="css/blue/css/kiosk_purple.css" type="text/css" media="all">
     <link rel="stylesheet" href="css/blue/css/mediaqueries.css" type="text/css" media="all">
-    <link rel="stylesheet" href="css/blue/calendar/css/calendar.css" type="text/css" media="all">
+    <!--<link rel="stylesheet" href="css/blue/calendar/css/calendar.css" type="text/css" media="all">-->
+    <link rel="stylesheet" href="css/blue/calendar/css/calendar_purple.css" type="text/css" media="all">
 
     <!--[if lt IE 8]>
     <link rel="stylesheet" type="text/css" href="css/blue/css/ie.css"/><![endif]-->
@@ -155,7 +157,7 @@ html, body{
                     <span ng-switch-when="auth">
                         <span ng-include="'views/auth/new.html'" ng-show="renderPath[1] =='new'"></span>
                         <span ng-include="'views/auth/sent.html'" ng-show="renderPath[1] =='sent'"></span>
-                        <span ng-include="'views/auth/sent.html'" ng-show="renderPath[1] =='sms'"></span>
+                        <span ng-include="'views/auth/sms.html'" ng-show="renderPath[1] =='sms'"></span>
                     </span>
                 </span>
             </span>
@@ -280,8 +282,8 @@ html, body{
 
     </div>
 
-
-    <section id="footer" ng-include="'footer.html'"></section>
+    <!-- In kiosk we donot need footer -->
+    <!--<section id="footer" ng-include="'footer.html'"></section>-->
     <!--</div>-->
     <!--</section>-->
 </div>
