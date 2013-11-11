@@ -5271,6 +5271,15 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             canvas.width = thumbnail;
             canvas.height = thumbnail;
             
+            $rootScope.userAvatar = data;
+            $rootScope.$broadcast("load_user_channel");
+            $rootScope.$broadcast("feedbackImg_uploaded");
+            
+            var ppWidth, ppHeight;
+            
+            ppWidth = $('.imgavatar').attr('width');
+            ppHeight = $('.imgavatar').attr('height');
+            
             var context = canvas.getContext('2d');
             context.clearRect(0, 0, thumbnail, thumbnail);
             var imageWidth;
@@ -5281,12 +5290,12 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             alert('Width: ' + data.width);
             alert('Height: ' + data.height);
             
-            if (data.width > data.height) {
-                imageWidth = Math.round(thumbnail * data.width / data.height);
+            if (ppWidth > ppHeight) {
+                imageWidth = Math.round(thumbnail * ppWidth / ppHeight);
                 imageHeight = thumbnail;
                 offsetX = - Math.round((imageWidth - thumbnail) / 2);
             } else {
-                imageHeight = Math.round(thumbnail * data.height / data.width);
+                imageHeight = Math.round(thumbnail * ppHeight / ppWidth);
                 imageWidth = thumbnail;    
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
             }
