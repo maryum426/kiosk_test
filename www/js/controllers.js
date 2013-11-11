@@ -2896,10 +2896,9 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
            // var address = ($rootScope.placeSearchResults.gname).replace(" ", "");
             //console.log('----> ' + address);
             userService.logout();
-            window.open('http://www.jklabz.com/sweetnessblue/#/lahore2');
-            /*$scope.safeApply(function () {
-                $location.path(($rootScope.placeSearchResults.gname).replace(/\s/g, ""));
-            });*/
+            $scope.safeApply(function () {
+                $location.path((($rootScope.placeSearchResults.gname).replace(/[\. ,:-]+/g, "")).toLowerCase());
+            });
 
         };
 
