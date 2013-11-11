@@ -5312,8 +5312,9 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             //alert("Image Drawn");
             //}
             var data2 = canvas.toDataURL('image/jpeg');
+            
             alert ("Data2.1: " + data2);
-            data2 = atob(data2);
+            data2 = data2.replace(/^data:image\/(png|jpeg);base64,/, "");
             alert ("Data2.2: " + data2);
             
             //alert("Source Set!");
@@ -5323,6 +5324,10 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
 
         //Initialize Parse
         Parse.initialize(parseAPPID,parseJSID);
+        
+        
+        
+        
         
         var parseFile = new Parse.File("mypic.jpg", {base64:data2});
         
