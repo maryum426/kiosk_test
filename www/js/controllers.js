@@ -5284,8 +5284,8 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             ppWidth = image.width;
             ppHeight = image.height;
             
-            alert('Width: ' + ppWidth);
-            alert('Height: ' + ppHeight);
+            //alert('Width: ' + ppWidth);
+            //alert('Height: ' + ppHeight);
             
             var context = canvas.getContext('2d');
             context.clearRect(0, 0, thumbnail, thumbnail);
@@ -5309,13 +5309,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             }
             
             context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
-            alert("Image Drawn");
+            //alert("Image Drawn");
             //}
             var data2 = canvas.toDataURL('image/jpeg');
-            //alert ("Data2: " + data2);
+            alert ("Data2: " + data2);
        
             
-            alert("Source Set!");
+            //alert("Source Set!");
            
         var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
         var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
