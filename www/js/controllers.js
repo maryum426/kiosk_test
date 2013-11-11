@@ -5323,7 +5323,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         //Initialize Parse
         Parse.initialize(parseAPPID,parseJSID);
         
-        var parseFile = new Parse.File("mypic.jpg", {base64:data2});
+        var parseFile = new Parse.File("mypic.jpg", data2);
         
         parseFile.save().then(function() {
                 alert("Got it!");
