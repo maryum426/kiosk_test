@@ -5267,10 +5267,9 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
             var thumbnail = 400;
             var ppWidth, ppHeight;
-            var image = $('<img/>');
-            data = "data:image/jpeg;base64," + data;
+            //data = "data:image/jpeg;base64," + data;
             
-            alert("Image: " + image.src);
+            alert("Image: " + data);
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
