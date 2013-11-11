@@ -5270,17 +5270,17 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             var data;
             data = "data:image/jpeg;base64," + data3;
             
-            alert("Image: " + data);
+            //alert("Image: " + data);
             var image = new Image();
             image.src = data;
-            image.onload = function(){
+            
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
             canvas.height = thumbnail;
             
             
-            
+            image.onload = function(){
             ppWidth = image.width();
             ppHeight = image.height();
             
@@ -5300,19 +5300,19 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 imageWidth = Math.round(thumbnail * ppWidth / ppHeight);
                 imageHeight = thumbnail;
                 offsetX = - Math.round((imageWidth - thumbnail) / 2);
-                alert("IF");
+                //alert("IF");
             } else {
                 imageHeight = Math.round(thumbnail * ppHeight / ppWidth);
                 imageWidth = thumbnail;    
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
-                alert("ELSE");
+                //alert("ELSE");
             }
             
             context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
             alert("Image Drawn");
             }
             var data2 = canvas.toDataURL('image/jpeg');
-            alert ("Data2: " + data2);
+            //alert ("Data2: " + data2);
        
             
             alert("Source Set!");
