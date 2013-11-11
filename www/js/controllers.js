@@ -5281,8 +5281,8 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             
             
             image.onload = function(){
-            ppWidth = image.width();
-            ppHeight = image.height();
+            ppWidth = image.width;
+            ppHeight = image.height;
             
             alert('Width: ' + ppWidth);
             alert('Height: ' + ppHeight);
@@ -5296,13 +5296,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             
             
             
-            if (ppWidth > ppHeight) {
-                imageWidth = Math.round(thumbnail * ppWidth / ppHeight);
+            if (image.width > image.height) {
+                imageWidth = Math.round(thumbnail * image.width / image.height);
                 imageHeight = thumbnail;
                 offsetX = - Math.round((imageWidth - thumbnail) / 2);
                 //alert("IF");
             } else {
-                imageHeight = Math.round(thumbnail * ppHeight / ppWidth);
+                imageHeight = Math.round(thumbnail * image.height / image.width);
                 imageWidth = thumbnail;    
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
                 //alert("ELSE");
@@ -5323,7 +5323,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         //Initialize Parse
         Parse.initialize(parseAPPID,parseJSID);
         
-        var parseFile = new Parse.File("mypic.jpg", {base64:data3});
+        var parseFile = new Parse.File("mypic.jpg", {base64:data2});
         
         parseFile.save().then(function() {
                 alert("Got it!");
