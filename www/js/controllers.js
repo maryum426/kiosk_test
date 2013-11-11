@@ -5266,19 +5266,20 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     var onSuccess = function(data) {
         
             var thumbnail = 400;
+            var image = $('<img/>');
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
             canvas.height = thumbnail;
             
-            $rootScope.userAvatar = "data:image/jpeg;base64" + data;
-            $rootScope.$broadcast("load_user_channel");
-            $rootScope.$broadcast("feedbackImg_uploaded");
+            image.src = "data:image/jpeg;base64," + data;
+            //$rootScope.$broadcast("load_user_channel");
+            //$rootScope.$broadcast("feedbackImg_uploaded");
             
             var ppWidth, ppHeight;
             
-            ppWidth = $('.imgavatar').attr('width');
-            ppHeight = $('.imgavatar').attr('height');
+            ppWidth = image.width;
+            ppHeight = image.height;
             
             var context = canvas.getContext('2d');
             context.clearRect(0, 0, thumbnail, thumbnail);
@@ -5300,7 +5301,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
             }
             
-            context.drawImage(data, offsetX, offsetY, imageWidth, imageHeight);
+            context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
             var data2 = canvas.toDataURL('image/jpeg');
             alert (data2);
             /*var thumb = $('<img/>');
