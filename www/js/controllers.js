@@ -5263,15 +5263,17 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         // Take picture using device camera and retrieve image as base64-encoded string
         navigator.camera.getPicture(onSuccess,onFail,options);
     };
-    var onSuccess = function(data) {
+    var onSuccess = function(data3) {
         
             var thumbnail = 400;
             var ppWidth, ppHeight;
-            data = "data:image/jpeg;base64," + data;
+            var data;
+            data = "data:image/jpeg;base64," + data3;
             
             alert("Image: " + data);
             var image = new Image();
             image.src = data;
+            image.onload = function(){
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
@@ -5279,8 +5281,8 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             
             
             
-            ppWidth = image.width;
-            ppHeight = image.height;
+            ppWidth = image.width();
+            ppHeight = image.height();
             
             alert('Width: ' + ppWidth);
             alert('Height: ' + ppHeight);
@@ -5305,7 +5307,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
                 alert("ELSE");
             }
-            image.onload = function(){
+            
             context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
             alert("Image Drawn");
             }
@@ -5321,7 +5323,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         //Initialize Parse
         Parse.initialize(parseAPPID,parseJSID);
         
-        var parseFile = new Parse.File("mypic.jpg", {base64:data});
+        var parseFile = new Parse.File("mypic.jpg", {base64:data3});
         
         parseFile.save().then(function() {
                 alert("Got it!");
