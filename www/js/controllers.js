@@ -5303,7 +5303,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
                 alert("ELSE");
             }
-            
+            alert("Image: " + image);
             context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
             alert("Image Drawn");
             var data2 = canvas.toDataURL('image/jpeg');
