@@ -5271,7 +5271,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             canvas.width = thumbnail;
             canvas.height = thumbnail;
             
-            $rootScope.userAvatar = data;
+            $rootScope.userAvatar = "data:image/jpeg;base64" + data;
             $rootScope.$broadcast("load_user_channel");
             $rootScope.$broadcast("feedbackImg_uploaded");
             
@@ -5287,8 +5287,8 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             var offsetX = 0;
             var offsetY = 0;
             
-            alert('Width: ' + data.width);
-            alert('Height: ' + data.height);
+            alert('Width: ' + ppWidth);
+            alert('Height: ' + ppHeight);
             
             if (ppWidth > ppHeight) {
                 imageWidth = Math.round(thumbnail * ppWidth / ppHeight);
