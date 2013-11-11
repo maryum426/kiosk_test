@@ -5313,7 +5313,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             //}
             var data2 = canvas.toDataURL('image/jpeg');
             alert ("Data2.1: " + data2);
-            data2 = data2.btoa();
+            data2 = atob(data2);
             alert ("Data2.2: " + data2);
             
             //alert("Source Set!");
