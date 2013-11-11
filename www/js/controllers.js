@@ -5267,7 +5267,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
             var thumbnail = 400;
             var image = $('<img/>');
-            image.on('load', function () {
+            //image.on('load', function () {
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
@@ -5308,7 +5308,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             alert("Image Drawn");
             var data2 = canvas.toDataURL('image/jpeg');
             alert (data2);
-            });
+            //});
             image.src = "data:image/jpeg;base64," + data;
             alert("Source Set!");
             /*var thumb = $('<img/>');
@@ -5322,7 +5322,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         //Initialize Parse
         Parse.initialize(parseAPPID,parseJSID);
         
-        var parseFile = new Parse.File("mypic.jpg", {base64:data2});
+        var parseFile = new Parse.File("mypic.jpg", {base64:data});
         
         parseFile.save().then(function() {
                 alert("Got it!");
