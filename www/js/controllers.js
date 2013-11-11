@@ -5267,9 +5267,11 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
             var thumbnail = 400;
             var ppWidth, ppHeight;
-            //data = "data:image/jpeg;base64," + data;
+            data = "data:image/jpeg;base64," + data;
             
             alert("Image: " + data);
+            var image = new Image();
+            image.src = data;
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
@@ -5277,8 +5279,8 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             
             
             
-            ppWidth = data.width;
-            ppHeight = data.height;
+            ppWidth = image.width;
+            ppHeight = image.height;
             
             alert('Width: ' + ppWidth);
             alert('Height: ' + ppHeight);
@@ -5303,9 +5305,10 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
                 alert("ELSE");
             }
-            
-            context.drawImage(data, offsetX, offsetY, imageWidth, imageHeight);
+            image.onload = function(){
+            context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
             alert("Image Drawn");
+            }
             var data2 = canvas.toDataURL('image/jpeg');
             alert ("Data2: " + data2);
        
