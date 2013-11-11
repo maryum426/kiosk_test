@@ -5257,6 +5257,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             quality: 50,
             cameraDirection:1,
             sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+            correctOrientation: true,
             destinationType: navigator.camera.DestinationType.DATA_URL
             //saveToPhotoAlbum: true
         };
@@ -5324,10 +5325,6 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
 
         //Initialize Parse
         Parse.initialize(parseAPPID,parseJSID);
-        
-        
-        
-        
         
         var parseFile = new Parse.File("mypic.jpg", {base64:data2});
         
