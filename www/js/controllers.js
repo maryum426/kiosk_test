@@ -5312,8 +5312,9 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             //alert("Image Drawn");
             //}
             var data2 = canvas.toDataURL('image/jpeg');
-            alert ("Data2: " + data2);
-       
+            alert ("Data2.1: " + data2);
+            data2 = data2.btoa();
+            alert ("Data2.2: " + data2);
             
             //alert("Source Set!");
            
