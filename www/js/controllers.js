@@ -5268,7 +5268,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             var thumbnail = 400;
             var image = $('<img/>');
             image.src = "data:image/jpeg;base64," + data;
-            //image.on('load', function () {
+            alert("Image: " + image.src);
             var canvas = document.createElement('canvas');
             
             canvas.width = thumbnail;
@@ -5300,19 +5300,15 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 offsetY = - Math.round((imageHeight - thumbnail) / 2);            
                 alert("ELSE");
             }
-            alert("Image: " + image);
+            
             context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
             alert("Image Drawn");
             var data2 = canvas.toDataURL('image/jpeg');
             alert (data2);
-            //});
+       
             
             alert("Source Set!");
-            /*var thumb = $('<img/>');
-            thumb.attr('src', data2);
-            $('body').append(thumb);*/
-        
-        
+           
         var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
         var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
 
