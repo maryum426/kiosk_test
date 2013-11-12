@@ -731,7 +731,7 @@ Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l
 //Sweetness Production Eneviorment : SweetApp
 //Parse.initialize("WRdpguLGfYdPVMq2LwHiB0s5k9ESVTwdde7kXwDm", "MzJ2jpG740oPfRdsKRY6jbXHCeEDXwTlnVFUYiTi");
 
-/*(function (d) {
+(function (d) {
     var js, id = 'facebook-jssdk';
     if (d.getElementById(id)) {
         return;
@@ -741,10 +741,10 @@ Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l
     js.async = true;
     js.src = "//connect.facebook.net/en_US/all.js";
     d.getElementsByTagName('head')[0].appendChild(js);
-}(document));*/
+}(document));
 
 setTimeout(function () {
-    /*Parse.FacebookUtils.init({
+    Parse.FacebookUtils.init({
         //              TODO: What if user revoke Sweet app permissions
         //appId      : "548541351864725", // thankyou.sweetness.io
         //appId      : "451283941617165",
@@ -759,6 +759,6 @@ setTimeout(function () {
         xfbml:true, // parse XFBML,
         oauth:true,
         bundleId: "com.sweetness.thankyou"
-    });*/
+    });
 }, 1000);
 

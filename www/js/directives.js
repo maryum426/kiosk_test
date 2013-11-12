@@ -1130,7 +1130,7 @@ sweetApp.directive('sweetfileselect', function($rootScope, userService) {
                 var file = files[0];
 
                 var serverUrl = 'https://api.parse.com/1/files/' + file.name;
-                console.log("---sweetfileselect user Pic --- "+serverUrl);
+                console.log("---sweetfileselect user Pic --- " + serverUrl);
                 scope.$apply(function(){
                     scope.showprogress = 'true';
                 });
@@ -1167,9 +1167,8 @@ sweetApp.directive('sweetfileselect', function($rootScope, userService) {
                                                 $rootScope.userAvatar = sUserChannel.get("avatarURL");
                                                 userService.setUserChannel(sUserChannel);
                                                 $rootScope.$broadcast("load_user_channel");
-                                                $rootScope.$broadcast("feedbackImg_uploaded");
-
-                                                // scope.setuseravatar(data.url);
+                                                //$rootScope.$broadcast("feedbackImg_uploaded");
+                                                //scope.setuseravatar(data.url);
                                             });
                                         }
                                     });
