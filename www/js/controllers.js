@@ -5252,7 +5252,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     };
     var onSuccess = function(data3) {
         
-            /*var thumbnail = 400;
+            var thumbnail = 400;
             var ppWidth, ppHeight;
             var data;
             data = "data:image/jpeg;base64," + data3;
@@ -5304,7 +5304,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 data2 = data2.replace(/^data:image\/(png|jpeg);base64,/, "");
                 alert ("Data2.2: " + data2);
 
-                //alert("Source Set!");*/
+                //alert("Source Set!");
 
                 var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
                 var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
