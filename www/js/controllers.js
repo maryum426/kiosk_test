@@ -5252,7 +5252,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     };
     var onSuccess = function(data3) {
         
-            var thumbnail = 400;
+            /*var thumbnail = 400;
             var ppWidth, ppHeight;
             var data;
             data = "data:image/jpeg;base64," + data3;
@@ -5304,7 +5304,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 data2 = data2.replace(/^data:image\/(png|jpeg);base64,/, "");
                 alert ("Data2.2: " + data2);
 
-                //alert("Source Set!");
+                //alert("Source Set!");*/
 
                 var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
                 var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
@@ -5312,7 +5312,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 //Initialize Parse
                 Parse.initialize(parseAPPID,parseJSID);
 
-                var parseFile = new Parse.File("mypic.jpg", {base64:data2});
+                var parseFile = new Parse.File("mypic.jpg", {base64:data3});
 
                 parseFile.save().then(function() {
                                                     alert("Got it!");
@@ -5328,7 +5328,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                                                     console.log("Error");
                                                     console.log(error);
                                                 });
-            }
+            //}
     };
        
     var onFail = function(e) {
