@@ -726,10 +726,10 @@ sweetApp.config(
 //Parse.initialize("jKROXk4rTh4qm0vO2QxqoHhkcSsjklqN8V7bZPTz", "vARBe1nGSGtDfQPkdlS2Ond0dxcAr6tAJZgkIm9K");
 
 //Sweetness Production Eneviorment : SweetBee
-//Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
+Parse.initialize("h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu", "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k");
 
 //Sweetness Development Eneviorment :SweetApp
-Parse.initialize("WRdpguLGfYdPVMq2LwHiB0s5k9ESVTwdde7kXwDm", "MzJ2jpG740oPfRdsKRY6jbXHCeEDXwTlnVFUYiTi");
+//Parse.initialize("WRdpguLGfYdPVMq2LwHiB0s5k9ESVTwdde7kXwDm", "MzJ2jpG740oPfRdsKRY6jbXHCeEDXwTlnVFUYiTi");
 
 /*(function (d) {
     var js, id = 'facebook-jssdk';

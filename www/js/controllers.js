@@ -5306,8 +5306,8 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             
             //alert("Source Set!");
            
-        var parseAPPID = "WRdpguLGfYdPVMq2LwHiB0s5k9ESVTwdde7kXwDm";
-        var parseJSID = "MzJ2jpG740oPfRdsKRY6jbXHCeEDXwTlnVFUYiTi";
+        var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
+        var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
 
         //Initialize Parse
         Parse.initialize(parseAPPID,parseJSID);
