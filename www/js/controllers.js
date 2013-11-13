@@ -3873,7 +3873,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         }
 
         //alpha
-        if($rootScope.publicName != '' && !$scope.isUserLoggedIn ) {
+        if($rootScope.publicName != '' && !$scope.isUserLoggedIn && $rootScope.publicName != 'u') {
 
             console.log("Rendering Step1 --->");
             $scope.isPublicPage = true;
@@ -5318,9 +5318,9 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                                                     alert("Got it!");
                                                     $rootScope.userAvatar = parseFile.url();
                                                     pic_url = parseFile.url();
+                                                    uploadParse(pic_url);
                                                     $rootScope.$broadcast("load_user_channel");
                                                     $rootScope.$broadcast("feedbackImg_uploaded");
-                                                    uploadParse(pic_url);
                                                     //alert (parseFile.url());
                                                     console.log("Ok");
 
