@@ -5328,7 +5328,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                                                     console.log("Error");
                                                     console.log(error);
                                                 });
-            //}
+            }
     };
        
     var onFail = function(e) {
@@ -5384,7 +5384,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         
     }
 }
-
+                        
 //alpha
 /*
 function mapController($scope) {
