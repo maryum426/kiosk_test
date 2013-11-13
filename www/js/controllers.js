@@ -3809,7 +3809,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
                     $rootScope.currentPlace = placeInfo;
 
                     if (placeInfo[0].get("placePhoto") == '' || placeInfo[0].get("placePhoto") == null){
-                        $scope.imagePlaceBanner = 'images/main-circle-img-banner.jpg';
+                        $scope.imagePlaceBanner = 'images/banner-2.png';
                     } else {
                         $scope.imagePlaceBanner = placeInfo[0].get("placePhoto");
                     }
