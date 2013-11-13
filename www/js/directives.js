@@ -1635,7 +1635,6 @@ sweetApp.directive('sweetplacepicselect', function($rootScope, userService) {
         template: '<div class="upload-title"><input type="file" accept="image/*" id="capture" capture="camera" class="text-field" size="0" ></div>'
             + "<span ng-show='showprogress' class='showupload'>"
             + "<span class='progress_animation'>Uploading...</span>"
-            + "Uploading..."
             + "</span>",
 
         //+"</div>",
