@@ -5268,66 +5268,66 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
             
             
             image.onload = function(){
-            ppWidth = image.width;
-            ppHeight = image.height;
-            
-            //alert('Width: ' + ppWidth);
-            //alert('Height: ' + ppHeight);
-            
-            var context = canvas.getContext('2d');
-            context.clearRect(0, 0, thumbnail, thumbnail);
-            var imageWidth;
-            var imageHeight;
-            var offsetX = 0;
-            var offsetY = 0;
-            
-            
-            
-            if (image.width > image.height) {
-                imageWidth = Math.round(thumbnail * image.width / image.height);
-                imageHeight = thumbnail;
-                offsetX = - Math.round((imageWidth - thumbnail) / 2);
-                //alert("IF");
-            } else {
-                imageHeight = Math.round(thumbnail * image.height / image.width);
-                imageWidth = thumbnail;    
-                offsetY = - Math.round((imageHeight - thumbnail) / 2);            
-                //alert("ELSE");
-            }
-            
-            context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
-            //alert("Image Drawn");
-            //}
-            var data2 = canvas.toDataURL('image/jpeg');
-            
-            //alert ("Data2.1: " + data2);
-            data2 = data2.replace(/^data:image\/(png|jpeg);base64,/, "");
-            //alert ("Data2.2: " + data2);
-            
-            //alert("Source Set!");
-           
-        var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
-        var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
+                ppWidth = image.width;
+                ppHeight = image.height;
 
-        //Initialize Parse
-        Parse.initialize(parseAPPID,parseJSID);
-        
-        var parseFile = new Parse.File("mypic.jpg", {base64:data2});
-        
-        parseFile.save().then(function() {
-                alert("Got it!");
-                $rootScope.userAvatar = parseFile.url();
-                pic_url = parseFile.url();
-                uploadParse(pic_url);
-                //alert (parseFile.url());
-                $rootScope.$broadcast("load_user_channel");
-                $rootScope.$broadcast("feedbackImg_uploaded");
-                console.log("Ok");
-                
-            }, function(error) {
-                console.log("Error");
-                console.log(error);
-            });
+                //alert('Width: ' + ppWidth);
+                //alert('Height: ' + ppHeight);
+
+                var context = canvas.getContext('2d');
+                context.clearRect(0, 0, thumbnail, thumbnail);
+                var imageWidth;
+                var imageHeight;
+                var offsetX = 0;
+                var offsetY = 0;
+
+
+
+                if (image.width > image.height) {
+                    imageWidth = Math.round(thumbnail * image.width / image.height);
+                    imageHeight = thumbnail;
+                    offsetX = - Math.round((imageWidth - thumbnail) / 2);
+                    //alert("IF");
+                } else {
+                    imageHeight = Math.round(thumbnail * image.height / image.width);
+                    imageWidth = thumbnail;    
+                    offsetY = - Math.round((imageHeight - thumbnail) / 2);            
+                    //alert("ELSE");
+                }
+
+                context.drawImage(image, offsetX, offsetY, imageWidth, imageHeight);
+                //alert("Image Drawn");
+                //}
+                var data2 = canvas.toDataURL('image/jpeg');
+
+                //alert ("Data2.1: " + data2);
+                data2 = data2.replace(/^data:image\/(png|jpeg);base64,/, "");
+                //alert ("Data2.2: " + data2);
+
+                //alert("Source Set!");
+
+                var parseAPPID = "h2w6h5BLXG3rak7sQ2eyEiTKRgu3UPzQcjRzIFCu";
+                var parseJSID = "gQ7DmgLGTDNNl4Nl9l3cmJkSluy4y2hEPVaNSH2k";
+
+                //Initialize Parse
+                Parse.initialize(parseAPPID,parseJSID);
+
+                var parseFile = new Parse.File("mypic.jpg", {base64:data2});
+
+                parseFile.save().then(function() {
+                                                    alert("Got it!");
+                                                    $rootScope.userAvatar = parseFile.url();
+                                                    pic_url = parseFile.url();
+                                                    $rootScope.$broadcast("load_user_channel");
+                                                    $rootScope.$broadcast("feedbackImg_uploaded");
+                                                    uploadParse(pic_url);
+                                                    //alert (parseFile.url());
+                                                    console.log("Ok");
+
+                                                }, function(error) {
+                                                    console.log("Error");
+                                                    console.log(error);
+                                                });
             }
     };
        
