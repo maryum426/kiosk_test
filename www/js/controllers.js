@@ -5300,9 +5300,9 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 //}
                 var data2 = canvas.toDataURL('image/jpeg');
 
-                alert ("Data2.1: " + data2);
+                //alert ("Data2.1: " + data2);
                 data2 = data2.replace(/^data:image\/(png|jpeg);base64,/, "");
-                alert ("Data2.2: " + data2);
+                //alert ("Data2.2: " + data2);
 
                 //alert("Source Set!");
 
@@ -5316,11 +5316,11 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
 
                 parseFile.save().then(function() {
                                                     alert("Got it!");
-                                                    //$rootScope.userAvatar = parseFile.url();
+                                                    $rootScope.userAvatar = parseFile.url();
                                                     pic_url = parseFile.url();
                                                     uploadParse(pic_url);
-                                                    //$rootScope.$broadcast("load_user_channel");
-                                                    //$rootScope.$broadcast("feedbackImg_uploaded");
+                                                    $rootScope.$broadcast("load_user_channel");
+                                                    $rootScope.$broadcast("feedbackImg_uploaded");
                                                     //alert (parseFile.url());
                                                     console.log("Ok");
 
@@ -5339,7 +5339,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
         var query = new Parse.Query("User");
         
                             //query.equalTo("userId", scope.userid);
-                            alert('Upload Parse Called');
+                            //alert('Upload Parse Called');
                             query.equalTo("username", $rootScope.userPName );
                             //alert("SweetofPlaceID: " + $rootScope.sweetofplaceid);
                             //alert("---sweetfleseelect---- userId"+$scope.userid);
@@ -5349,14 +5349,13 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                                     rUserChannel.set("avatarUrl",url);
                                     rUserChannel.save(null,{
                                         success:function(sUserChannel) {
-                                            alert("Saved "+sUserChannel);
+                                            //alert("Saved "+sUserChannel);
                                             $scope.$apply(function() {
                                                 console.log("--About to setUserAvatar--- "+sUserChannel.get("avatarURL"));
-                                                $rootScope.userAvatar = sUserChannel.get("avatarURL");
+                                                //$rootScope.userAvatar = sUserChannel.get("avatarURL");
                                                 userService.setUserChannel(sUserChannel);
-                                                $rootScope.$broadcast("load_user_channel");
-                                                $rootScope.$broadcast("feedbackImg_uploaded");
-
+                                                //$rootScope.$broadcast("load_user_channel");
+                                                //$rootScope.$broadcast("feedbackImg_uploaded");
                                                 // scope.setuseravatar(data.url);
                                             });
                                         }
@@ -5372,7 +5371,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                                     rUserChannel.set("avatarURL",url);
                                     rUserChannel.save(null,{
                                         success:function(sUserChannel) {
-                                            alert("Saved "+sUserChannel);
+                                            //alert("Saved "+sUserChannel);
                                             $scope.$apply(function() {
                                                 console.log("--About to setUserAvatar--- "+sUserChannel.get("avatarURL"));
                                                 
