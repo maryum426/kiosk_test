@@ -3869,6 +3869,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
 
         if (isAuth && renderPath[1] == 'sms') {
             console.log("isAuth and sms get");
+            $scope.showLogin = true;
             $location.path(CONSTANTS.ROUTES.AUTH_SMS);
         }
 
@@ -4124,6 +4125,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
 
         if (isAuth && renderPath[1] == 'sms') {
             console.log("isAuth and new and loggedin");
+            $scope.showLogin = true;
             $location.path(CONSTANTS.ROUTES.AUTH_SMS);
         }
 
@@ -4485,6 +4487,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
     $scope.newAuthAddUser = function () {
         $rootScope.userPName = '';
         $rootScope.userPName = $scope.user.phone ; //userPName -> userPhoneName
+        $scope.section.loginInProgress = true;
         $rootScope.userAddedPlace = document.getElementById("adduser").title ;
 
         console.log("--- AuthController Add User ---");
@@ -5315,7 +5318,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
                 var parseFile = new Parse.File("mypic.jpg", {base64:data3});
 
                 parseFile.save().then(function() {
-                                                    alert("Got it!");
+                                                    //alert("Got it!");
                                                     $rootScope.userAvatar = parseFile.url();
                                                     pic_url = parseFile.url();
                                                     uploadParse(pic_url);
@@ -5332,7 +5335,7 @@ function CameraCtrl($window, UpdateService, $log, $scope, sweetService, interact
     };
        
     var onFail = function(e) {
-        alert("On fail " + e);
+        console.log("On fail " + e);
     };
     
     var uploadParse = function(url){
