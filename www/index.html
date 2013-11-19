@@ -54,7 +54,7 @@
     <link href="fonts/style-typo.css" rel="stylesheet" type="text/css">
     <!--<link href="css/responsive.css" rel="stylesheet" type="text/css" >
     <link href="css/sweet.css" rel="stylesheet" type="text/css">-->
-    <link href="{{cssResponsive}}" rel="stylesheet" type="text/css" >
+    <!--<link href="{{cssResponsive}}" rel="stylesheet" type="text/css" >-->
     <!--<link href="{{cssSweet}}" rel="stylesheet" type="text/css">-->
     <link rel="apple-touch-icon" href="images/touch-icon-iphone.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/touch-icon-iphone4.png">
@@ -166,11 +166,11 @@ html, body{
 
     <div ng-switch on="renderPath[ 0 ]">
 
-        <div ng-switch-when="friends" ng-controller=AuthController>
+        <!--<div ng-switch-when="friends" ng-controller=AuthController>
             <span ng-include="'views/friends/discover.html'" ng-show="renderPath[1] =='discover'"></span>
-        </div>
+        </div>-->
 
-        <div ng-switch-when="sweet" ng-controller=SweetCtrl>
+        <!--<div ng-switch-when="sweet" ng-controller=SweetCtrl>
             <section ng-include="'views/sweets/home.html'" ng-show="renderPath[1] =='home'"></section>
             <section ng-include="'views/sweets/new.html'" ng-show="renderPath[1] == 'new'"></section>
             <section ng-include="'views/sweets/show.html'" ng-show="renderPath[1] == 'show'"></section>
@@ -192,48 +192,49 @@ html, body{
                      ng-show="renderPath[1] == 'timeline'"></section>
             <section ng-include="'views/sweets/sent.html'" ng-show="renderPath[1] == 'sent'"></section>
             <section ng-include="'views/friends/search.html'" ng-show="renderPath[1] == 'fsearch'"></section>
-        </div>
+        </div>-->
 
         <div ng-switch-when="user">
             <section ng-include="'views/user/preference.html'"
                      ng-show="renderPath[1] == 'preference'"></section>
         </div>
 
-        <div ng-switch-when="contacts" ng-controller=ContactCtrl>
+        <!--<div ng-switch-when="contacts" ng-controller=ContactCtrl>
             <section ng-include="'views/user/contacts/import.html'"
                      ng-show="renderPath[1] =='import'"></section>
             <section ng-include="'views/user/contacts/list.html'" ng-show="renderPath[1] =='list'"></section>
-        </div>
+        </div>-->
 
-        <div ng-switch-when="admin" ng-controller=AdminCtrl>
+        <!--<div ng-switch-when="admin" ng-controller=AdminCtrl>
             <section ng-include="'views/admin/bulk/gestures.html'"
                      ng-show="renderPath[1] == 'bulkgestures'"></section>
-        </div>
+        </div>-->
 
-        <div ng-switch-when="help" ng-controller=HelpCtrl>
+       <!-- <div ng-switch-when="help" ng-controller=HelpCtrl>
             <section ng-include="'views/help/new.html'" ng-show="renderPath[1] == 'new'"></section>
             <section ng-include="'views/help/sent.html'" ng-show="renderPath[1] == 'sent'"></section>
-        </div>
+        </div>-->
 
-        <div ng-switch-when="company">
+        <!--<div ng-switch-when="company">
             <section ng-include="'views/company/privacy.html'" ng-show="renderPath[1] == 'privacy'"></section>
-        </div>
+        </div>-->
 
-        <div ng-switch-when="locations" ng-controller=SweetCtrl>
+        <!--<div ng-switch-when="locations" ng-controller=SweetCtrl>
             <section ng-include="'views/location/place.html'" ng-show="renderPath[1] == 'place'"></section>
             <section ng-include="'views/location/sent.html'" ng-show="renderPath[1] == 'sent'"></section>
-        </div>
+        </div>-->
 
-        <div ng-switch-when="location" ng-controller=SweetCtrlPlace>
+        <!--<div ng-switch-when="location" ng-controller=SweetCtrlPlace>
             <section ng-include="'views/location/sweetplace.html'"
                      ng-show="renderPath[1] == 'sweetplace'"></section>
             <section ng-include="'views/location/sweetsent.html'"
                      ng-show="renderPath[1] == 'sweetsent'"></section>
-            <!--<section ng-include="'views/location/enterMobile.html'" ng-show="renderPath[1] == 'entermobile'"></section>-->
-        </div>
+            &lt;!&ndash;<section ng-include="'views/location/enterMobile.html'" ng-show="renderPath[1] == 'entermobile'"></section>&ndash;&gt;
+        </div>-->
 
         <div ng-switch-when="kiosk" ng-controller=SweetCtrl>
             <section ng-include="'views/kiosk/register.html'" ng-show="renderPath[1] == 'register'"></section>
+            <section ng-include="'views/kiosk/register_adduser.html'" ng-show="renderPath[1] == 'register_adduser'"></section>
             <section ng-include="'views/kiosk/register_visibility.html'" ng-show="renderPath[1] == 'register_visibility'"></section>
             <section ng-include="'views/kiosk/searchPlace.html'" ng-show="renderPath[1] == 'search'"></section>
             <section ng-include="'views/kiosk/createSweetPlace.html'" ng-show="renderPath[1] == 'claim'"></section>
@@ -243,7 +244,7 @@ html, body{
             <section ng-include="'views/kiosk/claimPlaceCreated.html'" ng-show="renderPath[1] == 'claimPlaceCreated'"></section>
         </div>
 
-        <div ng-switch-when="place" ng-controller=SweetCtrl>
+        <!--<div ng-switch-when="place" ng-controller=SweetCtrl>
             <section ng-include="'views/place/placeHeader.html'"
                      ng-show="renderPath[1] == 'placeHeader'"></section>
             <section ng-include="'views/place/sweetPlace.html'"
@@ -274,7 +275,7 @@ html, body{
             <section ng-include="'views/place/interActionP.html'"
                      ng-show="renderPath[1] == 'interactionp'"></section>
         </div>
-
+-->
         <!--<div ng-switch-when="name" ng-controller=SweetCtrlPlace>
           <section ng-include="'views/partials/sweetName.html'" ng-show="renderPath[1] == 'custom'"></section>
             <section ng-include="'views/partials/sent.html'" ng-show="renderPath[1] == 'sent'"></section>

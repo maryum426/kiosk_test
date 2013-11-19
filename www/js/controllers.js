@@ -2259,18 +2259,19 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 console.log("vocation --> " + $scope.kiosk.vocation);
                 console.log("userAvatar --> " + $rootScope.userAvatar);
                 console.log("userPName --> " + $rootScope.userPName);
-//kashif
+
                 $scope.kioskSetUser = [];
                 $scope.kioskSetUser.fullName = $scope.kiosk.fullname ;
                 $scope.kioskSetUser.vocation = $scope.kiosk.vocation ;
+                $scope.kioskSetUser.email = $scope.kiosk.email ;
                 $scope.kioskSetUser.userPhone = $rootScope.userPName ;
                 if ($rootScope.userAvatar == false || $rootScope.userAvatar == ' ' || $rootScope.userAvatar == null){
-                    $scope.kioskSetUser.userAvatar = 'images/capture-img.png';
+                    $scope.kioskSetUser.userAvatar = 'http://files.parse.com/7ddeea41-9b34-46f5-b20f-1e58e72ef6ee/29ec2710-bc27-4aff-bbfd-199e024c07b5-capture-img.png';
                 } else {
                     $scope.kioskSetUser.userAvatar = $rootScope.userAvatar ;
                 }
-                //7076344193
-                userService.getUserChannelInfo($rootScope.userPName, function(result){
+
+                /*userService.getUserChannelInfo($rootScope.userPName, function(result){
                     console.log("result -> " + _.pairs(result[0]));
                     console.log("userId -> " + result[0].get('userId'));
                     console.log("fullName -> " + result[0].get('fullName'));
@@ -2284,19 +2285,23 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                             $location.path("#/"+ $rootScope.currentPlace[0].get('placeName'));
                         });
                     });
-                });
-                /*sweetService.setKioskUser($scope.kioskSetUser, function (userinfo) {
+                });*/
+                sweetService.setKioskUser($scope.kioskSetUser, function (userinfo) {
                     console.log("User registered, know add to place");
                     userService.getUserChannelInfo($rootScope.userPName, function(result){
                         console.log("result -> " + _.pairs(result[0]));
                         console.log("result -> " + result[0].userId);
-                        sweetService.addKioskUserToPlace(result[0],$rootScope.currentPlace, function () {
-
+                        sweetService.addKioskUserToPlace(result,$rootScope.currentPlace, function () {
+                            userService.logout();
+                            $scope.safeApply(function () {
+                                $location.path("#/"+ $rootScope.currentPlace[0].get('placeName'));
+                            });
                         });
                     });
                     //$scope.kioskSetUser.placeName = $rootScope.userAddedPlace ;
 
-                });*/
+                });
+                //$rootScope.pageUserFlag = false ;
             } else {
                 console.log("----kioskRegister update user----");
                 console.log("full name --> " + $scope.kiosk.fullname);
@@ -2309,16 +2314,13 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 $scope.kioskSetUser.email = $scope.kiosk.email ;
                 $scope.kioskSetUser.userPhone = $rootScope.userPName ;
                 if ($rootScope.userAvatar == false || $rootScope.userAvatar == ' ' || $rootScope.userAvatar == null){
-                    $scope.kioskSetUser.userAvatar = 'images/capture-img.png';
+                    $scope.kioskSetUser.userAvatar = 'images/main-circle-img.png';
                 } else {
                     $scope.kioskSetUser.userAvatar = $rootScope.userAvatar ;
                 }
 
                 sweetService.setKioskUser($scope.kioskSetUser, function () {
-                    //console.log("");
-                    //$scope.showSearchKiosk();
-                    //$scope.createPlaceKiosk();
-                    //$location.path('/kiosk/createSweetPlace');
+                    $scope.searchPlaceKiosk();
                 });
             }
 
@@ -2334,9 +2336,10 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
         $scope.searchPlaceKiosk = function () {
 
-            $location.path('/kiosk/createSweetPlace');
-            $scope.initializeGMapKiosk($scope);
+            //$location.path('/kiosk/createSweetPlace');
             $scope.showClaim = false ;
+            $scope.initializeGMapKiosk($scope);
+            
             //alert("Search Place");
         };
 
@@ -2437,6 +2440,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 $rootScope.placeSearchResults.gname = place.name;
                 $rootScope.placeSearchResults.icon = place.icon;
                 $rootScope.placeSearchResults.formatted_address = place.formatted_address;
+                $rootScope.placeSearchResults.kioskthankyoutitle = "Love your barista?say thank you!" ;
                 console.log("placeSearchResults -->" + $rootScope.placeSearchResults.gname);
 
                 $scope.placeClaim($rootScope.placeSearchResults);
@@ -2622,7 +2626,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 $rootScope.placeSearchResults.gname = place.name;
                 $rootScope.placeSearchResults.icon = place.icon;
                 $rootScope.placeSearchResults.formatted_address = place.formatted_address;
-                $rootScope.placeSearchResults.kioskthankyoutitle = "Love your barista?sat thank you!" ;
+                $rootScope.placeSearchResults.kioskthankyoutitle = "Love your barista?say thank you!" ;
                 console.log("placeSearchResults -->" + $rootScope.placeSearchResults.gname);
 
                 $scope.placeClaim($rootScope.placeSearchResults);
@@ -2719,6 +2723,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             window.setTimeout(function () {
                 google.maps.event.trigger(map, 'resize');
             }, 1000);
+            
         }
 
         $scope.handleNoGeolocation = function (errorFlag) {
@@ -2794,7 +2799,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             $scope.newPlace.placeLatitude = '';
             $scope.newPlace.placeLongitude = '';
 
-            $scope.newPlace.placeName = (($rootScope.placeSearchResults.gname).replace(/[\. ,:-]+/g, "")).toLowerCase();
+            $scope.newPlace.placeName = (($rootScope.placeSearchResults.gname).replace(/[\s\$\&\!\. ,:-]+/g, "")).toLowerCase();
             $scope.newPlace.LatLong = $rootScope.placeSearchResults.LatLong;
             //$scope.newPlace.photo = $rootScope.placeSearchResults.photo ;
             $scope.newPlace.gname = $rootScope.placeSearchResults.gname;
@@ -3961,10 +3966,10 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         }
 
         if($scope.loggedInUser){
-            $scope.cssResponsive = 'css/responsive.css' ;
+            //$scope.cssResponsive = 'css/responsive.css' ;
             $scope.cssSweet = 'css/sweet.css' ;
             $scope.cssStyle = '' ;
-            console.log("cssResponsive " + $scope.cssResponsive);
+            //console.log("cssResponsive " + $scope.cssResponsive);
             console.log("cssSweet " + $scope.cssSweet);
             console.log("cssStyle" + $scope.cssStyle);
         } else {
@@ -4496,7 +4501,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
 
         $log.info("--SMS Login---");
 
-        authService.loginPhoneNumber($scope.user.phone, function (flag) {
+        authService.loginPhoneNumber($scope.user.phone, function (flag)     {
 
             var redirectPage;
             $rootScope.pageUserFlag = true;
@@ -4504,21 +4509,50 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             if (flag == true){
                 console.log("Is user loged IN --> " + userService.currentUser());
 
-                redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER;
+                userService.getUserChannelInfo($rootScope.userPName, function(result){
+                    console.log("user chanel info --> " + result.length);
+                    /*console.log("--- user chanel " + result[0].get('channel'));
+                     console.log("--- user chanel " + result[0].get('fullName'));
+                     console.log("--- user chanel " + result[0].get('userId'));
+                     console.log("--- user chanel " + result[0].get('avatarURL'));
+                     console.log("--- user chanel " + result[0].get('email'));*/
+
+                    //$rootScope.infoUserChannal.channel = result[0].get('channel') ;
+                    $rootScope.infoUserChannal.fullNmae = result[0].get('fullName') ;
+                    $rootScope.infoUserChannal.userId = result[0].get('userId') ;
+                    $rootScope.infoUserChannal.avatarURL = result[0].get('avatarURL') ;
+                    $rootScope.infoUserChannal.email = result[0].get('email') ;
+
+                    console.log("--->> user chanel " + $rootScope.infoUserChannal.channel);
+                    console.log("--->> user chanel " + $rootScope.infoUserChannal.fullNmae);
+                    console.log("--->> user chanel " + $rootScope.infoUserChannal.userId);
+                    console.log("--->> user chanel " + $rootScope.infoUserChannal.avatarURL);
+
+                    if (result.length > 0){
+                        $scope.safeApply(function () {
+                            $rootScope.editInfo = true ;
+                            $rootScope.userAvatar = result[0].get('avatarURL');
+                            $rootScope.$broadcast('user_registration');
+                            console.log("$rootScope.userAvatar +--> " + $rootScope.userAvatar);
+                        });
+                    }
+                });
+
+                //redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER;
+                redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER_ADDUSER;
             } else {
                 console.log("Is user New --> " );
                 authService.createAuthSms($rootScope.userPName);
                 redirectPage = CONSTANTS.ROUTES.AUTH_SMS;
             }
 
-            console.log("loginPhoneNumber-->$rootScope.userPName: " + $rootScope.userPName + '---' +$scope.user.phone);
-
             $scope.safeApply(function () {
+                $scope.section.loginInProgress = false;
                 $location.path(redirectPage);
+
             });
         });
-
-        $scope.clearData();
+        // $scope.clearData();
 
     };
 
@@ -4538,8 +4572,13 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                     redirectPage = CONSTANTS.ROUTES.SWEET_HOME;
                     console.log("smsLogin Step3--->");
                 } else {
-                    redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER;
+                    //redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER;
                     console.log("smsLogin Step4--->");
+                    if($rootScope.pageUserFlag == true){
+                        redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER_ADDUSER;
+                    }else{
+                        redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER;
+                    }
                 }
             }
             else {
@@ -4549,7 +4588,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             //TODO: Display info message
             $scope.safeApply(function () {
                 //console.log("Redirecting to "+redirectPage + " after authlink.");
-                $location.path(redirectPage)
+                $location.path(redirectPage);
             });
         });
     }

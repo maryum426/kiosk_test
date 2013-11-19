@@ -13,7 +13,21 @@ jQuery(function($) {
                 $(this).removeClass( "openClass" ).addClass( "closeClass" );
 				open = false;
 			}
-		});		
+		});
+
+    $('#btnCancel').click(function () {
+        if(open === false) {
+            $('#footerSlideContent').animate({ height: '253px' });
+            $(this).css('backgroundPosition', 'bottom left');
+            $('#footerSlideButton').removeClass( "closeClass" ).addClass( "openClass" );
+            open = true;
+        } else {
+            $('#footerSlideContent').animate({ height: '0px'});
+            $(this).css('backgroundPosition', 'top left');
+            $('#footerSlideButton').removeClass( "openClass" ).addClass( "closeClass" );
+            open = false;
+        }
+    });
 });
 </script>
 <!-- ------------------------------------------------------------------------------- -->
@@ -31,7 +45,9 @@ jQuery(function($) {
             </header>
             <div class="banner">
                 <!--<img src="images_blue/banner-1.png" alt="banner">-->
-                <img src="images/main-cirle-img-banner.png" alt="img" ng-src='{{ imagePlaceBanner || images/capture-img-banner.png}}'>
+
+                <img src="images/main-circle-img-banner.png" alt="img" ng-src='{{ imagePlaceBanner }}'>
+
             </div>
             <span class="thankyou-title">{{gplace.get("placeTitle")}}</span>
             <!--<span class="top-heading"> ${{gplace.get("placeName")}} </span>-->
@@ -52,10 +68,10 @@ jQuery(function($) {
     <ul class="social-connection">
         <li ng-repeat="uplace in usersInPlaces">
                 <span class="person-info">
-                    <!--ng-src="{{uplace.get('userPic')}}" -->
-                  <img  ng-src="http://graph.facebook.com/{{uplace.get('userID')}}/picture?width=200&height=200"
+                    <!--ng-src="http://graph.facebook.com/{{uplace.get('userID')}}/picture?width=200&height=200"" -->
+                  <img  ng-src="http://fast-bayou-8907.herokuapp.com/convert?resize=102x102&source={{uplace.get('userPic')}}"
                         title="{{uplace.get('userName')}}" ng-click="sendPlaceGesture(uplace)"
-                        friend="{{uplace}}">
+                        friend="{{uplace}}" width="102" height="102">
                 </span>
                 <span class="heart-icon-2" ng-show="{{uplace.get('userID')}}" id="{{uplace.get('userID')}}">
                     <!--<i class="icon-heart"></i>-->
@@ -167,7 +183,7 @@ jQuery(function($) {
         <div class="footer-Slider">
         		<input type="text" class="texfield" placeholder="enter your mobile number" ng-model="user.phone">
                 <ul class="submit-holder register_BUTTON_HOLDER">
-                  <li><a ng-click="">Cancel</a></li>
+                  <li><a id="btnCancel">Cancel</a></li>
                   <li><a ng-controller="AuthController" ng-click="newAuthAddUser()" class="send-button" title="{{placeKiosk}}" id="adduser">Login</a></li>
                   <!--<li><a class="facebook" alt="facebook" ng-click="facebookPlaceLogin()" ng-controller="AuthController">facebook</a></li>-->
                 </ul>

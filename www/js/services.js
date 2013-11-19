@@ -2608,7 +2608,7 @@ angular.module('DataServices', ['ngResource'])
                         //console.log("Error: " + error.code + " " + error.message);
                         var Kiosk = Parse.Object.extend("kioskUser");
                         var uKiosk = new Parse.Query(Kiosk);
-                        
+
                         uKiosk.set("fullName", kioskUserInfo.fullName);
                         uKiosk.set("vocation", kioskUserInfo.vocation);
                         uKiosk.set("userAvatar", kioskUserInfo.userAvatar);
