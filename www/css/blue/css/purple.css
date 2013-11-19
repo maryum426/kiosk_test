@@ -82,6 +82,9 @@ button, input, select, textarea {
 	font-size: 100%;
 	vertical-align: middle;
 }
+input, select, textare {
+	font-family: 'Helvetica-Light';
+}
 label, select, button, input[type="button"], input[type="reset"], input[type="submit"], input[type="radio"], input[type="checkbox"] {
 	cursor: pointer;
 }
@@ -99,10 +102,12 @@ textarea {
 	vertical-align: top;
 }
 .wrapper {
-	max-width: 770px;
+	background-color: #9966CC;
 	margin: 0 auto;
-	background-color: #672971;
-	position: relative;
+	width: 768px;
+	overflow: hidden;
+	height: 100%;
+	display: table;
 }
 .no-bg-color {
 	background-color: transparent;
@@ -144,6 +149,7 @@ textarea {
 	margin: 0 auto 10px;
 	padding: 10px 20px;
 	width: 85%;
+	text-align:center;
 }
 .authanimation {
 	height: auto;
@@ -264,12 +270,6 @@ textarea {
 .heading-title-holder {
 	float: none;
 }
-.heading-title {
-	display: block;
-	font-size: 34px;
-	text-transform: uppercase;
-	text-align:left;
-}
 .heading-sub-title {
 	font-size: 20px;
 	display: block;
@@ -334,46 +334,10 @@ textarea {
 .container {
 	background-color: #fff;
 }
-.profile-connect {
-	overflow: hidden;
-	padding: 240px 25px 187px;
-}
-.profile-connect-bottom {
-	padding: 0 81px 22px;
-}
 .profile-connect-other {
 	overflow: hidden;
 	/*padding: 102px 25px 77px;*/
 	padding: 164px 25px 187px;
-}
-.profile-img-main {
-	display: block;
-	height: 247px;
-	padding: 12px;
-	width: 247px;
-	margin: 0 auto;
-	background-color: #672971;
-	border-radius: 50%;
-	-webkit-border-radius: 50%;
-	position: relative;
-	z-index: 9999;
-}
-.profile-img-main > img {
-	width: 247px;
-	height: 247px;
-	border-radius: 50%;
-	-webkit-border-radius: 50%;
-}
-.heart-big-profile {
-	height: 300px;
-	padding: 23px;
-	width: 300px;
-}
-.heart-big-profile > img {
-	width: 300px;
-	height: 300px;
-	border-radius: 50%;
-	-webkit-border-radius: 50%;
 }
 .heart-icon {
 	left: 96px;
@@ -498,7 +462,7 @@ textarea {
 	color: #fff;
 	font-size: 30px;
     padding: 18px 10px;
-	background-color: #672971;
+	background-color: #9966cc;
 	text-align: center;
 }
 .social-connection {
@@ -508,25 +472,18 @@ textarea {
     padding: 10px 50px;
 	text-align: left;
 }
-.social-connection li {
-	display: inline-block;
-	margin-bottom: 15px;
-	margin-left: 28px;
-	position: relative;
-	vertical-align: top;
-	width: 133px;
-}
 .social-connection li .person-info {
 	display: block;
 	margin-bottom: 10px;
-	padding: 11px;
-	background-color: #672971;
+	padding: 12px;
+	background-color: #9966cc;
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
 	cursor: pointer;
 }
 .social-connection li .person-info img {
-	width: 100%;
+	width: 102px;
+	height:102px;
 	display: block;
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
@@ -592,13 +549,15 @@ textarea {
 	width: 400px;
 }
 .search-field input {
-	background: none;
+	background: #b08cd4;
 	border: none;
 	color: #FFFFFF;
 	float: left;
-	font-size: 26px;
+	font-size: 36px;
 	padding: 0 2px;
-	width: 390px;
+	width: 528px;
+	border-radius:0;
+	-webkit-border-radius:0;
 }
 .profile-status {
 	float: right;
@@ -972,7 +931,7 @@ textarea {
 }
 .social-network {
 	overflow: hidden;
-	background-color: #14b9d6;
+	background-color: #9966CB;
 	padding: 15px;
 }
 .social-holder-info {
@@ -999,11 +958,14 @@ textarea {
 	opacity: 0.4;
 }
 .heart-big {
-	height: 106px;
-	left: 114px;
-	top: 129px;
-	width: 120px;
-	opacity: 0.5;
+    height: 100px;
+    left: 32%;
+    opacity: 0.5;
+    top: 36%;
+    width: 100px;
+}
+.heart-big > img {
+	display:block;
 }
 .staric-holder {
 	text-align: center;
@@ -1273,7 +1235,7 @@ ul.rating {
 	/* left: 230px;
     position: absolute;
     top: 22px;*/
-	margin-top: -275px;
+	margin-top: -305px;
 	line-height: 0;
 }
 .ui-accordion {
@@ -1369,25 +1331,11 @@ ul.rating {
 	cursor: pointer;
 	text-indent: -9999px;
 }
-.textfield-holder {
-	text-align: center;
-	font-size: 24px;
-	color: #949494;
-	background-color: #ebebeb;
-	padding: 45px 10px;
-	margin-bottom: 10px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 100%;
-	border: none;
-	font-family: Arial, Helvetica, sans-serif;
-}
 .no_PADDING_TOP {
 	padding-top: 0;
 }
 .visibility-btn {
-	background-color: #14B9D6;
+	background-color: #ED145B;
 	color: #FFFFFF;
 	float: right;
 	font-size: 30px;
@@ -1401,9 +1349,6 @@ ul.rating {
 }
 .submit-holder li a.register-button {
 	background-color: #f24e22;
-}
-.register_BUTTON_HOLDER li a {
-	padding: 30px 0;
 }
 .inputfile-holder {
 	max-width: 346px;
@@ -1557,7 +1502,7 @@ ul.rating {
 	padding: 18px 0;
 }
 .feedbackFACEBOOK {
-	background-color: #672971;
+	background-color: #9966cc;
 	margin: 70px auto 0;
 	max-width: 614px;
 	padding: 20px;
@@ -1708,4 +1653,323 @@ ul.rating {
     font-size: 18px;
     left: 3px;
 }
+/*19-Nov-CSS-Start*/
+.heart-big-profile {
+	height: 300px;
+	padding: 23px;
+	width: 300px;
+}
+.heart-big-profile > img {
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+.header {
+	background-color: #9966cb;
+}
+.publicPage .social-connection li{
+	float: left;
+    margin-bottom: 10px;
+    margin-left: 30px;
+    position: relative;
+    width: 126px;
+}
+.heading-title {
+	display: block;
+	font-size: 38px;
+    padding: 5px 0;
+	letter-spacing: -1px;
+	text-transform: uppercase;
+	text-align:left;
+}
+.submit-holder .register-button {
+    background-color: #ed145b;
+    padding: 24px 72px;
+    font-size: 44px;
+    color: #fff;
+	border:none;
+}
+/*.textfield-holder {
+	text-align: center;
+	font-size: 24px;
+	color: #949494;
+	background-color: #ebebeb;
+	padding: 45px 10px;
+	margin-bottom: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	border: none;
+	font-family: Arial, Helvetica, sans-serif;
+}*/
+.textfield-holder {
+	text-align: center;
+	font-size: 38px;
+	color: #949494;
+	background-color: #ebebeb;
+	padding: 30px 10px;
+	margin-bottom: 5px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	border: none;
+	text-shadow: 1px 1px 1px #fafafa;
+}
+.profile-img-main {
+	height: 247px;
+	padding: 12px;
+	width: 247px;
+	margin: 0 auto 30px;
+	background-color: #9966CB;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	position: relative;
+	display:block;
+	z-index: 9999;
+}
+.profile-img-main > img {
+	width: 247px;
+	height: 247px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+.register_BUTTON_HOLDER li a {
+	padding: 27px 0 28px 0;
+}
+.profile-connect {
+	padding: 66px 78px 0;
+	overflow: hidden;
+}
+.profile-connect-bottom {
+	padding: 10px 77px 50px;
+}
+.publicPage .profile-connect{
+	padding: 164px 78px 187px;
+}
+/*--------------------------------------------------------------------------
+****************************Google Map Css************************************************/
+/*
+This is sample of the dropdown div. It will make it easy to set scc of div
+<div class="pac-container" >
+    <div class="pac-item-refresh">
+        <span class="pac-icon-container pac-icon-location"></span>
+        <span class="pac-item-query">
+            <span class="pac-item-bold">Lucknow</span>
+        </span>
+        <span class="pac-item-location">
+            <span class="pac-item-bold">Uttar Pradesh</span>
+            <span class="pac-item-bold">India</span>
+        </span>
+    </div>
+</div>
+*/
+.map-holder {
+	padding: 0;
+	width: 100%;
+	height: 930px;
+}
+.map-holder img {
+	display: block;
+	width: 100%;
+}
+.gmap {
+	height: 830px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	display: block;
+	border: 2px solid #58002d;
+	margin-top: 20px;
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+.pac-container {
+    background-color: #e1c3ff;
+    border-radius:0;
+	-webkit-border-radius:0;
+    color: #FFFFFF;
+    font-family:"Helvetica Light", Arial, sans-serif;
+	width:510px !important;
+ 	border-left: 22px solid #ed145b;
+}
+.pac-item-query{
+	color:inherit;
+}
+.pac-item:hover {
+    background-color: #FFFFFF;
+}
+.pac-item {
+    border-top: 1px solid #E6E6E6;
+    color: #9966cc;
+    font-size: 16px;
+    line-height: 60px;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.pac-item-query {
+    font-size: 32px;
+    margin-right: 3px;
+    width: 525px;
+}
+/*--------------------------------------------------------------------------
+****************************Google Map Css End************************************************/
+.claim-holder {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	overflow: hidden;
+}
+.claim-holder li {
+	float: left;
+	width: 50%;
+}
+.claim-holder li:first-child {
+	width: 49%;
+	margin-right: 1%;
+}
+.claim-holder li a {
+	background-color: #B7B7B7;
+	font-size: 44px;
+	padding: 23px 0;
+	text-transform: capitalize;
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+}
+.claim-holder li a:hover {
+	text-decoration: none;
+}
+.claim-holder a.active {
+	background-color: #ed145b;
+}
+.claim-holder-box {
+	overflow: hidden;
+	padding: 50px 80px;
+	margin: 50px 0 0;
+}
+.col02-placeMsg {
+    background: #9966CB;
+    color: #fff;
+    font-size: 24px;
+    left: 220px;
+    padding: 35px 80px;
+    position: absolute;
+    right: auto;
+    text-align: center;
+    top: 156px;
+    z-index: 999;
+}
+.place-msg{
+	display:block;
+	margin:0 0 10px;
+}
+.send-ok-btn {
+    background: #F24E22;
+    color: #FFFFFF;
+    display: block;
+    font-size: 38px;
+    margin: 0 auto;
+    padding: 12px 70px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 60px;
+}
+.send-ok-btn:hover{
+	text-decoration:none;
+}
 
+.editlabal {
+    background-color: #EBEBEB;
+    color: #949494;
+    font-size: 38px;
+    margin-bottom: 10px;
+    padding: 30px 10px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #FAFAFA;
+    width: 97%;
+    height: 50px;
+}
+
+.labelfield {
+    color: #FFFFFF;
+    display: block;
+    font-size: 30px;
+    overflow: hidden;
+    padding: 20px;
+    text-align: center;
+}
+
+.kiosk-login-holder{
+	padding:0 76px;
+}
+
+.thankyou-title .edit-holder {
+	margin: 0;
+}
+.edit-holder {
+	float: right;
+	background: url(../images/edit-icon.png) no-repeat;
+	width: 40px;
+	height: 36px;
+	margin: 14px 0 0;
+}
+.camera-icon {
+	background: url(../images/camera-icon-purple.png) no-repeat;
+	width: 72px;
+	height: 71px;
+	position: absolute;
+	right: 25px;
+	top: 25px;
+}
+
+.btn-holders{
+	float:right;
+}
+.save-kiosk{
+	background: url(../images/save-btn.png) no-repeat;
+	float: left;
+    height: 30px;
+    text-indent: -9999px;
+    width: 30px;	
+	margin: 0 5px;
+}
+.cancel-kiosk{
+	background: url(../images/cancel-btn.png) no-repeat;
+	float: left;
+    height: 30px;
+    text-indent: -9999px;
+    width: 30px;
+	margin: 0 5px;
+}
+.or-text{
+	float: left;
+    font-size: 20px;
+    margin: 5px 8px 0 0;
+}
+.editable-input {
+    float: left;
+}
+.editable-input input {
+    border: none;
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    margin: 5px 0;
+    padding: 2px;
+    width: 340px;
+	border-radius:0;
+	-webkit-border-radius:0;
+	font-size:20px;
+	color:#535353;
+	width: 620px;
+}
+.margin-stack{
+	margin: 20px 0 0;
+}

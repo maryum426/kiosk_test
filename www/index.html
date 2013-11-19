@@ -25,23 +25,41 @@
     <link rel="apple-touch-icon" sizes="114x114" href="images_blue/touch-icon-iphone4.png">
     <link rel="apple-touch-startup-image" href="images_blue/demo.png">
     <link rel="apple-touch-startup-image" href="images_blue/ipad-startup-image.png">
+    <link rel="apple-touch-icon" href="images/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/touch-icon-iphone4.png">
+    <link rel="apple-touch-startup-image" href="images/demo.png">
+    <link rel="apple-touch-startup-image" href="images/ipad-startup-image.png"
+          media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)"/>
+    <link rel="shortcut icon" href="images/favicon0.ico">
 
     <!--<link rel="stylesheet" href="css/blue/css/style.css" type="text/css" media="all">-->
-    <!--<link rel="stylesheet" href="css/blue/css/purple.css" type="text/css" media="all">-->
-    <!--<link rel="stylesheet" href="{{cssKiosk}}" type="text/css" media="all">-->
-    <!--<link rel="stylesheet" href="{{cssStyle}}" type="text/css" media="all">-->
-    <link rel="stylesheet" href="css/blue/css/font-awesome.css" type="text/css" media="all">
     <!--<link rel="stylesheet" href="css/blue/css/kiosk.css" type="text/css" media="all">-->
+    <!--  <link href="fonts/style-typo.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="css/responsive.css" rel="stylesheet" type="text/css" >
+    <link href="css/sweet.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="{{cssResponsive}}" rel="stylesheet" type="text/css" >-->
+    <!--<link rel="stylesheet" href="{{cssKiosk}}" type="text/css" media="all">-->
+    <!--<link href="{{cssSweet}}" rel="stylesheet" type="text/css">-->
+    <!--<link rel="stylesheet" href="{{cssStyle}}" type="text/css" media="all">-->
     <link rel="stylesheet" href="css/blue/css/kiosk_purple.css" type="text/css" media="all">
+    
+<!--    <link rel="stylesheet" href="css/blue/css/purple.css" type="text/css" media="all">-->
+    <link rel="stylesheet" href="css/blue/css/font-awesome.css" type="text/css" media="all">
     <link rel="stylesheet" href="css/blue/css/mediaqueries.css" type="text/css" media="all">
-    <!--<link rel="stylesheet" href="css/blue/calendar/css/calendar.css" type="text/css" media="all">-->
     <link rel="stylesheet" href="css/blue/calendar/css/calendar_purple.css" type="text/css" media="all">
 
     <!--[if lt IE 8]>
-    <link rel="stylesheet" type="text/css" href="css/blue/css/ie.css"/><![endif]-->
+    <link rel="stylesheet" type="text/css" href="css/blue/css/ie.css"/>
+    <![endif]-->
 
     <!-- -----------------------Blue End--------------------------------- -->
     <!-- ---------------------------------------------------------------- -->
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
 
 
      <!-- --------------------------PhoneGap-------------------------------- -->
@@ -51,70 +69,8 @@
 
     <script src="facebook-js-sdk.js"></script>-->
 
-    <link href="fonts/style-typo.css" rel="stylesheet" type="text/css">
-    <!--<link href="css/responsive.css" rel="stylesheet" type="text/css" >
-    <link href="css/sweet.css" rel="stylesheet" type="text/css">-->
-    <!--<link href="{{cssResponsive}}" rel="stylesheet" type="text/css" >-->
-    <!--<link href="{{cssSweet}}" rel="stylesheet" type="text/css">-->
-    <link rel="apple-touch-icon" href="images/touch-icon-iphone.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/touch-icon-iphone4.png">
-    <link rel="apple-touch-startup-image" href="images/demo.png">
-    <link rel="apple-touch-startup-image" href="images/ipad-startup-image.png"
-          media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)"/>
-    <link rel="shortcut icon" href="images/favicon0.ico">
-
-    <!--&lt;!&ndash; Le HTML5 shim, for IE6-8 support of HTML5 elements &ndash;&gt;-->
-    <!--&lt;!&ndash;[if lt IE 9]>-->
-    <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
-    <!--<![endif]&ndash;&gt;-->
-
-    <!-- Le fav and touch icons --><!--Mobile cache-->
-
-    <!-- start Mixpanel -->
-    <script type="text/javascript">
-        (function (e, b) {
-            if (!b.__SV) {
-                var a, f, i, g;
-                window.mixpanel = b;
-                a = e.createElement("script");
-                a.type = "text/javascript";
-                a.async = !0;
-                a.src = ("https:" === e.location.protocol ? "https:" : "http:") + '//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';
-                f = e.getElementsByTagName("script")[0];
-                f.parentNode.insertBefore(a, f);
-                b._i = [];
-                b.init = function (a, e, d) {
-                    function f(b, h) {
-                        var a = h.split(".");
-                        2 == a.length && (b = b[a[0]], h = a[1]);
-                        b[h] = function () {
-                            b.push([h].concat(Array.prototype.slice.call(arguments, 0)))
-                        }
-                    }
-
-                    var c = b;
-                    "undefined" !==
-                            typeof d ? c = b[d] = [] : d = "mixpanel";
-                    c.people = c.people || [];
-                    c.toString = function (b) {
-                        var a = "mixpanel";
-                        "mixpanel" !== d && (a += "." + d);
-                        b || (a += " (stub)");
-                        return a
-                    };
-                    c.people.toString = function () {
-                        return c.toString(1) + ".people (stub)"
-                    };
-                    i = "disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-                    for (g = 0; g < i.length; g++)f(c, i[g]);
-                    b._i.push([a, e, d])
-                };
-                b.__SV = 1.2
-            }
-        })(document, window.mixpanel || []);
-        mixpanel.init("e1c3f534a66f371ed1346002ab70136c");
-    </script>
-    <!-- end Mixpanel -->
+    
+    
 <style>
 html, body{
 	margin:0;
