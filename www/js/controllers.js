@@ -2252,6 +2252,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
         $scope.kioskRegister = function(){
             console.log("----kioskRegister----");
             console.log($rootScope.pageUserFlag);
+            
 
             if ($rootScope.pageUserFlag == true){
                 console.log("----kioskRegister Add user to place----");
@@ -2286,11 +2287,9 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                         });
                     });
                 });*/
-                sweetService.setKioskUser($scope.kioskSetUser, function (userinfo) {
-                    console.log("User registered, know add to place");
+                if ($scope.editInfo == true){
                     userService.getUserChannelInfo($rootScope.userPName, function(result){
                         console.log("result -> " + _.pairs(result[0]));
-                        console.log("result -> " + result[0].userId);
                         sweetService.addKioskUserToPlace(result,$rootScope.currentPlace, function () {
                             userService.logout();
                             $scope.safeApply(function () {
@@ -2298,9 +2297,23 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                             });
                         });
                     });
-                    //$scope.kioskSetUser.placeName = $rootScope.userAddedPlace ;
+                } else {
+                    sweetService.setKioskUser($scope.kioskSetUser, function (userinfo) {
+                        console.log("User registered, know add to place");
+                        userService.getUserChannelInfo($rootScope.userPName, function(result){
+                            console.log("result -> " + _.pairs(result[0]));
+                            sweetService.addKioskUserToPlace(result,$rootScope.currentPlace, function () {
+                                userService.logout();
+                                $scope.safeApply(function () {
+                                    $location.path("#/"+ $rootScope.currentPlace[0].get('placeName'));
+                                });
+                            });
+                        });
+                        //$scope.kioskSetUser.placeName = $rootScope.userAddedPlace ;
 
-                });
+                    });
+                }
+
                 //$rootScope.pageUserFlag = false ;
             } else {
                 console.log("----kioskRegister update user----");
@@ -2319,9 +2332,15 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                     $scope.kioskSetUser.userAvatar = $rootScope.userAvatar ;
                 }
 
-                sweetService.setKioskUser($scope.kioskSetUser, function () {
-                    $scope.searchPlaceKiosk();
-                });
+                    //if user again come(edit mode) goto place search
+                    if($rootScope.editInfo == true ){
+                        $scope.searchPlaceKiosk();
+                    }else{
+                        sweetService.setKioskUser($scope.kioskSetUser, function () {
+                            $scope.searchPlaceKiosk();
+                        });
+                    }
+
             }
 
         }
@@ -3742,19 +3761,14 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
     };
 
     // Update the rendering of the page logout state.
-    var renderNotLogoIn = function () {
+     var renderNotLogoIn = function () {
 
         console.log("---Rendering Logout---");
 
         $scope.no_bg = "no-bg-color";
-
         $scope.cssResponsive = '' ;
         $scope.cssSweet = '' ;
         $scope.cssStyle = 'css/blue/css/purple.css' ;
-        console.log("cssResponsive " + $scope.cssResponsive);
-        console.log("cssSweet " + $scope.cssSweet);
-        console.log("cssStyle " + $scope.cssStyle);
-        console.log('Path :: ' + $route.current.action);
 
         // Pull the "action" value out of the currently selected route.
         var renderAction = $route.current.action;
@@ -3765,9 +3779,15 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         else
             renderPath = "";
 
+        console.log("Current Route: " + $location.path());
         console.log("Render Action: " + renderAction);
         console.log("Render Path0: " + renderPath[0]);
         console.log("Render Path1: " + renderPath[1]);
+
+        //alpha
+        //Non user + logout state + this device + public pages for place and users >
+        //var renderGuestAction = $route.current.action; //$location.path();
+        //var renderGuestPath = renderGuestAction.split( "." );
 
         var isAuth = (renderPath[ 0 ] == "auth");
         var isAuthLink = (renderPath[ 0 ] == "authlink");
@@ -3793,36 +3813,36 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
                 $scope.no_bg = "";
                 break;
             /*case "sweet.friend":
-             case "sweet.timeline":
-             case "sweet.feed":
-             $scope.wrapper = "wrapper-feeds";
-             break;*/
+            case "sweet.timeline":
+            case "sweet.feed":
+                $scope.wrapper = "wrapper-feeds";
+                break;
             case "locations.place":
             case "name.custom":
                 $scope.wrapper = "wrapper-feeds-place";
                 $rootScope.sweeter.name = "Sweet Place";
-                break;
+                break;*/
             //case "place.sweetplace":
             /*case "place.feed":
-             case "place.friend":
-             $scope.wrapper = "wrapper-feeds";
-             $scope.activeFeed = "active";
-             $scope.activePlace = "";
-             //$scope.search_btn = "search";
-             break;*/
-            /*case "place.timeline":
-             $scope.wrapper = "wrapper-feeds";
-             $scope.activeFeed = "";
-             $scope.activePlace = "";
-             //$scope.search_btn = "search";
-             break;*/
-            /*case "place.myplaces":
-             case "place.interactionp":
-             $scope.wrapper = "wrapper-feeds";
-             $scope.activePlace = "active";
-             $scope.activeFeed = "";
-             //$scope.search_btn = "search";
-             break;*/
+            case "place.friend":
+                $scope.wrapper = "wrapper-feeds";
+                $scope.activeFeed = "active";
+                $scope.activePlace = "";
+                //$scope.search_btn = "search";
+                break;
+            case "place.timeline":
+                $scope.wrapper = "wrapper-feeds";
+                $scope.activeFeed = "";
+                $scope.activePlace = "";
+                //$scope.search_btn = "search";
+                break;
+            case "place.myplaces":
+            case "place.interactionp":
+                $scope.wrapper = "wrapper-feeds";
+                $scope.activePlace = "active";
+                $scope.activeFeed = "";
+                //$scope.search_btn = "search";
+                break;*/
             default:
                 //$scope.wrapper = "wrapper";
                 //$scope.activeFeed = "";
@@ -3830,84 +3850,94 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
                 break;
         }
 
-        //alpha
-        //Non user + logout state + this device + public pages for place and users >
-        //var renderGuestAction = $route.current.action;
-        //var renderGuestPath = renderGuestAction.split( "." );
-        if ( $routeParams.name != null || $routeParams.name != '' ){
+        if ( $routeParams.name != null && $routeParams.name != ''){
+            console.log("Rendering Step1 --->");
+            console.log("$routeParams username-->" + username);
             var username = ($routeParams.name);
         } else {
+            console.log("Rendering Step1 else--->");
+            console.log("$routeParams username -->" + username);
             var username = "";
-        }
-        //var username = ($routeParams.name || "");
-        console.log("username custom--> " + username);
 
-        //alpha
+        }
+
         if(renderPath[1] == 'custom' && username != "" ){
+            console.log("Rendering Step2 --->");
             $rootScope.publicName = username;
+            console.log("render username Guest-->" + $scope.publicName);
         }
         if (username == "[object Object]"){
+            console.log("Rendering Step3 --->");
             $rootScope.publicName = '';
+        }
+
+        if($rootScope.publicName != '' && !$scope.isUserLoggedIn && $rootScope.publicName != 'u') {
+
+            console.log("Rendering Step4 --->");
+            $scope.isPublicPage = true;
+            $scope.showLogin = false;
+
+            //console.log("sweetname Guest--> " + $rootScope.publicName);
+            //$scope.$apply( $location.path( '/'+ $rootScope.publicName ) );
+
+            $scope.showPlaceFeed = true ;
+            $location.path('/'+ $rootScope.publicName);
+            //$window.location('/'+ $rootScope.publicName);
         }
 
         // Non user + logout state + this device >
         //alpha
-        if ($location.path() == '/' || $location.path() == '/u/auth' && !$scope.isUserLoggedIn ) {
-            console.log("Rendering Step2 --->");
+        if ($location.path() == '/' || $location.path() == '/u/auth' && !$scope.isUserLoggedIn) {
+            console.log("Rendering Step5 --->");
+            console.log("constant auth: " + CONSTANTS.ROUTES.AUTH);
             $scope.showLogin = true;
             $location.path(CONSTANTS.ROUTES.AUTH);
         }
 
         if ($location.path() == '/u/auth/sms' && !$scope.isUserLoggedIn) {
-            //console.log("Rendering Step2 --->");
+            console.log("Rendering Step6 --->");
             //console.log("constant auth: " + CONSTANTS.ROUTES.AUTH);
             $location.path(CONSTANTS.ROUTES.AUTH_SMS);
         }
 
         // Non user + logout state + this device >
         if ($location.path() == '/' && !$scope.isUserLoggedIn) {
-            $scope.showLogin = true;
+            console.log("Rendering Step7 --->");
             $location.path(CONSTANTS.ROUTES.AUTH);
-
+            $scope.showLogin = true;
         }
 
-
         if (isAuth && renderPath[1] == 'sms') {
+            console.log("Rendering Step8 --->");
             console.log("isAuth and sms get");
             $scope.showLogin = true;
             $location.path(CONSTANTS.ROUTES.AUTH_SMS);
         }
 
-        //alpha
-        if($rootScope.publicName != '' && !$scope.isUserLoggedIn && $rootScope.publicName != 'u') {
-
-            console.log("Rendering Step1 --->");
-            $scope.isPublicPage = true;
-            $scope.showLogin = false;
-
-            $scope.showPlaceFeed = true ;
-            $location.path('/'+ $rootScope.publicName);
-        }
-
         if (renderPath[1] == "custom" && $rootScope.publicName != '') {
-
+            console.log("Rendering Step9 --->");
             $scope.showPlaceFeed = true ;
             $rootScope.currentPlace = [];
 
-            /*var renderAction = $route.current.action;
-            var renderPath = renderAction.split(".");
-            var username = ($routeParams.name || "");*/
+            //var renderAction = $location.path();
+            //var renderPath = renderAction.split( "/" );
+            //var renderAction = $route.current.action;
+            //var renderPath = renderAction.split(".");
+            //var username = ($routeParams.name || "");
+            //$rootScope.publicName = username;
 
             $scope.guestPlace = {};
-            $scope.guestPlace.placeName = username;
+            //$scope.guestPlace.placeName = username;
+
+            console.log("sweetname custom--> " + username);
             $rootScope.placeKiosk = username ;
 
             /*sweetService.getPlacesSweets(username, function (placeSweets) {
-                console.log("Successfully retrieved place sweets custom" + placeSweets.length + " scores.");
-                $scope.safeApply(function () {
-                    $rootScope.placeSweets = placeSweets;
-                });
-            });*/
+             console.log("Successfully retrieved place sweets custom" + placeSweets.length + " scores.");
+             $scope.safeApply(function () {
+             $rootScope.placeSweets = placeSweets;
+             });
+             });*/
 
             sweetService.getPlacesInfo(username, function (placeInfo) {
                 console.log("Successfully retrieved place info custom" + placeInfo.length + " scores.");
@@ -3944,6 +3974,7 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
             //$location.path("/" + username);
 
         }
+
     }
 
     // Update the rendering of the page.
@@ -4130,7 +4161,6 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
 
         if (isAuth && renderPath[1] == 'sms') {
             console.log("isAuth and new and loggedin");
-            $scope.showLogin = true;
             $location.path(CONSTANTS.ROUTES.AUTH_SMS);
         }
 
@@ -4490,6 +4520,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
 
     //user login add to place authentication
     $scope.newAuthAddUser = function () {
+        $rootScope.infoUserChannal = [] ;
         $rootScope.userPName = '';
         $rootScope.userPName = $scope.user.phone ; //userPName -> userPhoneName
         $scope.section.loginInProgress = true;
@@ -4543,6 +4574,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
             } else {
                 console.log("Is user New --> " );
                 authService.createAuthSms($rootScope.userPName);
+                $rootScope.editInfo = false;
                 redirectPage = CONSTANTS.ROUTES.AUTH_SMS;
             }
 
@@ -4574,7 +4606,7 @@ function AuthController($log, $scope, authService, $location, CONSTANTS, faceboo
                 } else {
                     //redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER;
                     console.log("smsLogin Step4--->");
-                    if($rootScope.pageUserFlag == true){
+                    if($rootScope.pageUserFlag === true){
                         redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER_ADDUSER;
                     }else{
                         redirectPage = CONSTANTS.ROUTES.KIOSK_REGISTER;
