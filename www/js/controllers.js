@@ -3968,6 +3968,9 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
                 console.log("Successfully retrieved place users custom" + placeDetailSweets.length + " scores.");
                 $scope.safeApply(function () {
                     $rootScope.usersInPlaces = placeDetailSweets;
+                    if(placeDetailSweets.length == 0){
+                        $rootScope.emptyPlacesMsg = 'Welcome! Register below to join this place so your customers can thank you for being so awesome!';
+                    }
                 });
             });
             $rootScope.placeJoin = false;
