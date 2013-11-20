@@ -427,7 +427,7 @@ textarea {
 	text-decoration: none;
 	background-color: #b7b7b7;
 	text-align: center;
-	padding: 26px 0;
+	padding: 24px 72px;
 }
 .submit-holder li a.send-button {
 	background-color: #ed145b;
@@ -506,8 +506,8 @@ textarea {
 	float: left;
 }
 .reorder-color {
-	background-color: #EEEEEE;
-	color: #9966CB;
+	background-color: #9966CB;
+	color: #EEEEEE;
 	float: left;
 	font-size: 45px;
 	padding: 18px 25px;
@@ -1560,7 +1560,7 @@ ul.rating {
 	background-image: url(../images/arrow-up.png);
 	background-position: 50% 50% !important;
 	background-repeat: no-repeat;
-	background-color: #672971;
+	background-color: #ed145b;
 	float: right;
 	/*height: 72px;
 	width: 80px;*/
@@ -1587,7 +1587,7 @@ ul.rating {
 	padding: 17px 0;
 }
 .footer-Slider .submit-holder li a.send-button {
-	background-color: #672971;
+	background-color: #9966cb;
 }
 .closeClass{
     background: transparent !important;
@@ -1660,7 +1660,7 @@ ul.rating {
 	background-color: #9966cb;
 }
 .publicPage .social-connection li{
-	float: left;
+    float: left;
     margin-bottom: 10px;
     margin-left: 30px;
     position: relative;

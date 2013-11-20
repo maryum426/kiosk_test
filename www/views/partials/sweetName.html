@@ -33,7 +33,7 @@ jQuery(function($) {
 <!-- ------------------------------------------------------------------------------- -->
 <!-- Page 1                                                                 -->
 <!-- --------------------------------------------------------------------------------->
-
+<div class="publicPage">
 <div class="show-place-public" ng-controller="SweetCtrlPlace" ng-show="showPlaceFeed">
 
     <div ng-show="gustPageInfo">
@@ -489,3 +489,9 @@ jQuery(function($) {
 <!-- -------------------------------------------------------------------------------------- -->
 <!-- -------------------------------------------------------------------------------------- -->
 
+<div class="col02-placeUserMsg" ng-show="placeUserMsg" ng-controller="AuthController">
+    <span class="place-msg">User already exist.</span>
+    <div class="send-btn" ><a ng-click="placeUserMsgBack()" class="send-ok-btn">Ok</a></div>
+</div>
+
+</div>
