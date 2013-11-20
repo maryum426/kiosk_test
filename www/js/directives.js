@@ -1646,7 +1646,7 @@ sweetApp.directive('sweetplacepicselect', function($rootScope, userService) {
                 //$rootScope.userAvatar = $rootScope.userChannel.get("avatarURL");
                 //$rootScope.loadUserChannel();
 
-                $scope.showprogress = 'false';
+                //$scope.showprogress = 'false';
 
             });
 

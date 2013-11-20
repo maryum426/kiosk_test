@@ -1515,9 +1515,9 @@ ul.rating {
 }
 .progress_animation {
 	height: 100%;
-	left: -3px;
+	left: 4px;
 	position: absolute;
-	top: -2px;
+	top: 75px;
 	width: 188px;
 }
 /*page3-CSS-End*/
