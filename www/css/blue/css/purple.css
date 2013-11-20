@@ -1086,6 +1086,96 @@ ul.rating {
 	color: #2ab9d4;
 	text-shadow: 4px 4px 4px #420044;
 }
+
+
+/*NEW-SCREEN-CSS-START*/
+.enter-NUMBER-holder {
+	margin-bottom: 20px;
+}
+.enter-NUMBER-holder .texfield {
+	text-align: center;
+}
+.texfield {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: medium none;
+	color: #9B9B9B;
+	display: block;
+	font-size: 48px;
+	height: 66px;
+	line-height: 66px;
+	margin: 0 auto 10px;
+	padding: 20px 20px;
+	width: 93%;
+	text-align: center;
+}
+.login-btn {
+	background: #ed145b !important;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-family: 'Helvetica-Light';
+	font-size: 52px;
+	margin: 34px auto 0;
+	padding: 11px 40px 15px;
+	width: auto;
+
+    -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0px;
+    -webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 */
+    -moz-box-sizing: border-box; /* Firefox 1+ */
+    box-sizing: border-box;
+}
+.new-page-style {
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+.textfield-holder {
+	text-align: center;
+	font-size: 38px;
+	color: #949494;
+	background-color: #ebebeb;
+	padding: 30px 10px;
+	margin-bottom: 5px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	border: none;
+	text-shadow: 1px 1px 1px #fafafa;
+}
+
+.register_BUTTON_HOLDER li a {
+	padding: 26px 0;
+}
+.add_user-button {
+    background-color: #ed145b;
+    padding: 24px 111px;
+    font-size: 44px;
+    color: #fff;
+}
+.submit-holder .register-button {
+    background-color: #ed145b;
+    padding: 24px 72px;
+    font-size: 44px;
+    color: #fff;
+}
+
+.disable {
+    background-color: #000;
+}
+input.ng-dirty.ng-invalid {
+    border: 1px solid #FF0000;
+}
+input.error, textarea.error {
+    /*background-color: rgba(198, 15, 19, 0.1);*/
+    border-color: #C60F13;
+}
+
+/*NEW-SCREEN-CSS-END*/
+
+
 /* ******************************************************************* */
 /* ******************************************************************* */
 /* ******************************************************************* */
@@ -1653,6 +1743,51 @@ ul.rating {
     font-size: 18px;
     left: 3px;
 }
+/*11-Oct-2013-CSS-START*/
+.checksms-title {
+	display: block;
+	color: #fff;
+	font-size: 40px;
+	text-align: center;
+	margin: 0 0 20px;
+}
+.expire-title {
+	font-size: 35px;
+	text-align: center;
+	display: block;
+	margin-top: 180px;
+	color: #fff;
+	margin-bottom: 15px;
+}
+.adderss-holder {
+	margin: 250px 0 30px;
+}
+.address-icon {
+	display: block;
+	margin: 0 0 35px;
+}
+.address-icon > img {
+	display: block;
+	margin: 0 auto;
+	width: auto;
+}
+.address-title {
+	color: #535353;
+	display: block;
+	font-size: 33px;
+	margin: 0 auto 100px;
+	max-width: 500px;
+}
+.welcome-title {
+	font-size: 33px;
+	color: #535353;
+	display: block;
+	max-width: 580px;
+	margin: 170px auto 20px;
+	text-align: center;
+}
+/*11-Oct-2013-CSS-END*/
+
 /*19-Nov-CSS-Start*/
 .heart-big-profile {
 	height: 300px;
@@ -1972,4 +2107,50 @@ This is sample of the dropdown div. It will make it easy to set scc of div
 }
 .margin-stack{
 	margin: 20px 0 0;
+}
+.profile-img-main .imgavatar {
+    height: 290px;
+    width: 290px;
+}
+.fileholder-btn #capture {
+    cursor: pointer;
+    display: block;
+    height:100%;
+	width:100%;
+    margin: 5px 0 0;
+}
+.overflow-holder{
+	overflow:hidden;
+}
+.alignLEFT .heading-title{
+	padding:0;
+}
+.heading-fixed {
+    height: 44px;
+    overflow: hidden;
+	max-width: 676px;
+}
+.sub-heading-fixed {
+    height: 25px;
+    overflow: hidden;
+	max-width: 676px;
+}
+.upload-title {
+    display: block;
+}
+.upload-title .text-field {
+    cursor: pointer;
+    height: 71px;
+    opacity: 0;
+	filter: alpha(opacity=0);
+    width: 100%;
+}
+
+.labelfield {
+    color: #FFFFFF;
+    display: block;
+    font-size: 30px;
+    overflow: hidden;
+    padding: 20px;
+    text-align: center;
 }

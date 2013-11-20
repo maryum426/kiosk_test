@@ -40,7 +40,7 @@
                 <li><a ng-click="kioskRegisterCancel()">Cancel</a></li>
                 <li>
                     <!--<a ng-click="kioskRegister()" class="send-button register-button">Register</a>-->
-                    <input type="submit" ng-click="kioskRegister()" class="register-button" value="Register"
+                    <input type="submit" ng-click="kioskRegister()" class="register-button ios-btn" value="Register"
                            ng-disabled="kiosk_user.fullname.$pristine || kiosk_user.fullname.$dirty && kiosk_user.fullname.$invalid || kiosk_user.email.$pristine || kiosk_user.email.$dirty && kiosk_user.email.$invalid"
                            ng-class="{enable : !kiosk_user.fullname.$invalid || !kiosk_user.email.$invalid, disable : kiosk_user.fullname.$invalid || kiosk_user.email.$invalid}" />
                 </li>
