@@ -2054,3 +2054,10 @@ This is sample of the dropdown div. It will make it easy to set scc of div
     font-size: 44px;
     color: #fff;
 }
+
+.downClass{
+    background-image: url(../images/arrow-down-icon.png) !important;
+}
+.upClass{
+    background-image: url(../images/arrow-up.png) !important;
+}
