@@ -427,7 +427,7 @@ textarea {
 	text-decoration: none;
 	background-color: #b7b7b7;
 	text-align: center;
-	padding: 24px 72px;
+	padding: 27px 0 28px 0;
 }
 .submit-holder li a.send-button {
 	background-color: #ed145b;
