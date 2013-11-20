@@ -3971,6 +3971,9 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
                     if(placeDetailSweets.length == 0){
                         $rootScope.emptyPlacesMsg = 'Welcome! Register below to join this place so your customers can thank you for being so awesome!';
                     }
+                    else{
+                        $rootScope.emptyPlacesMsg="";
+                    }
                 });
             });
             $rootScope.placeJoin = false;
