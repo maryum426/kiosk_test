@@ -456,15 +456,6 @@ textarea {
 	display: block;
 	height: 277px;
 }
-.thankyou-title {
-	display: block;
-	text-transform: uppercase;
-	color: #fff;
-	font-size: 30px;
-    padding: 18px 10px;
-	background-color: #9966cc;
-	text-align: center;
-}
 .social-connection {
 	list-style: none outside none;
 	margin: 25px 0 0;
@@ -516,7 +507,7 @@ textarea {
 }
 .reorder-color {
 	background-color: #EEEEEE;
-	color: #14B9D6;
+	color: #9966CB;
 	float: left;
 	font-size: 45px;
 	padding: 18px 25px;
@@ -561,12 +552,12 @@ textarea {
 }
 .profile-status {
 	float: right;
+	height: 91px;
 	width: 88px;
-	height: 88px;
 }
 .profile-status img {
 	width: 100%;
-	height: auto;
+	height: 100%;
 }
 .container-heading {
 	background-color: transparent;
@@ -1047,11 +1038,11 @@ ul.rating {
 	text-decoration: none;
 }
 .work-title {
-	color: #2ab9d4;
-	font-size: 40px;
+	color: #535353;
 	display: block;
-	text-align: center;
+	font-size: 33px;
 	margin-bottom: 15px;
+	text-align: center;
 }
 .work-link {
 	background-color: #2ab9d4;
@@ -1086,96 +1077,6 @@ ul.rating {
 	color: #2ab9d4;
 	text-shadow: 4px 4px 4px #420044;
 }
-
-
-/*NEW-SCREEN-CSS-START*/
-.enter-NUMBER-holder {
-	margin-bottom: 20px;
-}
-.enter-NUMBER-holder .texfield {
-	text-align: center;
-}
-.texfield {
-	background: none repeat scroll 0 0 #FFFFFF;
-	border: medium none;
-	color: #9B9B9B;
-	display: block;
-	font-size: 48px;
-	height: 66px;
-	line-height: 66px;
-	margin: 0 auto 10px;
-	padding: 20px 20px;
-	width: 93%;
-	text-align: center;
-}
-.login-btn {
-	background: #ed145b !important;
-	border: none;
-	color: #fff;
-	cursor: pointer;
-	display: block;
-	font-family: 'Helvetica-Light';
-	font-size: 52px;
-	margin: 34px auto 0;
-	padding: 11px 40px 15px;
-	width: auto;
-
-    -webkit-appearance: none;
-    border-radius: 0;
-    -webkit-border-radius: 0px;
-    -webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 */
-    -moz-box-sizing: border-box; /* Firefox 1+ */
-    box-sizing: border-box;
-}
-.new-page-style {
-	padding-bottom: 20px;
-	padding-top: 20px;
-}
-.textfield-holder {
-	text-align: center;
-	font-size: 38px;
-	color: #949494;
-	background-color: #ebebeb;
-	padding: 30px 10px;
-	margin-bottom: 5px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 100%;
-	border: none;
-	text-shadow: 1px 1px 1px #fafafa;
-}
-
-.register_BUTTON_HOLDER li a {
-	padding: 26px 0;
-}
-.add_user-button {
-    background-color: #ed145b;
-    padding: 24px 111px;
-    font-size: 44px;
-    color: #fff;
-}
-.submit-holder .register-button {
-    background-color: #ed145b;
-    padding: 24px 72px;
-    font-size: 44px;
-    color: #fff;
-}
-
-.disable {
-    background-color: #000;
-}
-input.ng-dirty.ng-invalid {
-    border: 1px solid #FF0000;
-}
-input.error, textarea.error {
-    /*background-color: rgba(198, 15, 19, 0.1);*/
-    border-color: #C60F13;
-}
-
-/*NEW-SCREEN-CSS-END*/
-
-
 /* ******************************************************************* */
 /* ******************************************************************* */
 /* ******************************************************************* */
@@ -1438,7 +1339,7 @@ input.error, textarea.error {
 	text-decoration: none;
 }
 .submit-holder li a.register-button {
-	background-color: #f24e22;
+	background-color: #ed145b;
 }
 .inputfile-holder {
 	max-width: 346px;
@@ -1743,51 +1644,6 @@ input.error, textarea.error {
     font-size: 18px;
     left: 3px;
 }
-/*11-Oct-2013-CSS-START*/
-.checksms-title {
-	display: block;
-	color: #fff;
-	font-size: 40px;
-	text-align: center;
-	margin: 0 0 20px;
-}
-.expire-title {
-	font-size: 35px;
-	text-align: center;
-	display: block;
-	margin-top: 180px;
-	color: #fff;
-	margin-bottom: 15px;
-}
-.adderss-holder {
-	margin: 250px 0 30px;
-}
-.address-icon {
-	display: block;
-	margin: 0 0 35px;
-}
-.address-icon > img {
-	display: block;
-	margin: 0 auto;
-	width: auto;
-}
-.address-title {
-	color: #535353;
-	display: block;
-	font-size: 33px;
-	margin: 0 auto 100px;
-	max-width: 500px;
-}
-.welcome-title {
-	font-size: 33px;
-	color: #535353;
-	display: block;
-	max-width: 580px;
-	margin: 170px auto 20px;
-	text-align: center;
-}
-/*11-Oct-2013-CSS-END*/
-
 /*19-Nov-CSS-Start*/
 .heart-big-profile {
 	height: 300px;
@@ -2021,16 +1877,16 @@ This is sample of the dropdown div. It will make it easy to set scc of div
 }
 
 .editlabal {
-    background-color: #EBEBEB;
-    color: #949494;
-    font-size: 38px;
-    margin-bottom: 10px;
-    padding: 30px 10px;
-    text-align: center;
-    text-shadow: 1px 1px 1px #FAFAFA;
-    width: 97%;
-    height: 50px;
-}
+     background-color: #EBEBEB;
+     color: #949494;
+     font-size: 38px;
+     margin-bottom: 10px;
+     padding: 30px 10px;
+     text-align: center;
+     text-shadow: 1px 1px 1px #FAFAFA;
+     width: 97%;
+     height: 50px;
+ }
 
 .labelfield {
     color: #FFFFFF;
@@ -2040,51 +1896,27 @@ This is sample of the dropdown div. It will make it easy to set scc of div
     padding: 20px;
     text-align: center;
 }
-
-.kiosk-login-holder{
-	padding:0 76px;
-}
-
-.thankyou-title .edit-holder {
-	margin: 0;
-}
-.edit-holder {
-	float: right;
-	background: url(../images/edit-icon.png) no-repeat;
-	width: 40px;
-	height: 36px;
-	margin: 14px 0 0;
-}
-.camera-icon {
-	background: url(../images/camera-icon-purple.png) no-repeat;
-	width: 72px;
-	height: 71px;
-	position: absolute;
-	right: 25px;
-	top: 25px;
-}
-
 .btn-holders{
-	float:right;
+    float:right;
 }
 .save-kiosk{
-	background: url(../images/save-btn.png) no-repeat;
-	float: left;
-    height: 30px;
-    text-indent: -9999px;
-    width: 30px;	
-	margin: 0 5px;
-}
-.cancel-kiosk{
-	background: url(../images/cancel-btn.png) no-repeat;
-	float: left;
+    background: url(../images/save-btn.png) no-repeat;
+    float: left;
     height: 30px;
     text-indent: -9999px;
     width: 30px;
-	margin: 0 5px;
+    margin: 0 5px;
+}
+.cancel-kiosk{
+    background: url(../images/cancel-btn.png) no-repeat;
+    float: left;
+    height: 30px;
+    text-indent: -9999px;
+    width: 30px;
+    margin: 0 5px;
 }
 .or-text{
-	float: left;
+    float: left;
     font-size: 20px;
     margin: 5px 8px 0 0;
 }
@@ -2099,31 +1931,51 @@ This is sample of the dropdown div. It will make it easy to set scc of div
     margin: 5px 0;
     padding: 2px;
     width: 340px;
-	border-radius:0;
-	-webkit-border-radius:0;
-	font-size:20px;
-	color:#535353;
-	width: 620px;
+    border-radius:0;
+    -webkit-border-radius:0;
+    font-size:20px;
+    color:#535353;
+    width: 620px;
 }
-.margin-stack{
-	margin: 20px 0 0;
+.thankyou-title .edit-holder {
+    margin: 0;
 }
-.profile-img-main .imgavatar {
-    height: 290px;
-    width: 290px;
+.edit-holder {
+    float: right;
+    background: url(../images/edit-icon.png) no-repeat;
+    width: 40px;
+    height: 36px;
+    margin: 14px 0 0;
 }
-.fileholder-btn #capture {
-    cursor: pointer;
+.camera-icon {
+    background: url(../images/camera-icon-purple.png) no-repeat;
+    width: 72px;
+    height: 71px;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+.upload-title {
     display: block;
-    height:100%;
-	width:100%;
-    margin: 5px 0 0;
+}
+.upload-title .text-field {
+    cursor: pointer;
+    height: 71px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    width: 100%;
 }
 .overflow-holder{
-	overflow:hidden;
+    overflow:hidden;
 }
 .alignLEFT .heading-title{
-	padding:0;
+    padding:0;
+}
+.btn-holders{
+    float:right;
+}
+.alignLEFT {
+	float: left;
 }
 .heading-fixed {
     height: 44px;
@@ -2146,6 +1998,18 @@ This is sample of the dropdown div. It will make it easy to set scc of div
     width: 100%;
 }
 
+.editlabal {
+    background-color: #EBEBEB;
+    color: #949494;
+    font-size: 38px;
+    margin-bottom: 10px;
+    padding: 30px 10px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #FAFAFA;
+    width: 97%;
+    height: 50px;
+}
+
 .labelfield {
     color: #FFFFFF;
     display: block;
@@ -2153,4 +2017,40 @@ This is sample of the dropdown div. It will make it easy to set scc of div
     overflow: hidden;
     padding: 20px;
     text-align: center;
+}
+.banner {
+	position: relative;
+}
+.banner > img {
+    display: block;
+    height: 304px;
+    width: 100%;
+	overflow:hidden;
+}
+.thankyou-title {
+	display: block;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 30px;
+	padding: 20px;
+	background-color: #9966CB;
+	text-align: center;
+	overflow: hidden;
+}
+/*19-Nov-CSS-END*/
+
+.ios-btn {
+    border: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0px;
+    -webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 */
+    -moz-box-sizing: border-box; /* Firefox 1+ */
+    box-sizing: border-box;
+}
+.add_user-button {
+    background-color: #ed145b;
+    padding: 24px 111px;
+    font-size: 44px;
+    color: #fff;
 }

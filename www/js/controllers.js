@@ -2327,7 +2327,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
                 $scope.kioskSetUser.email = $scope.kiosk.email ;
                 $scope.kioskSetUser.userPhone = $rootScope.userPName ;
                 if ($rootScope.userAvatar == false || $rootScope.userAvatar == ' ' || $rootScope.userAvatar == null){
-                    $scope.kioskSetUser.userAvatar = 'images/main-circle-img.png';
+                    $scope.kioskSetUser.userAvatar = 'http://files.parse.com/7ddeea41-9b34-46f5-b20f-1e58e72ef6ee/29ec2710-bc27-4aff-bbfd-199e024c07b5-capture-img.png';
                 } else {
                     $scope.kioskSetUser.userAvatar = $rootScope.userAvatar ;
                 }
@@ -2922,7 +2922,7 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
             //console.log('----> ' + address);
             userService.logout();
             $scope.safeApply(function () {
-                $location.path((($rootScope.placeSearchResults.gname).replace(/[\. ,:-]+/g, "")).toLowerCase());
+                $location.path((($rootScope.placeSearchResults.gname).replace(/[\s\$\&\!\. ,:-]+/g, "")).toLowerCase());
             });
 
         };
