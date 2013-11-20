@@ -1848,7 +1848,7 @@ This is sample of the dropdown div. It will make it easy to set scc of div
     background: #9966CB;
     color: #fff;
     font-size: 24px;
-    left: 220px;
+    left: 450px;
     padding: 35px 80px;
     position: absolute;
     right: auto;
@@ -1861,7 +1861,7 @@ This is sample of the dropdown div. It will make it easy to set scc of div
 	margin:0 0 10px;
 }
 .send-ok-btn {
-    background: #F24E22;
+    background: #ed145b;
     color: #FFFFFF;
     display: block;
     font-size: 38px;
