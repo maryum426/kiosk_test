@@ -1634,6 +1634,7 @@ angular.module('DataServices', ['ngResource'])
                 //if some place find with same name donot create it again.
                 //if error mean no place find then create new place.
                 query.equalTo("placeName", place.placeName);
+                query.equalTo("address", place.formatted_address);
                 query.find({
                     success:function (results) {
                         console.log("Successfully retrieved " + results.length);

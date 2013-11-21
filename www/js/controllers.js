@@ -1259,8 +1259,8 @@ function SweetCtrl($window, UpdateService, $log, $scope, sweetService, interacti
 
             $rootScope.currentPlace = place;
 
-
-            sweetService.getPlacesSweets(place.placeName, function (placeSweets) {
+            //now
+            sweetService.getPlacesSweets(place.placeLatitude,place.placeLongitude, function (placeSweets) {
                 console.log("Successfully retrieved place sweets " + placeSweets.length + " scores.");
                 $scope.safeApply(function () {
                     $rootScope.placeSweets = placeSweets;
@@ -3000,7 +3000,8 @@ function AppController($window, UpdateService, $http, $log, $scope, $route, $rou
         $scope.placeInfo = uplace;
         $rootScope.userEmail = uplace.get('email') ;
 
-        $scope.magicButtonImage = "http://graph.facebook.com/" + uplace.get('userID') + "/picture?width=300&height=300";//uplace.get('userPic');
+        //$scope.magicButtonImage = "http://graph.facebook.com/" + uplace.get('userID') + "/picture?width=300&height=300";//uplace.get('userPic');
+        $scope.magicButtonImage = "http://fast-bayou-8907.herokuapp.com/convert?resize=300x300&source=" + uplace.get('userPic') ;
         $scope.userName = uplace.get('userName');
         console.log("-- >> " + uplace.get('userName').split(" ")[0]);
         console.log("---setFriend() " + uplace.get('userPic'));
