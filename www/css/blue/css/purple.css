@@ -69,6 +69,7 @@ input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-s
 /*Corrects inline-block display not defined in IE6/7/8/9 & FF3*/
 audio, canvas, video {
 	display: inline-block;
+        margin-top:-37px;
 *display: inline;
  *zoom: 1;
 }
@@ -340,7 +341,7 @@ textarea {
 	padding: 164px 25px 187px;
 }
 .heart-icon {
-	left: 96px;
+	left: 110px;
 	opacity: 0.5;
 	position: absolute;
 	top: 113px;
@@ -1262,27 +1263,16 @@ ul.rating {
 	margin-top: 0;
 }
 .thanks_heading {
-	color: #F24E22;
+	color: #ED145B;
 	display: block;
-	font-family: cursive;
 	font-size: 34px;
-	font-style: italic;
-	text-align: center;
-	margin-bottom: 44px;
-	color: #F24E22;
-	display: block;
-	font-family: cursive;
-	font-size: 34px;
-	font-style: italic;
 	text-align: center;
 	margin-bottom: 44px;
 }
 .thanks_footer {
-	color: #F24E22;
+	color: #ED145B;
 	display: block;
-	font-family: cursive;
 	font-size: 34px;
-	font-style: italic;
 	text-align: center;
 	margin-top: 44px;
 }
@@ -1494,7 +1484,7 @@ ul.rating {
 }
 .feedbackFACEBOOK {
 	background-color: #9966cc;
-	margin: 70px auto 0;
+	margin: 130px auto 0;
 	max-width: 614px;
 	padding: 20px;
 }
@@ -1503,7 +1493,7 @@ ul.rating {
 }
 .feedbackFACEBOOK-HOLDER {
 	background: url(../images/bg-white.png);
-	height: 100%;
+	height: 110%;
 	left: 0;
 	position: absolute;
 	top: 0;
@@ -1525,12 +1515,13 @@ ul.rating {
 	background: #ed145b;
 	display: block;
 	margin: 30px auto 0;
-	width: auto;
+	width: 213px;
 	padding: 6px 20px 10px;
 	color: #fff;
 	cursor: pointer;
 	border: none;
-	font-size: 40px;
+	font-size: 44px;
+        height: 91px;
 	font-family: 'Helvetica-Light';
 }
 .bot-margin {
@@ -2066,4 +2057,10 @@ This is sample of the dropdown div. It will make it easy to set scc of div
 .kiosk_ADJUST{
     width: 100%;
     height: 77px;
+}
+
+.welcome-holder-box {
+	overflow: hidden;
+	padding: 50px 80px;
+	margin: 0;
 }
